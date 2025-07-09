@@ -1,69 +1,41 @@
-# React + TypeScript + Vite
+# PICUS Frontend Repository
+This repository contains the frontend code for the PICUS project, a web application designed to provide a seamless user experience with a focus on performance and maintainability.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 🚀 Tech Stack
+- React (Vite)
 
-Currently, two official plugins are available:
+- TypeScript
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- React Router
 
-## Expanding the ESLint configuration
+- TanStack Query (React Query)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- Emotion (CSS-in-JS)
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 📂 Project Structure (FSD)
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```aiignore
+src/
+├── app/        # Entry, 라우팅, provider, 글로벌 설정
+├── pages/      # Route 단위 Page 컴포넌트
+├── widgets/    # Page를 구성하는 주요 UI 컴포넌트(기능 단위)
+└── shared/     # 공통 컴포넌트, 유틸, 타입, 훅, 이미지, 아이콘 등 정적 리소스
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🛠️ 주요 개발 도구 및 설정
+- Vite: 빠른 번들링 및 HMR
+- ESLint & Prettier: 코드 품질 자동화, 스타일 일관성
+- TanStack Query: 서버 상태 관리, 비동기 캐싱
+- Emotion: 타입 지원, 동적 스타일링, 글로벌 스타일
+- React Router: SPA 라우팅
+- 환경별 설정: .env, vite.config.ts
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## ⚡️ Getting Started
+1. install dependencies:
+   ```bash
+   npm install
+   ```
+2. Run development server:
+   ```bash
+   npm run dev
+   ```
