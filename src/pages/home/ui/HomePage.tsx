@@ -1,7 +1,13 @@
 import styled from '@emotion/styled';
+import Navigation from '@shared/components/Navigation.tsx';
 
 const HomePage = () => {
-  return <HomePageContainer>HomePage</HomePageContainer>;
+  return (
+    <>
+      <HomePageContainer>HomePage</HomePageContainer>
+      <Navigation />
+    </>
+  );
 };
 
 export default HomePage;
