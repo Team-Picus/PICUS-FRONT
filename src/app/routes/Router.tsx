@@ -37,7 +37,7 @@ export const router = createBrowserRouter([
     ],
   },
   {
-    path: 'explore',
+    path: 'my',
     element: <RootLayout />,
     children: [
       {
