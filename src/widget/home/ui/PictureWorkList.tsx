@@ -1,9 +1,21 @@
 import styled from '@emotion/styled';
 import { pictureWorkCategories, pictureWorkList } from '@widget/home/feature/mock.ts';
+import { motion } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
 
 const PictureWorkList = () => {
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+    threshold: 0.5,
+  });
+
   return (
-    <PictureWorkListContainer>
+    <PictureWorkListContainer
+      ref={ref}
+      initial={{ opacity: 1, y: 150 }}
+      animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 150 }}
+      transition={{ type: 'spring', stiffness: 300, damping: 80 }}
+    >
       <div style={{ gap: '12px', width: '100%' }}>
         <PictureWorkListCategoryTitle>장면의 온도</PictureWorkListCategoryTitle>
         <PictureWorkListCategoriesSection>
@@ -28,7 +40,7 @@ const PictureWorkList = () => {
 
 export default PictureWorkList;
 
-const PictureWorkListContainer = styled.div`
+const PictureWorkListContainer = styled(motion.div)`
   display: flex;
   flex-direction: column;
   width: 100%;
