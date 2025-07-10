@@ -76,6 +76,7 @@ interface ActiveLinkProps extends NavigationProps {
 
 const NavigationContainer = styled.div<NavigationProps>`
   position: sticky;
+  margin-top: auto;
   bottom: 0;
   width: 100%;
   max-width: 768px;
