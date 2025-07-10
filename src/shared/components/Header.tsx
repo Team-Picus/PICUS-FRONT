@@ -24,6 +24,9 @@ const Header = ({ title, icons }: HeaderProps) => {
 export default Header;
 
 const HeaderContainer = styled.header`
+  position: fixed;
+  width: 100%;
+  max-width: 768px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
