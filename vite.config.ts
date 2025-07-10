@@ -46,6 +46,10 @@ export default defineConfig({
         find: '@image',
         replacement: path.resolve(__dirname, 'src/shared/assets/image'),
       },
+      {
+        find: '@widget',
+        replacement: path.resolve(__dirname, 'src/widget'),
+      },
     ],
   },
 });

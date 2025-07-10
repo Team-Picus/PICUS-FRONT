@@ -32,7 +32,8 @@
       "@chat/*": ["pages/chat/*"],
       "@explore/*": ["pages/explore/*"],
       "@icon/*": ["shared/assets/icon/*"],
-      "@image/*": ["shared/assets/image/*"]
+      "@image/*": ["shared/assets/image/*"],
+      "@widget/*": ["widget/*"],
     }
   },
   "include": ["src"]
