@@ -1,9 +1,9 @@
-import styled from '@emotion/styled';
 import Navigation from '@shared/components/Navigation.tsx';
 import Header from '@shared/components/Header.tsx';
 import type { HeaderIcon } from '@shared/types/header.ts';
 import IcSearch from '@icon/ic-search.svg';
 import IcBell from '@icon/ic-bell.svg';
+import MainBanner from '@widget/home/ui/MainBanner.tsx';
 
 const HomePage = () => {
   const icons: HeaderIcon[] = [
@@ -26,15 +26,10 @@ const HomePage = () => {
   return (
     <>
       <Header icons={icons} />
-      <HomePageContainer>HomePage</HomePageContainer>
+      <MainBanner />
       <Navigation />
     </>
   );
 };
 
 export default HomePage;
-
-const HomePageContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
