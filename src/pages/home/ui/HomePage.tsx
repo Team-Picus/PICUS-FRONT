@@ -4,6 +4,7 @@ import type { HeaderIcon } from '@shared/types/header.ts';
 import IcSearch from '@icon/ic-search.svg';
 import IcBell from '@icon/ic-bell.svg';
 import MainBanner from '@widget/home/ui/MainBanner.tsx';
+import DiscoveryBanner from '@widget/home/ui/DiscoveryBanner.tsx';
 
 const HomePage = () => {
   const icons: HeaderIcon[] = [
@@ -24,11 +25,12 @@ const HomePage = () => {
   ];
 
   return (
-    <>
+    <div style={{ backgroundColor: 'white' }}>
       <Header icons={icons} />
       <MainBanner />
+      <DiscoveryBanner />
       <Navigation />
-    </>
+    </div>
   );
 };
 
