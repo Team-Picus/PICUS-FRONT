@@ -8,7 +8,7 @@ import { useState } from 'react';
 
 const DiscoveryBanner = () => {
   const { ref, inView } = useInView({
-    triggerOnce: false,
+    triggerOnce: true,
     threshold: 0.8,
   });
   const [selected, setSelected] = useState(1);
