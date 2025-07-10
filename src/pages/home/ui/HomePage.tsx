@@ -3,9 +3,7 @@ import Header from '@shared/components/Header.tsx';
 import type { HeaderIcon } from '@shared/types/header.ts';
 import IcSearch from '@icon/ic-search.svg';
 import IcBell from '@icon/ic-bell.svg';
-import MainBanner from '@widget/home/ui/MainBanner.tsx';
-import DiscoveryBanner from '@widget/home/ui/DiscoveryBanner.tsx';
-import PictureWorkList from '@widget/home/ui/PictureWorkList.tsx';
+import { DiscoveryBanner, HomeFooter, MainBanner, PictureWorkList } from '@widget/home/ui';
 
 const HomePage = () => {
   const icons: HeaderIcon[] = [
@@ -31,6 +29,7 @@ const HomePage = () => {
       <MainBanner />
       <DiscoveryBanner />
       <PictureWorkList />
+      <HomeFooter />
       <Navigation />
     </div>
   );
