@@ -75,7 +75,8 @@ interface ActiveLinkProps extends NavigationProps {
 }
 
 const NavigationContainer = styled.div<NavigationProps>`
-  position: fixed;
+  position: sticky;
+  margin-top: auto;
   bottom: 0;
   width: 100%;
   max-width: 768px;
@@ -100,6 +101,11 @@ const NavigationLink = styled(Link)`
   flex-direction: column;
   align-items: center;
   gap: 6px;
+  width: 180px;
+
+  @media (max-width: 440px) {
+    width: 69px;
+  }
 `;
 
 const NavigationLabel = styled.div<ActiveLinkProps>`
@@ -113,9 +119,4 @@ const NavigationLabel = styled.div<ActiveLinkProps>`
         ? theme.colors.lightMode.text.text1
         : theme.colors.lightMode.brand.dark};
   text-align: center;
-  width: 15vw;
-
-  @media (max-width: 440px) {
-    width: 69px;
-  }
 `;
