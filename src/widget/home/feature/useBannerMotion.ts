@@ -16,13 +16,13 @@ const useBannerMotion = () => {
       await Promise.all([
         leftControls.start({
           opacity: 1,
-          x: -500,
+          x: -800,
           transition: { duration: 1, type: 'keyframes', stiffness: 300, damping: 80 },
         }),
         rightControls.start({
           opacity: 1,
-          x: 500,
-          transition: { duration: 1, type: 'keyframes', stiffness: 300, damping: 80 },
+          x: 800,
+          transition: { duration: 1.5, type: 'keyframes', stiffness: 300, damping: 80 },
         }),
       ]);
     }
