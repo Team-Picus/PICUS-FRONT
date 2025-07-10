@@ -5,6 +5,7 @@ import IcSearch from '@icon/ic-search.svg';
 import IcBell from '@icon/ic-bell.svg';
 import MainBanner from '@widget/home/ui/MainBanner.tsx';
 import DiscoveryBanner from '@widget/home/ui/DiscoveryBanner.tsx';
+import PictureWorkList from '@widget/home/ui/PictureWorkList.tsx';
 
 const HomePage = () => {
   const icons: HeaderIcon[] = [
@@ -29,6 +30,7 @@ const HomePage = () => {
       <Header icons={icons} />
       <MainBanner />
       <DiscoveryBanner />
+      <PictureWorkList />
       <Navigation />
     </div>
   );
