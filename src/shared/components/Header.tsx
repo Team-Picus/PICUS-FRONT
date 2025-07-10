@@ -24,7 +24,9 @@ const Header = ({ title, icons }: HeaderProps) => {
 export default Header;
 
 const HeaderContainer = styled.header`
-  position: fixed;
+  position: sticky;
+  z-index: 1000;
+  top: 0;
   width: 100%;
   max-width: 768px;
   display: flex;
