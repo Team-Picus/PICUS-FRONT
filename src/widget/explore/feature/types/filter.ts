@@ -14,3 +14,22 @@ export const filterItems = [
 ];
 
 export type ExploreFilter = 'all' | 'region' | 'space' | 'mood' | 'type';
+
+export const sortOptions = [
+  {
+    id: 'recent',
+    label: '최근 업로드순',
+  },
+  {
+    id: 'popular',
+    label: '거래량순',
+  },
+  {
+    id: 'views',
+    label: '조회순',
+  },
+  {
+    id: 'comments',
+    label: '댓글순',
+  },
+] as const;
