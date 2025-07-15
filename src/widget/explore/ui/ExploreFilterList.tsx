@@ -1,11 +1,11 @@
 import { type ExploreFilter, filterItems } from '@widget/explore/feature/types/filter.ts';
 import { IcArrowBottom } from '@icon/ic-arrow-bottom.tsx';
-import styled from '@emotion/styled';
 import { useExploreTabStore } from '@widget/explore/feature/store/useExploreTabStore.ts';
-import type { ActiveProps } from '@shared/types/active.ts';
 import { useExploreFilterStore } from '@widget/explore/feature/store/useExploreFilterStore.ts';
+import styled from '@emotion/styled';
+import type { ActiveProps } from '@shared/types/active.ts';
 
-export const ExploreFilterList = () => {
+const ExploreFilterList = () => {
   const { isActiveTab } = useExploreTabStore();
   const { filter, setFilter } = useExploreFilterStore();
 
@@ -37,6 +37,8 @@ export const ExploreFilterList = () => {
     </ExploreFilterContainer>
   );
 };
+
+export default ExploreFilterList;
 
 const ExploreFilterContainer = styled.div`
   display: flex;
