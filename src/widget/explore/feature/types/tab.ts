@@ -23,6 +23,6 @@ export const exploreTabItems = [
     id: 'snap',
     label: '스냅',
   },
-];
+] as const;
 
 export type ExploreTabCategory = (typeof exploreTabItems)[number]['id'];
