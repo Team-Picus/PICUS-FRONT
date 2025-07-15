@@ -1,10 +1,10 @@
-import { exploreTabItems } from '@widget/explore/feature/tab.ts';
+import { exploreTabItems } from '@widget/explore/feature/types/tab.ts';
 import styled from '@emotion/styled';
 import type { ActiveProps } from '@shared/types/active.ts';
-import { useManageTabs } from '@widget/explore/feature/useManageTabs.ts';
+import { useManageTabs } from '@widget/explore/feature/custom/useManageTabs.ts';
 
 const ExploreTabs = () => {
-  const { category, setCategory, indicatorStyle, tabRefs } = useManageTabs();
+  const { activeTab, setActiveTab, indicatorStyle, tabRefs } = useManageTabs();
 
   return (
     <ExploreTabsContainer>
@@ -12,10 +12,10 @@ const ExploreTabs = () => {
         <ExploreTabItem
           key={tab.id}
           ref={(el) => {
-            tabRefs.current[tab.id] = el;
+            tabRefs.current[tab.id] = el as HTMLDivElement;
           }}
-          active={category === tab.id}
-          onClick={() => setCategory(tab.id)}
+          active={activeTab === tab.id}
+          onClick={() => setActiveTab(tab.id)}
         >
           {tab.label}
         </ExploreTabItem>
