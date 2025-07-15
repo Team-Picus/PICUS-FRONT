@@ -3,6 +3,7 @@ import Header from '@shared/components/Header.tsx';
 import type { HeaderIcon } from '@shared/types/header.ts';
 import IcSearch from '@icon/ic-search.svg';
 import { ExploreTabs } from '@widget/explore/ui';
+import { ExploreFilterList } from "@widget/explore/ui/ExploreFilterList.tsx";
 
 const ExplorePage = () => {
   const icons: HeaderIcon[] = [
@@ -18,6 +19,7 @@ const ExplorePage = () => {
     <>
       <Header title="탐색" icons={icons} />
       <ExploreTabs />
+      <ExploreFilterList />
       <Navigation whiteBackgroundColor={true} />
     </>
   );
