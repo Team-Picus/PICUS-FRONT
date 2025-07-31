@@ -13,7 +13,23 @@ export const filterItems = [
   },
 ];
 
-export type ExploreFilter = 'all' | 'region' | 'space' | 'mood' | 'type';
+export const exploreFilter = {
+  all: '전체',
+  region: '지역',
+  space: '공간',
+  mood: '분위기',
+  type: '유형',
+} as const;
+
+export type ExploreFilter = keyof typeof exploreFilter;
+
+export const exploreFilterRecord: Record<ExploreFilter, string> = {
+  all: '전체',
+  region: '지역',
+  space: '공간',
+  mood: '분위기',
+  type: '유형',
+};
 
 export const sortOptions = [
   {
