@@ -3,7 +3,8 @@ import { create } from 'zustand/react';
 
 export interface ExploreFilterState {
   filter: ExploreFilter | null;
-  setFilter: (filter: ExploreFilter) => void;
+  setFilter: (filter: ExploreFilter | null) => void;
+  clearFilter: () => void;
 }
 
 export const useExploreFilterStore = create<ExploreFilterState>((set) => ({
@@ -11,5 +12,9 @@ export const useExploreFilterStore = create<ExploreFilterState>((set) => ({
   setFilter: (filter) =>
     set((state) => ({
       filter: state.filter === filter ? null : filter,
+    })),
+  clearFilter: () =>
+    set(() => ({
+      filter: null,
     })),
 }));
