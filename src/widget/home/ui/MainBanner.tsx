@@ -16,7 +16,7 @@ const MainBanner = () => {
 
   return (
     <>
-      <S.MainBannerContainer key="notClicked" isOverview={isClicked}>
+      <S.MainBannerContainer isOverview={isClicked}>
         <S.MainBannerTitleSection style={{ order: isClicked ? 1 : 0 }} isOverview={isClicked}>
           <S.MainBannerTitle initial={{ opacity: 1, x: -200 }} animate={titleControls}>
             <span>시선</span>

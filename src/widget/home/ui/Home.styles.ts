@@ -1,9 +1,7 @@
 import styled from '@emotion/styled';
-import { motion, type HTMLMotionProps } from 'framer-motion';
+import { motion } from 'framer-motion';
 
-export const MainBannerContainer = styled(motion.div)<
-  HTMLMotionProps<'div'> & { isOverview: boolean }
->`
+export const MainBannerContainer = styled(motion.div)<{ isOverview: boolean }>`
   display: flex;
   flex-direction: column;
   padding: ${({ isOverview }) => (isOverview ? '0' : '32px 16px')};
