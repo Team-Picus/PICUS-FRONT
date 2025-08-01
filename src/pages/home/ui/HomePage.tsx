@@ -1,11 +1,14 @@
+import { useNavigate } from 'react-router';
 import Navigation from '@shared/components/Navigation.tsx';
 import Header from '@shared/components/Header.tsx';
 import type { HeaderIcon } from '@shared/types/header.ts';
 import IcSearch from '@icon/ic-search.svg';
 import IcBell from '@icon/ic-bell.svg';
-import { DiscoveryBanner, HomeFooter, MainBanner, PictureWorkList } from '@widget/home/ui';
+import { DiscoveryBanner, HomeFooter, MainBanner, PictureWorkCategory } from '@widget/home/ui';
 
 const HomePage = () => {
+  const navigate = useNavigate();
+
   const icons: HeaderIcon[] = [
     {
       src: IcSearch,
@@ -18,7 +21,7 @@ const HomePage = () => {
       src: IcBell,
       alt: '알림',
       onClick: () => {
-        console.log('알림 아이콘 클릭됨');
+        navigate('/notification');
       },
     },
   ];
@@ -28,7 +31,7 @@ const HomePage = () => {
       <Header icons={icons} />
       <MainBanner />
       <DiscoveryBanner />
-      <PictureWorkList />
+      <PictureWorkCategory />
       <HomeFooter />
       <Navigation />
     </div>
