@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import FilterDetailOption from '@widget/explore/ui/filter/FilterDetailOption.tsx';
 import { useExploreFilterStore } from '@widget/explore/feature/store/useExploreFilterStore.ts';
-import { forwardRef } from 'react';
+import { forwardRef, useEffect } from 'react';
 import { useFilterOptionStore } from '@widget/explore/feature/store/useFilterOptionStore.ts';
 import { useExploreTabStore } from '@widget/explore/feature/store/useExploreTabStore.ts';
 
@@ -37,6 +37,13 @@ const FilterModal = forwardRef<HTMLDivElement, FilterModalProps>((props, ref) =>
     }
   };
 
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, []);
+
   return (
     <ModalOverlay onClick={handleOverlayClick}>
       <FilterModalContainer ref={ref}>
@@ -64,13 +71,13 @@ const ModalOverlay = styled.div`
   display: flex;
   position: absolute;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 999;
+  flex-direction: column;
 `;
 
 const FilterModalContainer = styled.div`
-  position: sticky;
   border-bottom-right-radius: 12px;
   border-bottom-left-radius: 12px;
   box-shadow: 0 3px 0 rgba(0, 0, 0, 0.1);
