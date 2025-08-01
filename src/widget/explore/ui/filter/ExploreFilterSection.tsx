@@ -12,5 +12,4 @@ const ExploreFilterSection = () => {
 
 export default ExploreFilterSection;
 
-const ExploreFilterSectionContainer = styled.div`
-`;
+const ExploreFilterSectionContainer = styled.div``;
