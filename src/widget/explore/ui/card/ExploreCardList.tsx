@@ -64,7 +64,7 @@ const ExploreCardListContainer = styled.div`
   @media (max-width: 680px) {
     grid-template-columns: repeat(auto-fill, minmax(32%, 3fr));
   }
-  
+
   @media (max-width: 440px) {
     grid-template-columns: repeat(auto-fill, minmax(48%, 2fr));
   }
