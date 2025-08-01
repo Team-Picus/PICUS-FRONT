@@ -1,12 +1,16 @@
 import { ExploreFilterList, ExploreSortingDropdown } from '@widget/explore/ui';
+import styled from '@emotion/styled';
 
 const ExploreFilterSection = () => {
   return (
-    <div style={{ height: '100%', overflow: 'hidden' }}>
+    <ExploreFilterSectionContainer>
       <ExploreFilterList />
       <ExploreSortingDropdown />
-    </div>
+    </ExploreFilterSectionContainer>
   );
 };
 
 export default ExploreFilterSection;
+
+const ExploreFilterSectionContainer = styled.div`
+`;
