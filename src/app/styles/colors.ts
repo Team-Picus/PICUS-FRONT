@@ -8,7 +8,7 @@ export const colors = {
     text: {
       text1: '#000000',
       text2: '#666666',
-      text3: '#666666',
+      text3: '#808080',
       text4: '#B2B2B2',
       text5: '#CCCCCC',
       text1color: '#CAFF29',
@@ -29,8 +29,8 @@ export const colors = {
       bgColor: '#F5F7F7',
     },
     divider: {
-      divider1: '#CCCCCC',
-      divider2: '#B2B2B2',
+      divider1: '#F2F2F2',
+      divider2: '#CCCCCC',
     },
     semantic: {
       success: '#0094F7',
