@@ -16,7 +16,7 @@ const Header = ({ back, title, icons }: HeaderProps) => {
   return (
     <HeaderContainer back={back}>
       <HeaderTitleContainer>
-        {back && <BackIcon src={IcBack} alt="이전" onClick={() => navigate(-1)}></BackIcon>}
+        {back && <Icon src={IcBack} alt="이전" onClick={() => navigate(-1)}></Icon>}
         {title ? <Title>{title}</Title> : <Logo src={IcPicusLogo} alt="" />}
       </HeaderTitleContainer>
       <HeaderIconsContainer>
@@ -41,12 +41,8 @@ const HeaderContainer = styled.header<{ back?: boolean }>`
   flex-direction: row;
   justify-content: space-between;
   background-color: ${({ theme }) => theme.colors.lightMode.brand.primary};
-  padding: 8px 0;
+  padding: 8px;
   padding-left: ${({ back }) => (back ? '4px' : '16px')};
-`;
-
-const BackIcon = styled.img`
-  cursor: pointer;
 `;
 
 const HeaderTitleContainer = styled.div`
@@ -72,5 +68,9 @@ const HeaderIconsContainer = styled.div`
 
 const Icon = styled.img`
   padding: 8px;
+  border-radius: 8px;
   cursor: pointer;
+  &:active {
+    background-color: #1d1d1d0d;
+  }
 `;
