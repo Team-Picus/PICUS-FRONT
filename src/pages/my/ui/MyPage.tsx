@@ -1,11 +1,11 @@
 import styled from '@emotion/styled';
 import Navigation from '@shared/components/Navigation.tsx';
 import Header from '@shared/components/Header.tsx';
-import IcSet from '@icon/ic-set.svg';
-import type { HeaderIcon } from '@shared/types/header.ts';
 import Profile from '@widget/my/ui/Profile.tsx';
 import Menu from '@widget/my/ui/Menu.tsx';
+import type { HeaderIcon } from '@shared/types/header.ts';
 import type { MenuItemProps } from '@widget/my/types/menu.ts';
+import IcSet from '@icon/ic-set.svg';
 
 const MyPage = () => {
   const icons: HeaderIcon[] = [
@@ -62,6 +62,7 @@ export default MyPage;
 const MyPageContainer = styled.div`
   display: flex;
   flex-direction: column;
+  background-color: white;
   padding: 24px 16px 80px 16px;
   gap: 16px;
 `;
