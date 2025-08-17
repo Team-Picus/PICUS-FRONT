@@ -6,6 +6,7 @@ import ExplorePage from '@explore/ui/ExplorePage.tsx';
 import ChatPage from '@chat/ui/ChatPage.tsx';
 import MyPage from '@my/ui/MyPage.tsx';
 import NotificationPage from '@home/ui/NotificationPage.tsx';
+import AccountSettings from '@my/ui/AccountSettings.tsx';
 
 export const router = createBrowserRouter([
   {
@@ -53,6 +54,10 @@ export const router = createBrowserRouter([
       {
         index: true,
         element: <MyPage />,
+      },
+      {
+        path: 'settings',
+        element: <AccountSettings />,
       },
     ],
   },

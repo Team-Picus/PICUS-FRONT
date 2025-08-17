@@ -25,7 +25,7 @@ const Profile = () => {
           isApproved={isApproved}
           onClick={() => {
             if (!isApproved) {
-              navigate('/account/settings');
+              navigate('/my/settings');
             }
           }}
         >
@@ -123,8 +123,9 @@ const Email = styled.div`
 
 const ExpertProfileDetail = styled.div`
   display: flex;
+  white-space: nowrap;
   align-items: center;
-  width: 80px;
+  width: fit-content;
   height: 40px;
   font: ${({ theme }) => theme.fonts.labelM};
   border-radius: 8px;

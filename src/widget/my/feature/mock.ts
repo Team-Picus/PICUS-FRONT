@@ -1,6 +1,9 @@
 import ImgProfileEx from '@image/img-profile-ex.png';
 
 interface User {
+  name: string;
+  email: string;
+  phone_number?: string;
   nickname: string;
   profile_image_url?: string;
   links?: string[];
@@ -10,6 +13,9 @@ interface User {
 }
 
 export const user: User = {
+  name: '홍길동',
+  email: 'ahgsoooooo8@naver.com',
+  phone_number: '+82 10-1234-5678',
   nickname: 'usee_pic',
   profile_image_url: ImgProfileEx,
   links: ['calendar@gmail.com'],
