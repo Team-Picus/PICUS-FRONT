@@ -1,10 +1,15 @@
 import { createBrowserRouter } from 'react-router';
 import RootLayout from '@app/layout/RootLayout';
 import HomePage from '@home/ui/HomePage.tsx';
+import WeeklyMagazinePage from '@home/ui/WeeklyMagazinePage.tsx';
 import ExplorePage from '@explore/ui/ExplorePage.tsx';
-import ChatPage from '@chat/ui/ChatPage.tsx';
+import ChatMainPage from '@chat/ui/main/ChatMainPage';
 import MyPage from '@my/ui/MyPage.tsx';
+import ChatDetailPage from '@pages/chat/ui/detail/ChatDetailPage';
+import ChatReservationMainPage from '@pages/chat/ui/reservation/ChatReservationMainPage';
 import LoginPage from '@pages/login/ui/LoginPage';
+import NotificationPage from '@home/ui/NotificationPage.tsx';
+import AccountSettings from '@my/ui/AccountSettings.tsx';
 
 export const router = createBrowserRouter([
   {
@@ -14,6 +19,14 @@ export const router = createBrowserRouter([
       {
         index: true,
         element: <HomePage />,
+      },
+      {
+        path: 'weekly_magazine',
+        element: <WeeklyMagazinePage />,
+      },
+      {
+        path: 'notification',
+        element: <NotificationPage />,
       },
     ],
   },
@@ -43,7 +56,27 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <ChatPage />,
+        element: <ChatMainPage />,
+      },
+    ],
+  },
+  {
+    path: 'chat/detail',
+    element: <RootLayout />,
+    children: [
+      {
+        index: true,
+        element: <ChatDetailPage />,
+      },
+    ],
+  },
+  {
+    path: 'chat/reservation',
+    element: <RootLayout />,
+    children: [
+      {
+        index: true,
+        element: <ChatReservationMainPage />,
       },
     ],
   },
@@ -54,6 +87,10 @@ export const router = createBrowserRouter([
       {
         index: true,
         element: <MyPage />,
+      },
+      {
+        path: 'settings',
+        element: <AccountSettings />,
       },
     ],
   },
