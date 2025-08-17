@@ -35,7 +35,12 @@ export const colors = {
     semantic: {
       success: '#0094F7',
       warning: '#E7CD3F',
-      error: '#FF4C00',
+      error: '#FF2C3D',
+    },
+    neutral: {
+      neutral200: '#E6E6E6',
+      neutral300: '#CCCCCC',
+      neutral1000: '#1D1D1D',
     },
   },
   darkMode: {
