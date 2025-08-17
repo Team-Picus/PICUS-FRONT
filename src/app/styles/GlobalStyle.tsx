@@ -26,6 +26,7 @@ const GlobalStyle = () => {
           margin: 0 auto;
           padding: 0;
           color: black;
+          font-family: Pretendard, system-ui;
         }
 
         button {
