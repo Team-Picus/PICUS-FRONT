@@ -4,6 +4,7 @@ import HomePage from '@home/ui/HomePage.tsx';
 import ExplorePage from '@explore/ui/ExplorePage.tsx';
 import ChatPage from '@chat/ui/ChatPage.tsx';
 import MyPage from '@my/ui/MyPage.tsx';
+import LoginPage from '@pages/login/ui/LoginPage';
 
 export const router = createBrowserRouter([
   {
@@ -13,6 +14,16 @@ export const router = createBrowserRouter([
       {
         index: true,
         element: <HomePage />,
+      },
+    ],
+  },
+  {
+    path: 'login',
+    element: <RootLayout />,
+    children: [
+      {
+        index: true,
+        element: <LoginPage />,
       },
     ],
   },
