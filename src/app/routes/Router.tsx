@@ -2,7 +2,7 @@ import { createBrowserRouter } from 'react-router';
 import RootLayout from '@app/layout/RootLayout';
 import HomePage from '@home/ui/HomePage.tsx';
 import ExplorePage from '@explore/ui/ExplorePage.tsx';
-import ChatPage from '@chat/ui/ChatPage.tsx';
+import ChatMainPage from '@pages/chat/ui/main/ChatMainPage';
 import MyPage from '@my/ui/MyPage.tsx';
 
 export const router = createBrowserRouter([
@@ -32,7 +32,7 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <ChatPage />,
+        element: <ChatMainPage />,
       },
     ],
   },
