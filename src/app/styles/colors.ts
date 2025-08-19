@@ -42,6 +42,21 @@ export const colors = {
       neutral300: '#CCCCCC',
       neutral1000: '#1D1D1D',
     },
+    neutral: {
+      neutral1100: '#000000',
+      neutral1000: '#1D1D1D',
+      neutral900: '#333333',
+      neutral800: '#4D4D4D',
+      neutral700: '#666666',
+      neutral600: '#808080',
+      neutral500: '#999999',
+      neutral400: '#B2B2B2',
+      neutral300: '#CCCCCC',
+      neutral200: '#E6E6E6',
+      neutral100: '#F2F2F2',
+      neutral50: '#F7F7F7',
+      neutral0: '#FFFFFF',
+    },
   },
   darkMode: {
     brand: {

@@ -3,7 +3,7 @@ import RootLayout from '@app/layout/RootLayout';
 import HomePage from '@home/ui/HomePage.tsx';
 import WeeklyMagazinePage from '@home/ui/WeeklyMagazinePage.tsx';
 import ExplorePage from '@explore/ui/ExplorePage.tsx';
-import ChatPage from '@chat/ui/ChatPage.tsx';
+import ChatMainPage from '@pages/chat/ui/main/ChatMainPage';
 import MyPage from '@my/ui/MyPage.tsx';
 import NotificationPage from '@home/ui/NotificationPage.tsx';
 import AccountSettings from '@my/ui/AccountSettings.tsx';
@@ -43,7 +43,7 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <ChatPage />,
+        element: <ChatMainPage />,
       },
     ],
   },
