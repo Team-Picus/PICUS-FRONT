@@ -3,7 +3,8 @@ import styled from '@emotion/styled';
 interface ModalProps {
   isVisible: boolean;
   title: string;
-  description: string;
+  description?: string;
+  customDescription?: React.ReactNode; // 커스텀 설명을 위한 추가 prop
   leftButtonText: string;
   rightButtonText: string;
   onClose: () => void;
@@ -15,6 +16,7 @@ const Modal = ({
   isVisible,
   title,
   description,
+  customDescription,
   leftButtonText,
   rightButtonText,
   onClose,
@@ -30,7 +32,12 @@ const Modal = ({
         <ModalContent>
           <ModalText>
             <ModalTitle>{title}</ModalTitle>
-            <ModalDescription>{description}</ModalDescription>
+            {/* 밑줄을 긋는 등 커스텀을 하기 위해 만들었습니다. */}
+            {customDescription ? (
+              <ModalDescription>{customDescription}</ModalDescription>
+            ) : (
+              <ModalDescription>{description}</ModalDescription>
+            )}
           </ModalText>
           <ButtonContainer>
             <CancelButton onClick={onLeftClick}>{leftButtonText}</CancelButton>
