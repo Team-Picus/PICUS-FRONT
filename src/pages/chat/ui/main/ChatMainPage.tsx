@@ -6,7 +6,7 @@ import IcCalendar from '@icon/ic-calendar.svg';
 import IcMoreVertical from '@icon/ic-more-vertical.svg';
 import ChatMainSearch from '@widget/chat/ui/main/ChatMainSearch';
 import ChatRoomList from '@widget/chat/ui/main/ChatRoomList';
-import ChatSettingModal from '@widget/chat/ui/main/ChatSettingModal';
+import DropDownMenu from '@shared/components/DropDownMenu';
 import BottomTap from '@shared/components/BottomTap';
 import Modal from '@shared/components/Modal';
 
@@ -114,11 +114,20 @@ const ChatMainPage = () => {
           isBack={isEditMode || isPinMode}
           onBackClick={handleBackClick}
         />
-        <ChatSettingModal
+        <DropDownMenu
           isVisible={isModalVisible}
           onClose={handleModalClose}
-          onEditClick={handleEditMode}
-          onPinClick={handlePinMode}
+          title="채팅 설정"
+          items={[
+            {
+              label: '편집',
+              onClick: handleEditMode,
+            },
+            {
+              label: '채팅방 상단고정',
+              onClick: handlePinMode,
+            },
+          ]}
         />
       </HeaderWrapper>
       <ChatMainSearch />
