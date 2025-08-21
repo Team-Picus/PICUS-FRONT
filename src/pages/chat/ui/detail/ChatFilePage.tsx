@@ -12,9 +12,10 @@ import Modal from '@shared/components/Modal';
 
 interface ChatFilePageProps {
   onClose?: () => void;
+  isClosing?: boolean;
 }
 
-const ChatFilePage = ({ onClose }: ChatFilePageProps) => {
+const ChatFilePage = ({ onClose, isClosing }: ChatFilePageProps) => {
   const theme = useTheme();
   const [isDropDownVisible, setIsDropDownVisible] = useState(false);
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
@@ -56,7 +57,7 @@ const ChatFilePage = ({ onClose }: ChatFilePageProps) => {
   ];
   return (
     <ChatFilePageContainer>
-      <HeaderWrapper>
+      <HeaderWrapper isClosing={isClosing}>
         <Header
           isBack={true}
           icons={icons}
@@ -179,9 +180,10 @@ const ChatFilePageContainer = styled.div`
   height: 100dvh;
 `;
 
-const HeaderWrapper = styled.div`
+const HeaderWrapper = styled.div<{ isClosing?: boolean }>`
   position: relative;
   flex-shrink: 0;
+  visibility: ${({ isClosing }) => (isClosing ? 'hidden' : 'visible')};
 `;
 
 const ChatFileListContainer = styled.div`

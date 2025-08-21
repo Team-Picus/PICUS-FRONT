@@ -10,7 +10,34 @@ import {
   FirstChatNoticeMessage,
 } from '@widget/chat/component/NoticeMessageComponents';
 
-const ChatMessageSpace = () => {
+interface ChatMessageSpaceProps {
+  onReservationDetailClick?: (type: 'request' | 'payment' | 'receipt') => void;
+}
+
+const ChatMessageSpace = ({ onReservationDetailClick }: ChatMessageSpaceProps) => {
+  const handleCheckMessageClick = (checkType: string) => {
+    if (onReservationDetailClick) {
+      switch (checkType) {
+        case 'detail':
+          onReservationDetailClick('receipt'); // 예약 완료
+          break;
+        case 'payment':
+          onReservationDetailClick('payment'); // 결제청구서 확인
+          break;
+        case 'reservation':
+          onReservationDetailClick('receipt'); // 예약 완료
+          break;
+        // cancel은 아직 구현하지 않음
+      }
+    }
+  };
+
+  const handleRequestCheckClick = () => {
+    if (onReservationDetailClick) {
+      onReservationDetailClick('request'); // 의뢰서 확인
+    }
+  };
+
   return (
     <ChatMessageSpaceContainer>
       <FirstChatNoticeMessage />
@@ -20,7 +47,13 @@ const ChatMessageSpace = () => {
       {/* 유저의 메시지 */}
       <UserMessageContainer>
         <UserMessageContentContainer>
-          <RequestCheckMessage roleType="my" />
+          <RequestCheckMessage roleType="my" onButtonClick={handleRequestCheckClick} />
+
+          <CheckMessage
+            roleType="my"
+            checkType="detail"
+            onButtonClick={() => handleCheckMessageClick('detail')}
+          />
 
           <NormalMessage roleType="my" text="안녕하세요! 잘 부탁드립니다." time="13:21" />
           <NormalMessage
@@ -51,7 +84,27 @@ const ChatMessageSpace = () => {
           {/* 상대방 메시지 전체 틀 */}
           <OtherMessageContentContainer>
             {/* 각각의 메시지 내용 */}
-            <CheckMessage roleType="other" checkType="payment" />
+            <CheckMessage
+              roleType="other"
+              checkType="detail"
+              onButtonClick={() => handleCheckMessageClick('detail')}
+            />
+
+            <CheckMessage
+              roleType="other"
+              checkType="payment"
+              onButtonClick={() => handleCheckMessageClick('payment')}
+            />
+            <CheckMessage
+              roleType="other"
+              checkType="reservation"
+              onButtonClick={() => handleCheckMessageClick('reservation')}
+            />
+            <CheckMessage
+              roleType="other"
+              checkType="cancel"
+              onButtonClick={() => handleCheckMessageClick('cancel')}
+            />
 
             <NormalMessage
               roleType="other"

@@ -63,7 +63,6 @@ const HeaderContainer = styled.header<HeaderContainerProps>`
   z-index: 1000;
   top: 0;
   width: 100%;
-  max-width: 768px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -92,7 +91,7 @@ const BackIcon = styled.img`
 `;
 
 const Title = styled.div`
-  font: ${({ theme }) => theme.fonts.labelMB};
+  font: ${({ theme }) => theme.fonts.body2};
   font-size: 16px;
   margin: 8px 0;
 `;
