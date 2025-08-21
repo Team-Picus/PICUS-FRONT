@@ -6,6 +6,7 @@ interface BottomTapProps {
   rightButtonText: string;
   onLeftClick: () => void;
   onRightClick: () => void;
+  hideCount?: boolean;
 }
 
 const BottomTap = ({
@@ -14,6 +15,7 @@ const BottomTap = ({
   rightButtonText,
   onLeftClick,
   onRightClick,
+  hideCount = false,
 }: BottomTapProps) => {
   const handleRightClick = () => {
     if (checkedCount > 0) {
@@ -24,7 +26,7 @@ const BottomTap = ({
   return (
     <BottomTapContainer>
       <LeftButton isActive={checkedCount > 0} onClick={onLeftClick}>
-        {checkedCount > 0 ? `${checkedCount} ${leftButtonText}` : leftButtonText}
+        {checkedCount > 0 && !hideCount ? `${checkedCount} ${leftButtonText}` : leftButtonText}
       </LeftButton>
       <RightButton onClick={handleRightClick}>{rightButtonText}</RightButton>
     </BottomTapContainer>

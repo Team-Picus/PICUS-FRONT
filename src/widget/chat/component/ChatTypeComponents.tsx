@@ -17,6 +17,7 @@ interface CheckMessageProps {
   checkType: 'payment' | 'detail' | 'reservation' | 'cancel';
   // payment: 결제하기, detail: 예약내역 상세, reservation: 예약 확정, cancel: 예약 취소내역
   roleType: 'my' | 'other';
+  onButtonClick?: () => void;
 }
 
 /* 일반적인 채팅 메시지일 때 사용합니다. */
@@ -286,7 +287,13 @@ const NormalMessageTime = styled.div`
 `;
 
 /* 의뢰서 확인 메시지에 사용합니다. */
-const RequestCheckMessage = ({ roleType }: { roleType: 'my' | 'other' }) => {
+const RequestCheckMessage = ({
+  roleType,
+  onButtonClick,
+}: {
+  roleType: 'my' | 'other';
+  onButtonClick?: () => void;
+}) => {
   return (
     <RequestCheckMessageWrapper>
       {roleType === 'my' ? (
@@ -303,7 +310,7 @@ const RequestCheckMessage = ({ roleType }: { roleType: 'my' | 'other' }) => {
                 <ContentTextTitle roleType={roleType}>
                   {'{클라}님이 보내신 의뢰서가 도착했습니다.'}
                 </ContentTextTitle>
-                <ContentTextButton>{'의뢰서 확인'}</ContentTextButton>
+                <ContentTextButton onClick={onButtonClick}>{'의뢰서 확인'}</ContentTextButton>
               </ContentTextContainer>
             </MessageContainer>
           </RequestCheckMessageContainer>
@@ -321,7 +328,7 @@ const RequestCheckMessage = ({ roleType }: { roleType: 'my' | 'other' }) => {
                 <ContentTextTitle roleType={roleType}>
                   {'{클라}님이 보내신 의뢰서가 도착했습니다.'}
                 </ContentTextTitle>
-                <ContentTextButton>{'의뢰서 확인'}</ContentTextButton>
+                <ContentTextButton onClick={onButtonClick}>{'의뢰서 확인'}</ContentTextButton>
               </ContentTextContainer>
             </MessageContainer>
           </RequestCheckMessageContainer>
@@ -409,7 +416,7 @@ const ContentTextTitle = styled.div<{ roleType: 'my' | 'other' }>`
     roleType === 'my' ? theme.colors.darkMode.text.text1 : theme.colors.lightMode.text.text1};
 `;
 
-const ContentTextButton = styled.div`
+const ContentTextButton = styled.button`
   display: flex;
   width: 100%;
   border-radius: 8px;
@@ -422,7 +429,7 @@ const ContentTextButton = styled.div`
 `;
 
 /* 다양한 체크 메시지에서 사용 가능합니다. ex) 결제하기, 예약내역 상세, 예약 확정 */
-const CheckMessage = ({ checkType, roleType }: CheckMessageProps) => {
+const CheckMessage = ({ checkType, roleType, onButtonClick }: CheckMessageProps) => {
   const getMessageContent = () => {
     switch (checkType) {
       case 'payment':
@@ -474,7 +481,7 @@ const CheckMessage = ({ checkType, roleType }: CheckMessageProps) => {
               <CheckMessageContent>{messageContent.content}</CheckMessageContent>
             </CheckMessageContainer>
 
-            <CheckMessageButton>{messageContent.button}</CheckMessageButton>
+            <CheckMessageButton onClick={onButtonClick}>{messageContent.button}</CheckMessageButton>
           </CheckDetailMessageContainer>
         </>
       ) : (
@@ -487,7 +494,7 @@ const CheckMessage = ({ checkType, roleType }: CheckMessageProps) => {
               <CheckMessageContent>{messageContent.content}</CheckMessageContent>
             </CheckMessageContainer>
 
-            <CheckMessageButton>{messageContent.button}</CheckMessageButton>
+            <CheckMessageButton onClick={onButtonClick}>{messageContent.button}</CheckMessageButton>
           </CheckDetailMessageContainer>
           <CheckMessageTime>13:20</CheckMessageTime>
         </>
