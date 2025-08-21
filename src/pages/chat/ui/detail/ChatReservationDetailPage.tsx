@@ -1,9 +1,10 @@
 import styled from '@emotion/styled';
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Header from '@shared/components/Header';
 import DropDownMenu from '@shared/components/DropDownMenu';
 import Modal from '@shared/components/Modal';
 import IcMoreVertical from '@icon/ic-more-vertical.svg';
+import IcChevronDown from '@icon/ic-chevron-down.svg';
 import ImgMainbannerEx from '@image/img-mainbanner-ex.png';
 import BottomTap from '@shared/components/BottomTap';
 import { useTheme } from '@emotion/react';
@@ -21,7 +22,9 @@ const ChatReservationDetailPage = ({
 }: ChatReservationDetailPageProps) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isCancelModalOpen, setIsCancelModalOpen] = useState(false);
+  const [isButtonVisible, setIsButtonVisible] = useState(true);
   const theme = useTheme();
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const handleDropdownToggle = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -42,6 +45,40 @@ const ChatReservationDetailPage = ({
     setIsCancelModalOpen(false);
   };
 
+  const handleReceiptButtonClick = () => {
+    // 페이지 컨테이너의 최하단으로 스크롤
+    if (containerRef.current) {
+      containerRef.current.scrollTo({
+        top: containerRef.current.scrollHeight,
+        behavior: 'smooth',
+      });
+    }
+  };
+
+  // 스크롤 이벤트 리스너
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const handleScroll = () => {
+      const scrollTop = container.scrollTop;
+      const scrollHeight = container.scrollHeight;
+      const clientHeight = container.clientHeight;
+
+      // 스크롤 진행률 계산 (0 ~ 1)
+      const scrollProgress = scrollTop / (scrollHeight - clientHeight);
+
+      // 70% 이상 스크롤되면 버튼 숨김
+      setIsButtonVisible(scrollProgress < 0.7);
+    };
+
+    container.addEventListener('scroll', handleScroll);
+
+    return () => {
+      container.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   const icons = [
     {
       src: IcMoreVertical,
@@ -51,7 +88,7 @@ const ChatReservationDetailPage = ({
   ];
 
   return (
-    <ChatReservationDetailPageContainer>
+    <ChatReservationDetailPageContainer ref={containerRef}>
       <HeaderWrapper isClosing={isClosing}>
         <Header title="예약내역 상세" icons={icons} isBack={true} onBackClick={onClose} />
         {isDropdownOpen && (
@@ -333,6 +370,16 @@ const ChatReservationDetailPage = ({
         onLeftClick={handleModalClose}
         onRightClick={handleConfirmCancel}
       />
+
+      {/* receipt 타입일 때 하단 고정 영수증 확인 버튼 */}
+      {reservationDetailType === 'receipt' && isButtonVisible && (
+        <FixedReceiptButtonContainer onClick={handleReceiptButtonClick}>
+          <FixedReceiptButtonText>{'영수증 확인하기'}</FixedReceiptButtonText>
+          <FixedReceiptButtonIcon>
+            <img src={IcChevronDown} alt="" />
+          </FixedReceiptButtonIcon>
+        </FixedReceiptButtonContainer>
+      )}
     </ChatReservationDetailPageContainer>
   );
 };
@@ -740,6 +787,36 @@ const ChatReservationDetailReceiptButton = styled.button`
   border: 1px solid ${({ theme }) => theme.colors.lightMode.neutral.neutral200};
   font: ${({ theme }) => theme.fonts.labelM};
   color: ${({ theme }) => theme.colors.lightMode.text.text1};
+`;
+
+const FixedReceiptButtonContainer = styled.button`
+  position: fixed;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 40px;
+  border-radius: 24px;
+  background-color: ${({ theme }) => theme.colors.lightMode.background.bg1};
+  border: 1px solid ${({ theme }) => theme.colors.lightMode.neutral.neutral1000};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+  width: fit-content;
+  z-index: 1000;
+  gap: 8px;
+`;
+
+const FixedReceiptButtonText = styled.div`
+  display: flex;
+  font: ${({ theme }) => theme.fonts.labelM};
+  color: ${({ theme }) => theme.colors.lightMode.text.text1};
+`;
+
+const FixedReceiptButtonIcon = styled.div`
+  display: flex;
+  width: 16px;
+  height: 16px;
 `;
 
 export default ChatReservationDetailPage;
