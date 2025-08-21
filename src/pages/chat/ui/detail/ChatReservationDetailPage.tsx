@@ -371,15 +371,21 @@ const ChatReservationDetailPage = ({
         onRightClick={handleConfirmCancel}
       />
 
-      {/* receipt 타입일 때 하단 고정 영수증 확인 버튼 */}
-      {reservationDetailType === 'receipt' && isButtonVisible && (
-        <FixedReceiptButtonContainer onClick={handleReceiptButtonClick}>
-          <FixedReceiptButtonText>{'영수증 확인하기'}</FixedReceiptButtonText>
-          <FixedReceiptButtonIcon>
-            <img src={IcChevronDown} alt="" />
-          </FixedReceiptButtonIcon>
-        </FixedReceiptButtonContainer>
-      )}
+      {/* receipt/payment 타입일 때 하단 고정 버튼 */}
+      {(reservationDetailType === 'receipt' || reservationDetailType === 'payment') &&
+        isButtonVisible && (
+          <FixedReceiptButtonContainer
+            onClick={handleReceiptButtonClick}
+            reservationType={reservationDetailType}
+          >
+            <FixedReceiptButtonText>
+              {reservationDetailType === 'receipt' ? '영수증 확인하기' : '결제금액 확인하기'}
+            </FixedReceiptButtonText>
+            <FixedReceiptButtonIcon>
+              <img src={IcChevronDown} alt="" />
+            </FixedReceiptButtonIcon>
+          </FixedReceiptButtonContainer>
+        )}
     </ChatReservationDetailPageContainer>
   );
 };
@@ -789,15 +795,19 @@ const ChatReservationDetailReceiptButton = styled.button`
   color: ${({ theme }) => theme.colors.lightMode.text.text1};
 `;
 
-const FixedReceiptButtonContainer = styled.button`
+interface FixedReceiptButtonContainerProps {
+  reservationType: 'receipt' | 'payment';
+}
+
+const FixedReceiptButtonContainer = styled.button<FixedReceiptButtonContainerProps>`
   position: fixed;
-  bottom: 16px;
+  bottom: ${({ reservationType }) => (reservationType === 'payment' ? '72px' : '16px')};
   left: 50%;
   transform: translateX(-50%);
   height: 40px;
   border-radius: 24px;
   background-color: ${({ theme }) => theme.colors.lightMode.background.bg1};
-  border: 1px solid ${({ theme }) => theme.colors.lightMode.neutral.neutral1000};
+  border: 1px solid ${({ theme }) => theme.colors.lightMode.neutral.neutral1000} !important;
   display: flex;
   align-items: center;
   justify-content: center;
