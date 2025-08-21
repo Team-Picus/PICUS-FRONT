@@ -212,33 +212,124 @@ const AddFileList = () => {
     { id: 1, fileName: '파일명.pdf' },
     { id: 2, fileName: '파일명ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ.pdf' },
     { id: 3, fileName: '파일명ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ.pdf' },
+    { id: 4, fileName: '파일명ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ.pdf' },
+    { id: 5, fileName: '파일명ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ.pdf' },
+    { id: 6, fileName: '파일명ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ.pdf' },
+    { id: 7, fileName: '파일명ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ.pdf' },
+    { id: 8, fileName: '파일명ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ.pdf' },
+    { id: 9, fileName: '파일명ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ.pdf' },
+    { id: 10, fileName: 'asdasdasdasdasd.pdf' },
   ];
 
+  // 768px 이상에서만 특정 패턴으로 나누기
+  const getRowsLayout = (items: typeof fileItems, useDesktopLayout: boolean) => {
+    if (!useDesktopLayout || items.length <= 3) {
+      return [items];
+    }
+
+    const rows = [];
+    let currentIndex = 0;
+
+    // 첫 번째 줄: 항상 3개
+    rows.push(items.slice(currentIndex, currentIndex + 3));
+    currentIndex += 3;
+
+    // 남은 아이템이 있으면 두 번째 줄에 최대 4개
+    if (currentIndex < items.length) {
+      const remainingItems = items.length - currentIndex;
+      const secondRowCount = Math.min(4, remainingItems);
+      rows.push(items.slice(currentIndex, currentIndex + secondRowCount));
+      currentIndex += secondRowCount;
+    }
+
+    // 남은 아이템이 있으면 세 번째 줄에 나머지
+    if (currentIndex < items.length) {
+      rows.push(items.slice(currentIndex));
+    }
+
+    return rows;
+  };
+
   return (
-    <AddFileListContainer>
-      {fileItems.map(({ id, fileName }) => (
-        <AddFileItem key={id}>
-          <AddFileItemLeft>
-            <IcFileBlank />
-          </AddFileItemLeft>
-          <AddFileItemRightText>{truncateFileName(fileName)}</AddFileItemRightText>
-          <DeleteFileIcon>
-            <IcDeleteBig width={24} height={24} />
-          </DeleteFileIcon>
-        </AddFileItem>
-      ))}
+    <AddFileListContainer itemCount={fileItems.length}>
+      {/* 데스크톱 레이아웃 (768px 이상) */}
+      <DesktopLayout itemCount={fileItems.length}>
+        {getRowsLayout(fileItems, true).map((row, rowIndex) => (
+          <AddFileRow key={rowIndex} itemCount={fileItems.length}>
+            {row.map(({ id, fileName }) => (
+              <AddFileItem key={id}>
+                <AddFileItemLeft>
+                  <IcFileBlank />
+                </AddFileItemLeft>
+                <AddFileItemRightText>{truncateFileName(fileName)}</AddFileItemRightText>
+                <DeleteFileIcon>
+                  <IcDeleteBig width={24} height={24} />
+                </DeleteFileIcon>
+              </AddFileItem>
+            ))}
+          </AddFileRow>
+        ))}
+      </DesktopLayout>
+
+      {/* 모바일 레이아웃 (768px 미만) */}
+      <MobileLayout>
+        {fileItems.slice(0, 2).map(({ id, fileName }) => (
+          <AddFileItem key={id}>
+            <AddFileItemLeft>
+              <IcFileBlank />
+            </AddFileItemLeft>
+            <AddFileItemRightText>{truncateFileName(fileName)}</AddFileItemRightText>
+            <DeleteFileIcon>
+              <IcDeleteBig width={24} height={24} />
+            </DeleteFileIcon>
+          </AddFileItem>
+        ))}
+      </MobileLayout>
     </AddFileListContainer>
   );
 };
 
-const AddFileListContainer = styled.div`
+const AddFileListContainer = styled.div<{ itemCount: number }>`
+  width: 100%;
+  padding: 12px 16px 0 16px;
+
+  @media (min-width: 768px) {
+    padding: 12px 80px 0 80px;
+  }
+`;
+
+const DesktopLayout = styled.div<{ itemCount: number }>`
+  display: none;
+
+  @media (min-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+  }
+`;
+
+const MobileLayout = styled.div`
   display: flex;
   flex-wrap: wrap;
-  width: 100%;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   gap: 16px;
-  padding: 12px 16px 0 16px;
+  width: 100%;
+
+  @media (min-width: 768px) {
+    display: none;
+  }
+`;
+
+const AddFileRow = styled.div<{ itemCount: number }>`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
 `;
 
 const AddFileItem = styled.div`

@@ -28,6 +28,8 @@ const FirstNoticeMessage = styled.div`
   font: ${({ theme }) => theme.fonts.body4};
   color: ${({ theme }) => theme.colors.lightMode.text.text3};
   text-align: center;
+  justify-content: center;
+  align-items: center;
 `;
 
 const DateChangeNoticeMessage = () => {

@@ -52,6 +52,14 @@ export const colors = {
       neutral50: '#F7F7F7',
       neutral0: '#FFFFFF',
     },
+    blue: {
+      blue1200: '#80CA14',
+      blue900: '#8EEC00',
+      blue700: '#AFFA00',
+      blue500: '#CAFF29',
+      blue300: '#DCFF73',
+      blue100: '#E6FF98',
+    },
   },
   darkMode: {
     brand: {

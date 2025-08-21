@@ -334,6 +334,7 @@ const RequestCheckMessage = ({ roleType }: { roleType: 'my' | 'other' }) => {
 
 const RequestCheckMessageWrapper = styled.div`
   display: flex;
+  width: 100%;
   gap: 8px;
 `;
 
@@ -346,6 +347,7 @@ const RequestCheckMessageTime = styled.div`
 
 const RequestCheckMessageContainer = styled.div<{ roleType: 'my' | 'other' }>`
   display: flex;
+  width: 100%;
   flex-direction: column;
   border-radius: ${({ roleType }) => (roleType === 'my' ? '12px 0 12px 12px' : '0 12px 12px 12px')};
   background-color: ${({ theme, roleType }) =>
@@ -396,8 +398,7 @@ const ContentImage = styled.div`
 const ContentTextContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  width: 100%;
+  justify-content: space-between;
 `;
 
 const ContentTextTitle = styled.div<{ roleType: 'my' | 'other' }>`

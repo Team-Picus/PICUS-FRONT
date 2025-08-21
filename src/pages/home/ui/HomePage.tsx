@@ -25,7 +25,7 @@ const HomePage = () => {
 
   return (
     <div style={{ backgroundColor: 'white' }}>
-      <Header icons={icons} />
+      <Header isLogo={true} icons={icons} />
       <MainBanner />
       <DiscoveryBanner />
       <PictureWorkList />
