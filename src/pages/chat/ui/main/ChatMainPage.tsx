@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import styled from '@emotion/styled';
+import { useNavigate } from 'react-router-dom';
 import Navigation from '@shared/components/Navigation.tsx';
 import Header from '@shared/components/Header.tsx';
 import IcCalendar from '@icon/ic-calendar.svg';
@@ -11,6 +12,7 @@ import BottomTap from '@shared/components/BottomTap';
 import Modal from '@shared/components/Modal';
 
 const ChatMainPage = () => {
+  const navigate = useNavigate();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
   const [isPinMode, setIsPinMode] = useState(false);
@@ -94,7 +96,7 @@ const ChatMainPage = () => {
             src: IcCalendar,
             alt: '캘린더',
             onClick: () => {
-              console.log('캘린더 아이콘 클릭됨');
+              navigate('/chat/reservation');
             },
           },
           {
