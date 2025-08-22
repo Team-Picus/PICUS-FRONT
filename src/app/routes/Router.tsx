@@ -5,6 +5,7 @@ import ExplorePage from '@explore/ui/ExplorePage.tsx';
 import ChatMainPage from '@chat/ui/main/ChatMainPage';
 import MyPage from '@my/ui/MyPage.tsx';
 import ChatDetailPage from '@pages/chat/ui/detail/ChatDetailPage';
+import ChatReservationMainPage from '@pages/chat/ui/reservation/ChatReservationMainPage';
 
 export const router = createBrowserRouter([
   {
@@ -44,6 +45,16 @@ export const router = createBrowserRouter([
       {
         index: true,
         element: <ChatDetailPage />,
+      },
+    ],
+  },
+  {
+    path: 'chat/reservation',
+    element: <RootLayout />,
+    children: [
+      {
+        index: true,
+        element: <ChatReservationMainPage />,
       },
     ],
   },
