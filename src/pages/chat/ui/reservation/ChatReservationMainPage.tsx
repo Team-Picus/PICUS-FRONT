@@ -2,12 +2,19 @@ import Header from '@shared/components/Header';
 import styled from '@emotion/styled';
 import SelectMenuButton from '@shared/components/SelectMenuButton';
 import ChatReservationCard from '@widget/chat/ui/reservation/ChatReservationCard';
+import { useNavigate } from 'react-router-dom';
 
 const ChatReservationMainPage = () => {
+  const navigate = useNavigate();
+
+  const handleBackClick = () => {
+    navigate(-1);
+  };
+
   return (
     <ChatReservationMainPageContainer>
       <HeaderWrapper>
-        <Header title="예약내역" isBack={true} onBackClick={() => {}} />
+        <Header title="예약내역" isBack={true} onBackClick={handleBackClick} />
       </HeaderWrapper>
       <ChatReservationMainContentContainer>
         {/* 예약 Select Menu Button */}
@@ -27,6 +34,7 @@ const ChatReservationMainPage = () => {
         </ChatReservationSelectMenuContainer>
 
         {/* 예약 카드 리스트 */}
+        <ChatReservationCard />
         <ChatReservationCard />
       </ChatReservationMainContentContainer>
     </ChatReservationMainPageContainer>
