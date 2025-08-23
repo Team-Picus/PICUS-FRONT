@@ -6,6 +6,7 @@ import {
   RequestCheckMessage,
 } from '@widget/chat/component/ChatTypeComponents';
 import {
+  ConfirmNoticeMessage,
   DateChangeNoticeMessage,
   FirstChatNoticeMessage,
 } from '@widget/chat/component/NoticeMessageComponents';
@@ -114,6 +115,8 @@ const ChatMessageSpace = ({ onReservationDetailClick }: ChatMessageSpaceProps) =
           </OtherMessageContentContainer>
         </OtherMessage>
       </OtherMessageContainer>
+
+      <ConfirmNoticeMessage />
     </ChatMessageSpaceContainer>
   );
 };

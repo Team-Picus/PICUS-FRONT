@@ -65,6 +65,7 @@ const ChatDetailPage = () => {
     },
   ];
   return (
+    // 채팅방 상세 페이지 입니다
     <ChatDetailPageContainer>
       <Header
         title="작가 이름"
@@ -72,7 +73,11 @@ const ChatDetailPage = () => {
         icons={icons}
         backgroundColor={theme.colors.lightMode.background.bg1}
       />
+
+      {/* 채팅방 메시지 영역 */}
       <ChatMessageSpace onReservationDetailClick={handleReservationDetailOpen} />
+
+      {/* 채팅방 입력 컴포넌트 영역 */}
       <ChatRoomInput />
 
       {isFilePageOpen && (

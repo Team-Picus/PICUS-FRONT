@@ -1,4 +1,5 @@
-// 다양한 안내 메시지를 관리합니다. ex) 날짜 변경, 첫 채팅 시작 시 메시지 등
+// 다양한 채팅방 내부 안내 메시지를 관리합니다. ex) 날짜 변경, 첫 채팅 시작 시 메시지 등
+
 import styled from '@emotion/styled';
 
 const FirstChatNoticeMessage = () => {
@@ -45,4 +46,36 @@ const DateChangeNotice = styled.div`
   font: ${({ theme }) => theme.fonts.body4};
 `;
 
-export { FirstChatNoticeMessage, DateChangeNoticeMessage };
+const ConfirmNoticeMessage = () => {
+  return (
+    <ConfirmNoticeMessageContainer>
+      <ConfirmNoticeMessageText>
+        <span>{'촬영예약이 확정되었습니다.'}</span>
+        <span>{'날짜 : 2025년 6월 6일 금요일'}</span>
+        <span>{'시간 : 오전 11시'}</span>
+      </ConfirmNoticeMessageText>
+    </ConfirmNoticeMessageContainer>
+  );
+};
+
+const ConfirmNoticeMessageContainer = styled.div`
+  display: flex;
+  width: 100%;
+  padding: 16px 0;
+`;
+
+const ConfirmNoticeMessageText = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 8px 12px;
+  border-radius: 4px;
+  background-color: ${({ theme }) => theme.colors.lightMode.background.bg3};
+  font: ${({ theme }) => theme.fonts.body4};
+  color: ${({ theme }) => theme.colors.lightMode.text.text3};
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+`;
+
+export { FirstChatNoticeMessage, DateChangeNoticeMessage, ConfirmNoticeMessage };
