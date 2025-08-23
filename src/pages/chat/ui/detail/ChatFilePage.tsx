@@ -56,6 +56,7 @@ const ChatFilePage = ({ onClose, isClosing }: ChatFilePageProps) => {
     },
   ];
   return (
+    // 채팅방 파일 페이지 입니다.
     <ChatFilePageContainer>
       <HeaderWrapper isClosing={isClosing}>
         <Header
@@ -78,6 +79,7 @@ const ChatFilePage = ({ onClose, isClosing }: ChatFilePageProps) => {
         />
       </HeaderWrapper>
       <ChatFileListContainer>
+        {/* 날짜 별 파일 리스트 영역 */}
         <ChatFileList>
           <DateChangeNoticeMessage />
 

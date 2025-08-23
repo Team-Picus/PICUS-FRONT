@@ -8,12 +8,29 @@ import IcChevronDown from '@icon/ic-chevron-down.svg';
 import ImgMainbannerEx from '@image/img-mainbanner-ex.png';
 import BottomTap from '@shared/components/BottomTap';
 import { useTheme } from '@emotion/react';
+import ChatReservationTypeTitle from '@widget/chat/ui/detail/ChatReservationTypeTitle';
+import ReservationDetailContent from '@widget/chat/ui/detail/ReservationDetailContent';
+import {
+  PaymentContentTotal,
+  ReservationDetailInfoContent,
+  ReservationDetailPackageContent,
+  ReservationDetailPaymentContent,
+} from '@widget/chat/ui/detail/ReservationDetailInfoContent';
 
 interface ChatReservationDetailPageProps {
   reservationDetailType: 'request' | 'payment' | 'receipt';
   onClose?: () => void;
   isClosing?: boolean;
 }
+
+const getReservationTitle = (type: 'request' | 'payment' | 'receipt'): string => {
+  const titles = {
+    request: '의뢰서 확인',
+    payment: '결제청구서 확인',
+    receipt: '예약 완료',
+  };
+  return titles[type];
+};
 
 const ChatReservationDetailPage = ({
   reservationDetailType,
@@ -110,46 +127,21 @@ const ChatReservationDetailPage = ({
       <ChatReservationDetailContentContainer>
         {/* 첫번째 박스 */}
         <ChatReservationDetailTypeContainer>
-          <ChatReservationDetailType>
-            <ChatReservationDetailTypeTitle isActive={reservationDetailType === 'request'}>
-              {'1. 의뢰서 확인'}
-            </ChatReservationDetailTypeTitle>
-            <ChatReservationDetailTypeTitle isActive={reservationDetailType === 'payment'}>
-              {'2. 결제청구서 확인'}
-            </ChatReservationDetailTypeTitle>
-            <ChatReservationDetailTypeTitle isActive={reservationDetailType === 'receipt'}>
-              {'3. 예약 완료'}
-            </ChatReservationDetailTypeTitle>
-          </ChatReservationDetailType>
+          {/* 예약 진행 단계를 표시하는 타이틀 컴포넌트 */}
+          <ChatReservationTypeTitle currentStep={reservationDetailType} />
 
           <ChatReservationDetailTitle>
-            {reservationDetailType === 'request' && '의뢰서 확인'}
-            {reservationDetailType === 'payment' && '결제청구서 확인'}
-            {reservationDetailType === 'receipt' && '예약 완료'}
+            {getReservationTitle(reservationDetailType)}
           </ChatReservationDetailTitle>
 
-          <ChatReservationDetailContent>
-            {/* 이미지 */}
-            <ChatReservationDetailContentImage>
-              <img src={ImgMainbannerEx} alt="" />
-            </ChatReservationDetailContentImage>
-
-            <ChatReservationDetailContentText>
-              <ChatReservationDetailContentTextTitle>
-                {'미세키서울 F/W 룩북 / 무신사 인큐베이팅 프로그램'}
-              </ChatReservationDetailContentTextTitle>
-
-              <ChatReservationDetailContentSubText>
-                <ChatReservationDetailContentTextType>
-                  {'패션'}
-                </ChatReservationDetailContentTextType>
-
-                <ChatReservationDetailContentTextName>
-                  {'작가 이름'}
-                </ChatReservationDetailContentTextName>
-              </ChatReservationDetailContentSubText>
-            </ChatReservationDetailContentText>
-          </ChatReservationDetailContent>
+          {/* 예약 상세 컨텐츠 */}
+          <ReservationDetailContent
+            imageSrc={ImgMainbannerEx}
+            imageAlt="미세키서울 F/W 룩북 / 무신사 인큐베이팅 프로그램"
+            title="미세키서울 F/W 룩북 / 무신사 인큐베이팅 프로그램"
+            type="패션"
+            authorName="작가 이름"
+          />
         </ChatReservationDetailTypeContainer>
 
         {/* 두번째 박스 */}
@@ -159,132 +151,33 @@ const ChatReservationDetailPage = ({
             <ChatReservationDetailInfoTitleText>{'예약 정보'}</ChatReservationDetailInfoTitleText>
           </ChatReservationDetailInfoTitle>
 
-          <ChatReservationDetailInfoContentContainer>
-            <ChatReservationDetailInfoContent>
-              <ChatReservationDetailInfoDateContainer>
-                <ChatReservationDetailInfoDateTitle>{'날짜'}</ChatReservationDetailInfoDateTitle>
-                <ChatReservationDetailInfoDateText>
-                  {'2024년 12월 15일 (목)'}
-                </ChatReservationDetailInfoDateText>
-              </ChatReservationDetailInfoDateContainer>
+          {/* 날짜 ~ 요청까지의 정보를 표시하는 컴포넌트 */}
+          <ReservationDetailInfoContent
+            dateValue="2024년 12월 15일 (목)"
+            timeValue="오전 10:00 ~ 오후 1:00"
+            locationValue="라이트 스튜디오"
+            locationSubValue="경기도 성남시 수정구 성남대로 1342"
+            filterValues={['도회적인', '빈티지', '몽환적인']}
+            requestValue="서로 즐겨 하는 포즈나 습관을 담고 싶어요. 기념일을 맞아 촬영합니다. 프러포즈를 앞두고 있어요! 촬영 중 반지를 건네는 순간을 자연스럽게 담아주시면 좋겠습니다. 둘 다 활동적인 걸 좋아해서 움직이는 장면을 많이 찍어주시면 좋겠어요."
+          />
 
-              <ChatReservationDetailInfoTimeContainer>
-                <ChatReservationDetailInfoTimeTitle>{'시간'}</ChatReservationDetailInfoTimeTitle>
-                <ChatReservationDetailInfoTimeText>
-                  {'오전 10:00 ~ 오후 1:00'}
-                </ChatReservationDetailInfoTimeText>
-              </ChatReservationDetailInfoTimeContainer>
-
-              <ChatReservationDetailInfoLocationContainer>
-                <ChatReservationDetailInfoLocationTitle>
-                  {'장소'}
-                </ChatReservationDetailInfoLocationTitle>
-                <ChatReservationDetailInfoLocationText>
-                  <ChatReservationDetailInfoLocationTextTitle>
-                    {'라이트 스튜디오'}
-                  </ChatReservationDetailInfoLocationTextTitle>
-
-                  <ChatReservationDetailInfoLocationTextSubText>
-                    {'경기도 성남시 수정구 성남대로 1342'}
-                  </ChatReservationDetailInfoLocationTextSubText>
-                </ChatReservationDetailInfoLocationText>
-              </ChatReservationDetailInfoLocationContainer>
-
-              <ChatReservationDetailInfoFilterContainer>
-                <ChatReservationDetailInfoFilterTitle>
-                  {'필터'}
-                </ChatReservationDetailInfoFilterTitle>
-                <ChatReservationDetailInfoFilterContent>
-                  <ChatReservationDetailInfoFilterContentTitle>
-                    {'도회적인'}
-                  </ChatReservationDetailInfoFilterContentTitle>
-                  <ChatReservationDetailInfoFilterContentDivider>
-                    {'/'}
-                  </ChatReservationDetailInfoFilterContentDivider>
-                  <ChatReservationDetailInfoFilterContentTitle>
-                    {'빈티지'}
-                  </ChatReservationDetailInfoFilterContentTitle>
-                  <ChatReservationDetailInfoFilterContentDivider>
-                    {'/'}
-                  </ChatReservationDetailInfoFilterContentDivider>
-                  <ChatReservationDetailInfoFilterContentTitle>
-                    {'몽환적인'}
-                  </ChatReservationDetailInfoFilterContentTitle>
-                </ChatReservationDetailInfoFilterContent>
-              </ChatReservationDetailInfoFilterContainer>
-            </ChatReservationDetailInfoContent>
-
-            <ChatReservationDetailInfoRequestContainer>
-              <ChatReservationDetailInfoRequestTitle>
-                {'요청'}
-              </ChatReservationDetailInfoRequestTitle>
-
-              <ChatReservationDetailInfoRequestContent>
-                {
-                  '서로 즐겨 하는 포즈나 습관을 담고 싶어요. 기념일을 맞아 촬영합니다. 프러포즈를 앞두고 있어요! 촬영 중 반지를 건네는 순간을 자연스럽게 담아주시면 좋겠습니다. 둘 다 활동적인 걸 좋아해서 움직이는 장면을 많이 찍어주시면 좋겠어요.'
-                }
-              </ChatReservationDetailInfoRequestContent>
-            </ChatReservationDetailInfoRequestContainer>
-          </ChatReservationDetailInfoContentContainer>
-
-          {/* 패키지 설명 */}
-          <ChatReservationDetailInfoPackageContainer>
-            {/* 첫번째 패키지 설명 */}
-            <ChatReservationDetailInfoPackageContent>
-              <ChatReservationDetailInfoPackageContentTitle>
-                <ChatReservationDetailInfoPackageContentName>
-                  {'패키지 B'}
-                </ChatReservationDetailInfoPackageContentName>
-                <ChatReservationDetailInfoPackageContentPrice>
-                  {'800,000원'}
-                </ChatReservationDetailInfoPackageContentPrice>
-              </ChatReservationDetailInfoPackageContentTitle>
-
-              <ChatReservationDetailInfoPackageContentDetail>
-                <ChatReservationDetailInfoPackageContentDetailText>
-                  {'모먼트 패키지 1세트'}
-                </ChatReservationDetailInfoPackageContentDetailText>
-                <ChatReservationDetailInfoPackageContentDetailText>
-                  {'세밀 보정본 10장'}
-                </ChatReservationDetailInfoPackageContentDetailText>
-                <ChatReservationDetailInfoPackageContentDetailText>
-                  {'색보정본 10장'}
-                </ChatReservationDetailInfoPackageContentDetailText>
-                <ChatReservationDetailInfoPackageContentDetailText>
-                  {'분할 컷 2장'}
-                </ChatReservationDetailInfoPackageContentDetailText>
-              </ChatReservationDetailInfoPackageContentDetail>
-
-              <ChatReservationDetailInfoPackageContentDetailMessage>
-                {'장소는 원하시는 장소 또는 바담 추천 제공드립니다. 기본은 1시간입니다.'}
-              </ChatReservationDetailInfoPackageContentDetailMessage>
-            </ChatReservationDetailInfoPackageContent>
-
-            {/* 두번째 패키지 설명 */}
-            <ChatReservationDetailInfoPackageContent>
-              <ChatReservationDetailInfoPackageContentTitle>
-                <ChatReservationDetailInfoPackageContentName>
-                  {'편집본 추가'}
-                </ChatReservationDetailInfoPackageContentName>
-                <ChatReservationDetailInfoPackageContentQuantity>
-                  {'2장'}
-                </ChatReservationDetailInfoPackageContentQuantity>
-                <ChatReservationDetailInfoPackageContentPrice>
-                  {'100,000원'}
-                </ChatReservationDetailInfoPackageContentPrice>
-              </ChatReservationDetailInfoPackageContentTitle>
-
-              <ChatReservationDetailInfoPackageQuantity>
-                {'1장'}
-              </ChatReservationDetailInfoPackageQuantity>
-
-              <ChatReservationDetailInfoPackageContentDetailMessage>
-                {
-                  '최대 5장까지 가능합니다. 추가된 편집본 장 수에 따라 최대 3일정도 추가로 소요될 수 있습니다.'
-                }
-              </ChatReservationDetailInfoPackageContentDetailMessage>
-            </ChatReservationDetailInfoPackageContent>
-          </ChatReservationDetailInfoPackageContainer>
+          {/* 패키지 및 옵션 설명 */}
+          <ReservationDetailPackageContent
+            PackageName="패키지 B"
+            PackagePrice="800,000"
+            PackageDetails={[
+              '모먼트 패키지 1세트',
+              '세밀 보정본 10장',
+              '색보정본 20장',
+              '분할 컷 2장',
+            ]}
+            PackageDetailMessage="장소는 원하시는 장소 또는 바담 추천 제공드립니다. 기본 1시간입니다."
+            PackageOptionName="편집본 추가"
+            PackageOptionQuantity="2"
+            PackageOptionPrice="100,000"
+            PackageQuantity="1"
+            PackageOptionMessage="최대 5장까지 가능합니다. 추가된 편집본 장 수에 따라 최대 3일정도 추가로 소요될 수 있습니다."
+          />
         </ChatReservationDetailInfoContainer>
       </ChatReservationDetailContentContainer>
 
@@ -294,51 +187,17 @@ const ChatReservationDetailPage = ({
           <ChatReservationDetailInfoTitleText>{'결제 정보'}</ChatReservationDetailInfoTitleText>
         </ChatReservationDetailInfoTitle>
 
-        <ChatReservationDetailPaymentContent>
-          <ChatReservationDetailPaymentContentTitle>
-            <ChatReservationDetailPaymentContentTitleText>
-              {'서비스 가격'}
-            </ChatReservationDetailPaymentContentTitleText>
-            <ChatReservationDetailPaymentContentTitlePrice>
-              {'1,500,000원'}
-            </ChatReservationDetailPaymentContentTitlePrice>
-          </ChatReservationDetailPaymentContentTitle>
-
-          <ChatReservationDetailPaymentContentDetail>
-            <ChatReservationDetailPaymentContentDetailTitle>
-              <ChatReservationDetailPaymentContentDetailTitleText>
-                {'기본선택'}
-              </ChatReservationDetailPaymentContentDetailTitleText>
-              <ChatReservationDetailPaymentContentDetailTitlePackageName>
-                {'패키지 B'}
-              </ChatReservationDetailPaymentContentDetailTitlePackageName>
-            </ChatReservationDetailPaymentContentDetailTitle>
-
-            <ChatReservationDetailPaymentContentDetailTitle>
-              <ChatReservationDetailPaymentContentDetailTitleText>
-                {'옵션'}
-              </ChatReservationDetailPaymentContentDetailTitleText>
-              <ChatReservationDetailPaymentContentDetailTitlePackageName>
-                {'시간추가 1시간(2), 편집본 추가 2장(1)'}
-              </ChatReservationDetailPaymentContentDetailTitlePackageName>
-            </ChatReservationDetailPaymentContentDetailTitle>
-          </ChatReservationDetailPaymentContentDetail>
-        </ChatReservationDetailPaymentContent>
+        {/* 결제 상품 정보 컴포넌트 */}
+        <ReservationDetailPaymentContent
+          PackageName="패키지 B"
+          PaymentPrice="1,500,000"
+          PackageOption={['시간추가 1시간(2)', '편집본 추가 2장(1)']}
+        />
 
         <ChatReservationDetailPaymentContentDivider />
 
         {/* 전체 금액 */}
-        <ChatReservationDetailPaymentContentTotal>
-          <ChatReservationDetailPaymentContentTotalText>
-            {'총 결제 금액'}
-          </ChatReservationDetailPaymentContentTotalText>
-          <ChatReservationDetailPaymentContentTotalPrice>
-            {'1,500,000원'}
-          </ChatReservationDetailPaymentContentTotalPrice>
-          <ChatReservationDetailPaymentContentTotalCard>
-            {'국민카드 / 일시불'}
-          </ChatReservationDetailPaymentContentTotalCard>
-        </ChatReservationDetailPaymentContentTotal>
+        <PaymentContentTotal PaymentPrice="1,500,000" PaymentCard="국민카드" PaymentType="일시불" />
 
         {reservationDetailType === 'receipt' && (
           <ChatReservationDetailReceiptButton>{'영수증 확인'}</ChatReservationDetailReceiptButton>
@@ -417,74 +276,10 @@ const ChatReservationDetailTypeContainer = styled.div`
   gap: 24px;
 `;
 
-const ChatReservationDetailType = styled.div`
-  display: flex;
-  gap: 8px;
-`;
-
-interface ChatReservationDetailTypeTitleProps {
-  isActive: boolean;
-}
-
-const ChatReservationDetailTypeTitle = styled.div<ChatReservationDetailTypeTitleProps>`
-  display: flex;
-  font: ${({ theme }) => theme.fonts.caption};
-  color: ${({ theme, isActive }) =>
-    isActive ? theme.colors.lightMode.brand.dark : theme.colors.lightMode.text.text5};
-`;
-
 const ChatReservationDetailTitle = styled.div`
   display: flex;
   font: ${({ theme }) => theme.fonts.title2};
   color: ${({ theme }) => theme.colors.lightMode.text.text1};
-`;
-
-const ChatReservationDetailContent = styled.div`
-  display: flex;
-  width: 100%;
-  height: 126px;
-  padding: 12px;
-  background-color: ${({ theme }) => theme.colors.lightMode.background.bgColor};
-  border-radius: 4px;
-  gap: 13px;
-`;
-
-const ChatReservationDetailContentImage = styled.div`
-  display: flex;
-  width: 102px;
-  height: 102px;
-`;
-
-const ChatReservationDetailContentText = styled.div`
-  display: flex;
-  width: 100%;
-  flex-direction: column;
-  justify-content: space-between;
-`;
-
-const ChatReservationDetailContentTextTitle = styled.div`
-  display: flex;
-  font: ${({ theme }) => theme.fonts.body1};
-  color: ${({ theme }) => theme.colors.lightMode.text.text2};
-`;
-
-const ChatReservationDetailContentSubText = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 17px;
-`;
-
-const ChatReservationDetailContentTextType = styled.div`
-  display: flex;
-  font: ${({ theme }) => theme.fonts.caption};
-  color: ${({ theme }) => theme.colors.lightMode.text.text4};
-`;
-
-const ChatReservationDetailContentTextName = styled.div`
-  display: flex;
-  font: ${({ theme }) => theme.fonts.labelS};
-  color: ${({ theme }) => theme.colors.lightMode.text.text2};
 `;
 
 const ChatReservationDetailInfoContainer = styled.div`
@@ -514,189 +309,6 @@ const ChatReservationDetailInfoTitleText = styled.div`
   color: ${({ theme }) => theme.colors.lightMode.text.text2};
 `;
 
-const ChatReservationDetailInfoContentContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
-`;
-
-const ChatReservationDetailInfoContent = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-`;
-
-const ChatReservationDetailInfoDateContainer = styled.div`
-  display: flex;
-  gap: 40px;
-`;
-
-const ChatReservationDetailInfoDateTitle = styled.div`
-  display: flex;
-  font: ${({ theme }) => theme.fonts.labelM};
-  color: #7f7e7e;
-`;
-
-const ChatReservationDetailInfoDateText = styled.div`
-  display: flex;
-  font: ${({ theme }) => theme.fonts.body1};
-  color: ${({ theme }) => theme.colors.lightMode.text.text1};
-  background-color: ${({ theme }) => theme.colors.lightMode.brand.primary};
-`;
-
-const ChatReservationDetailInfoTimeContainer = styled.div`
-  display: flex;
-  gap: 40px;
-`;
-
-const ChatReservationDetailInfoTimeTitle = styled.div`
-  display: flex;
-  font: ${({ theme }) => theme.fonts.labelM};
-  color: #7f7e7e;
-`;
-
-const ChatReservationDetailInfoTimeText = styled.div`
-  display: flex;
-  font: ${({ theme }) => theme.fonts.body1};
-  color: ${({ theme }) => theme.colors.lightMode.text.text1};
-`;
-
-const ChatReservationDetailInfoLocationContainer = styled.div`
-  display: flex;
-  gap: 40px;
-`;
-
-const ChatReservationDetailInfoLocationTitle = styled.div`
-  display: flex;
-  font: ${({ theme }) => theme.fonts.labelM};
-  color: #7f7e7e;
-`;
-
-const ChatReservationDetailInfoLocationText = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-`;
-
-const ChatReservationDetailInfoLocationTextTitle = styled.div`
-  display: flex;
-  font: ${({ theme }) => theme.fonts.body1};
-  color: ${({ theme }) => theme.colors.lightMode.text.text1};
-`;
-
-const ChatReservationDetailInfoLocationTextSubText = styled.div`
-  display: flex;
-  font: ${({ theme }) => theme.fonts.caption};
-  color: ${({ theme }) => theme.colors.lightMode.text.text3};
-`;
-
-const ChatReservationDetailInfoFilterContainer = styled.div`
-  display: flex;
-  gap: 40px;
-`;
-
-const ChatReservationDetailInfoFilterTitle = styled.div`
-  display: flex;
-  font: ${({ theme }) => theme.fonts.labelM};
-  color: #7f7e7e;
-`;
-
-const ChatReservationDetailInfoFilterContent = styled.div`
-  display: flex;
-  gap: 8px;
-`;
-
-const ChatReservationDetailInfoFilterContentTitle = styled.div`
-  display: flex;
-  font: ${({ theme }) => theme.fonts.body1};
-  color: ${({ theme }) => theme.colors.lightMode.text.text1};
-`;
-
-const ChatReservationDetailInfoFilterContentDivider = styled.div`
-  display: flex;
-  font: ${({ theme }) => theme.fonts.body4};
-  color: #c4c4c4;
-`;
-
-const ChatReservationDetailInfoRequestContainer = styled.div`
-  display: flex;
-  width: 100%;
-  gap: 40px;
-`;
-
-const ChatReservationDetailInfoRequestTitle = styled.div`
-  display: flex;
-  flex-shrink: 0;
-  font: ${({ theme }) => theme.fonts.labelM};
-  color: #7f7e7e;
-`;
-
-const ChatReservationDetailInfoRequestContent = styled.div`
-  display: flex;
-  width: 100%;
-  font: ${({ theme }) => theme.fonts.body4};
-  color: ${({ theme }) => theme.colors.lightMode.text.text3};
-`;
-
-const ChatReservationDetailInfoPackageContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-`;
-
-const ChatReservationDetailInfoPackageContent = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: 12px 16px;
-  background-color: ${({ theme }) => theme.colors.lightMode.background.bgColor};
-  gap: 16px;
-`;
-const ChatReservationDetailInfoPackageContentTitle = styled.div`
-  display: flex;
-  gap: 24px;
-`;
-
-const ChatReservationDetailInfoPackageContentName = styled.div`
-  display: flex;
-  font: ${({ theme }) => theme.fonts.title3};
-  color: ${({ theme }) => theme.colors.lightMode.text.text1};
-`;
-
-const ChatReservationDetailInfoPackageContentQuantity = styled.div`
-  display: flex;
-  font: ${({ theme }) => theme.fonts.title3};
-  color: ${({ theme }) => theme.colors.lightMode.text.text1};
-`;
-
-const ChatReservationDetailInfoPackageContentPrice = styled.div`
-  display: flex;
-  font: ${({ theme }) => theme.fonts.title3};
-  color: ${({ theme }) => theme.colors.lightMode.text.text1};
-`;
-
-const ChatReservationDetailInfoPackageQuantity = styled.div`
-  display: flex;
-  font: ${({ theme }) => theme.fonts.title3};
-  color: #454545;
-`;
-
-const ChatReservationDetailInfoPackageContentDetail = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-`;
-const ChatReservationDetailInfoPackageContentDetailText = styled.div`
-  display: flex;
-  font: ${({ theme }) => theme.fonts.body4};
-  color: #878686;
-`;
-
-const ChatReservationDetailInfoPackageContentDetailMessage = styled.div`
-  display: flex;
-  font: ${({ theme }) => theme.fonts.body4};
-  color: #878686;
-`;
-
 const ChatReservationDetailPaymentContentContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -704,83 +316,10 @@ const ChatReservationDetailPaymentContentContainer = styled.div`
   gap: 24px;
 `;
 
-const ChatReservationDetailPaymentContent = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-`;
-
-const ChatReservationDetailPaymentContentTitle = styled.div`
-  display: flex;
-  gap: 8px;
-`;
-
-const ChatReservationDetailPaymentContentTitleText = styled.div`
-  display: flex;
-  font: ${({ theme }) => theme.fonts.body1};
-  color: ${({ theme }) => theme.colors.lightMode.text.text1};
-`;
-
-const ChatReservationDetailPaymentContentTitlePrice = styled.div`
-  display: flex;
-  font: ${({ theme }) => theme.fonts.body1};
-  color: ${({ theme }) => theme.colors.lightMode.text.text1};
-`;
-
-const ChatReservationDetailPaymentContentDetail = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: 12px 16px;
-  gap: 8px;
-  background-color: ${({ theme }) => theme.colors.lightMode.background.bg2};
-`;
-
-const ChatReservationDetailPaymentContentDetailTitle = styled.div`
-  display: flex;
-  gap: 12px;
-`;
-
-const ChatReservationDetailPaymentContentDetailTitleText = styled.div`
-  display: flex;
-  width: 49px;
-  font: ${({ theme }) => theme.fonts.body3};
-  color: ${({ theme }) => theme.colors.lightMode.text.text1};
-`;
-
-const ChatReservationDetailPaymentContentDetailTitlePackageName = styled.div`
-  display: flex;
-  font: ${({ theme }) => theme.fonts.body4};
-  color: #9d9d9d;
-`;
-
 const ChatReservationDetailPaymentContentDivider = styled.div`
   display: flex;
   width: 100%;
   border-bottom: 1px solid ${({ theme }) => theme.colors.lightMode.divider.divider2};
-`;
-
-const ChatReservationDetailPaymentContentTotal = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-`;
-
-const ChatReservationDetailPaymentContentTotalText = styled.div`
-  display: flex;
-  font: ${({ theme }) => theme.fonts.labelMB};
-  color: ${({ theme }) => theme.colors.lightMode.text.text1};
-`;
-
-const ChatReservationDetailPaymentContentTotalPrice = styled.div`
-  display: flex;
-  font: ${({ theme }) => theme.fonts.labelL};
-  color: ${({ theme }) => theme.colors.lightMode.text.text1};
-`;
-
-const ChatReservationDetailPaymentContentTotalCard = styled.div`
-  display: flex;
-  font: ${({ theme }) => theme.fonts.body4};
-  color: #878787;
 `;
 
 const ChatReservationDetailReceiptButton = styled.button`

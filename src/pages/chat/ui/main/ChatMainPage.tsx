@@ -35,7 +35,7 @@ const ChatMainPage = () => {
   };
 
   const handleBackClick = () => {
-    // Pin 모드에서 체크된 항목이 있을 때 확인 모달 표시
+    // 체크된 항목이 있을 때 확인 모달 표시
     if (isPinMode && checkedCount > 0) {
       setIsPinModalVisible(true);
     } else {
@@ -74,7 +74,6 @@ const ChatMainPage = () => {
   };
 
   const handlePinConfirm = () => {
-    console.log(`${checkedCount}개의 채팅방을 상단에 고정합니다.`);
     setPinnedCount((prev) => prev + checkedCount); // 고정된 채팅방 수 업데이트
     setIsPinMode(false);
     setCheckedCount(0);
@@ -108,6 +107,7 @@ const ChatMainPage = () => {
         ];
 
   return (
+    // 채팅 메인 페이지 입니다
     <ChatPageContainer>
       <HeaderWrapper>
         <Header
@@ -132,7 +132,11 @@ const ChatMainPage = () => {
           ]}
         />
       </HeaderWrapper>
+
+      {/* 채팅방 검색 컴포넌트 */}
       <ChatMainSearch />
+
+      {/* 채팅방 리스트 컴포넌트 */}
       <ChatRoomList
         isEditMode={isEditMode}
         isPinMode={isPinMode}
@@ -149,6 +153,7 @@ const ChatMainPage = () => {
       ) : (
         <Navigation />
       )}
+
       {/* 편집 모달 */}
       <Modal
         isVisible={isDeleteModalVisible}
@@ -160,6 +165,7 @@ const ChatMainPage = () => {
         onLeftClick={handleDeleteModalClose}
         onRightClick={handleDeleteConfirm}
       />
+
       {/* 고정 모달 */}
       <Modal
         isVisible={isPinModalVisible}
