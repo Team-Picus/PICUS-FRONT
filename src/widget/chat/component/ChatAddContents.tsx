@@ -6,16 +6,22 @@ import IcDeleteBig from '@icon/ic-delete-filled.svg?react';
 
 const ChatAddContents = ({
   onContentTypeChange,
+  role,
 }: {
-  onContentTypeChange?: (type: 'image' | 'file') => void;
+  onContentTypeChange?: (type: 'image' | 'file' | 'document') => void;
+  role: 'artist' | 'user';
 }) => {
   const addContents = [
     { icon: IcGallery, title: '사진', type: 'image' as const },
     { icon: IcFileBlank, title: '파일', type: 'file' as const },
-    { icon: IcDocument, title: '의뢰서', type: 'file' as const },
+    {
+      icon: IcDocument,
+      title: role === 'artist' ? '결제청구서' : '의뢰서',
+      type: 'document' as const,
+    },
   ];
 
-  const handleContentClick = (type: 'image' | 'file') => {
+  const handleContentClick = (type: 'image' | 'file' | 'document') => {
     onContentTypeChange?.(type);
   };
 

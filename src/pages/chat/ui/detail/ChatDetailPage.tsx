@@ -9,6 +9,7 @@ import ChatRoomInput from '@widget/chat/ui/detail/ChatRoomInput';
 import ChatMessageSpace from '@widget/chat/ui/detail/ChatMessageSpace';
 import ChatFilePage from './ChatFilePage';
 import ChatReservationDetailPage from './ChatReservationDetailPage';
+import ChatPaymentDocumentPage from './ChatPaymentDocumentPage';
 
 const ChatDetailPage = () => {
   const theme = useTheme();
@@ -16,6 +17,7 @@ const ChatDetailPage = () => {
   const [isFilePageClosing, setIsFilePageClosing] = useState(false);
   const [isReservationDetailOpen, setIsReservationDetailOpen] = useState(false);
   const [isReservationDetailClosing, setIsReservationDetailClosing] = useState(false);
+  const [isPaymentDocumentOpen, setIsPaymentDocumentOpen] = useState(false);
   const [reservationDetailType, setReservationDetailType] = useState<
     'request' | 'payment' | 'receipt'
   >('request');
@@ -31,6 +33,14 @@ const ChatDetailPage = () => {
 
   const handleReservationDetailClose = () => {
     setIsReservationDetailClosing(true);
+  };
+
+  const handlePaymentDocumentOpen = () => {
+    setIsPaymentDocumentOpen(true);
+  };
+
+  const handlePaymentDocumentClose = () => {
+    setIsPaymentDocumentOpen(false);
   };
 
   useEffect(() => {
@@ -78,7 +88,7 @@ const ChatDetailPage = () => {
       <ChatMessageSpace onReservationDetailClick={handleReservationDetailOpen} />
 
       {/* 채팅방 입력 컴포넌트 영역 */}
-      <ChatRoomInput />
+      <ChatRoomInput onPaymentDocumentOpen={handlePaymentDocumentOpen} />
 
       {isFilePageOpen && (
         <FilePageOverlay isClosing={isFilePageClosing}>
@@ -93,6 +103,12 @@ const ChatDetailPage = () => {
             onClose={handleReservationDetailClose}
           />
         </ReservationDetailOverlay>
+      )}
+
+      {isPaymentDocumentOpen && (
+        <PaymentDocumentOverlay>
+          <ChatPaymentDocumentPage onClose={handlePaymentDocumentClose} />
+        </PaymentDocumentOverlay>
       )}
     </ChatDetailPageContainer>
   );
@@ -142,8 +158,18 @@ const ReservationDetailOverlay = styled.div<{ isClosing: boolean }>`
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: 10000;
+  z-index: 9999;
   background-color: white;
   animation: ${({ isClosing }) => (isClosing ? slideOutToRight : slideInFromRight)} 0.15s
     ease-in-out;
+`;
+
+const PaymentDocumentOverlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+  background-color: white;
 `;

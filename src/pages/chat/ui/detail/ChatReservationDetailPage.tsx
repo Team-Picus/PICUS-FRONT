@@ -253,8 +253,12 @@ const ChatReservationDetailPageContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+  max-width: 768px;
   height: 100vh;
   overflow-y: auto;
+  margin: 0 auto;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom)
+    env(safe-area-inset-left);
 `;
 
 const HeaderWrapper = styled.div<{ isClosing?: boolean }>`
