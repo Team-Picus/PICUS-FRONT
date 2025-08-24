@@ -5,7 +5,11 @@ import IcSend from '@icon/ic-send.svg';
 import IcCloseBig from '@icon/ic-close-big.svg';
 import { AddContentSpace, ChatAddContents } from '@widget/chat/component/ChatAddContents';
 
-const ChatRoomInput = () => {
+interface ChatRoomInputProps {
+  onPaymentDocumentOpen: () => void;
+}
+
+const ChatRoomInput = ({ onPaymentDocumentOpen }: ChatRoomInputProps) => {
   const [isAddMode, setIsAddMode] = useState(false);
   const [contentType, setContentType] = useState<'image' | 'file'>('image');
 
@@ -13,7 +17,13 @@ const ChatRoomInput = () => {
     setIsAddMode(!isAddMode);
   };
 
-  const handleContentTypeChange = (type: 'image' | 'file') => {
+  const handleContentTypeChange = (type: 'image' | 'file' | 'document') => {
+    if (type === 'document') {
+      // 결제청구서일 때 모달 띄우기
+      onPaymentDocumentOpen();
+      setIsAddMode(false);
+      return;
+    }
     setContentType(type);
   };
 
@@ -31,7 +41,7 @@ const ChatRoomInput = () => {
           <img src={IcSend} alt="전송" />
         </SendButton>
       </ChatRoomInputContainer>
-      {isAddMode && <ChatAddContents onContentTypeChange={handleContentTypeChange} />}
+      {isAddMode && <ChatAddContents onContentTypeChange={handleContentTypeChange} role="artist" />}
     </ChatRoomInputWrapper>
   );
 };
