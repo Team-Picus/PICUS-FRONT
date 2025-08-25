@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import styled from '@emotion/styled';
-import ChatRoomCard from '@widget/chat/component/ChatRoomCard';
+import ChatRoomCard from '@widget/chat/ui/main/ChatRoomCard';
 import IcCheckNone from '@icon/ic-circle-check.svg';
 import IcCheck from '@icon/ic-circle-check-filled.svg';
 
@@ -22,6 +22,7 @@ const ChatRoomList = ({ isEditMode, isPinMode, onCheckedCountChange }: ChatRoomL
   const showCheckbox = isEditMode || isPinMode;
 
   return (
+    // 채팅방 리스트 컴포넌트입니다.
     <ChatRoomListContainer>
       <ChatRoomCardContainer>
         {showCheckbox && (

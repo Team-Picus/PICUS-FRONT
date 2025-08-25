@@ -1,8 +1,31 @@
 import Header from '@shared/components/Header';
 import styled from '@emotion/styled';
 import SelectMenuButton from '@shared/components/SelectMenuButton';
-import ChatReservationCard from '@widget/chat/ui/reservation/ChatReservationCard';
+import ChatReservationCard from '@widget/chat/ui/detail/reservation/ChatReservationCard';
 import { useNavigate } from 'react-router-dom';
+import ImgMainbannerEx from '@image/img-mainbanner-ex.png';
+
+interface MyReservationInformation {
+  date: string;
+  state: 'on' | 'off';
+  image: string;
+  time: string;
+  artistName: string;
+  location: string;
+  locationSub: string;
+}
+
+const MockMyReservationInformation: MyReservationInformation[] = [
+  {
+    date: '2024년 12월 15일 (목)',
+    state: 'on',
+    image: ImgMainbannerEx,
+    time: '오전 10:00',
+    artistName: '작가 이름',
+    location: '라이트 스튜디오',
+    locationSub: '서울특별시 강남구 도산대로 123',
+  },
+];
 
 const ChatReservationMainPage = () => {
   const navigate = useNavigate();
@@ -34,8 +57,9 @@ const ChatReservationMainPage = () => {
         </ChatReservationSelectMenuContainer>
 
         {/* 예약 카드 리스트 */}
-        <ChatReservationCard />
-        <ChatReservationCard />
+        {MockMyReservationInformation.map((reservation, index) => (
+          <ChatReservationCard key={index} myReservation={reservation} />
+        ))}
       </ChatReservationMainContentContainer>
     </ChatReservationMainPageContainer>
   );

@@ -1,52 +1,52 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import type {
+  Package,
+  ReservationDetailPaymentContentProps,
+  PaymentContentTotalProps,
+} from '@widget/chat/types/ReservationInformation';
 
 interface ReservationDetailInfoContentProps {
-  dateValue?: string;
-  timeValue?: string;
-  locationValue?: string;
-  locationSubValue?: string;
-  filterValues?: string[];
-  requestValue?: string;
+  reservationData: {
+    date: string;
+    time: string;
+    location: string;
+    locationSub: string;
+    filter: string[];
+    request: string;
+  };
 }
 
-const ReservationDetailInfoContent = ({
-  dateValue,
-  timeValue,
-  locationValue,
-  locationSubValue,
-  filterValues,
-  requestValue,
-}: ReservationDetailInfoContentProps) => {
+const ReservationDetailInfoContent = ({ reservationData }: ReservationDetailInfoContentProps) => {
   return (
     <Container>
       <InfoSection>
         <InfoRow>
           <InfoLabel>{'날짜'}</InfoLabel>
-          <DateText>{dateValue}</DateText>
+          <DateText>{reservationData.date}</DateText>
         </InfoRow>
 
         <InfoRow>
           <InfoLabel>{'시간'}</InfoLabel>
-          <InfoValue>{timeValue}</InfoValue>
+          <InfoValue>{reservationData.time}</InfoValue>
         </InfoRow>
 
         <InfoRow>
           <InfoLabel>{'장소'}</InfoLabel>
           <LocationContainer>
-            <InfoValue>{locationValue}</InfoValue>
+            <InfoValue>{reservationData.location}</InfoValue>
 
-            <LocationSubText>{locationSubValue}</LocationSubText>
+            <LocationSubText>{reservationData.locationSub}</LocationSubText>
           </LocationContainer>
         </InfoRow>
 
         <InfoRow>
           <InfoLabel>{'필터'}</InfoLabel>
           <FilterContainer>
-            {filterValues?.map((filter, index) => (
+            {reservationData.filter?.map((filter, index) => (
               <React.Fragment key={filter}>
                 <InfoValue>{filter}</InfoValue>
-                {index < filterValues.length - 1 && <Divider>{'/'}</Divider>}
+                {index < reservationData.filter.length - 1 && <Divider>{'/'}</Divider>}
               </React.Fragment>
             ))}
           </FilterContainer>
@@ -56,7 +56,7 @@ const ReservationDetailInfoContent = ({
       <InfoRow>
         <InfoLabel>{'요청'}</InfoLabel>
 
-        <RequestContent>{requestValue}</RequestContent>
+        <RequestContent>{reservationData.request}</RequestContent>
       </InfoRow>
     </Container>
   );
@@ -127,58 +127,29 @@ const RequestContent = styled.div`
   color: ${({ theme }) => theme.colors.lightMode.text.text3};
 `;
 
-interface ReservationDetailPackageContentProps {
-  PackageName: string;
-  PackagePrice: string;
-  PackageDetails: string[];
-  PackageDetailMessage: string;
-  PackageOptionName: string;
-  PackageOptionQuantity: string;
-  PackageOptionPrice: string;
-  PackageOptionMessage: string;
-  PackageQuantity: string;
-}
-
-const ReservationDetailPackageContent = ({
-  PackageName,
-  PackagePrice,
-  PackageDetails,
-  PackageDetailMessage,
-  PackageOptionName,
-  PackageOptionQuantity,
-  PackageOptionPrice,
-  PackageOptionMessage,
-  PackageQuantity,
-}: ReservationDetailPackageContentProps) => {
+const ReservationDetailPackageContent = ({ packageData }: { packageData: Package }) => {
   return (
     <PackageContainer>
       {/* 패키지 설명 */}
       <PackageContent>
         <PackageTitle>
-          <PackageTitleText>{PackageName}</PackageTitleText>
-          <PackageTitleText>{PackagePrice}원</PackageTitleText>
+          <PackageTitleText>{packageData.packageName}</PackageTitleText>
+          {packageData.packageOptionName && (
+            <PackageTitleText>{packageData.packageOptionName}</PackageTitleText>
+          )}
+          <PackageTitleText>{packageData.packagePrice}원</PackageTitleText>
         </PackageTitle>
 
         <PackageDetail>
-          {PackageDetails.map((detail, index) => (
+          {packageData.packageQuantity && (
+            <PackageQuantityText>{packageData.packageQuantity}</PackageQuantityText>
+          )}
+          {packageData.packageDetails?.map((detail, index) => (
             <PackageDetailText key={index}>{detail}</PackageDetailText>
           ))}
         </PackageDetail>
 
-        <PackageDetailText>{PackageDetailMessage}</PackageDetailText>
-      </PackageContent>
-
-      {/* 패키지 옵션 설명 */}
-      <PackageContent>
-        <PackageTitle>
-          <PackageTitleText>{PackageOptionName}</PackageTitleText>
-          <PackageTitleText>{PackageOptionQuantity}장</PackageTitleText>
-          <PackageTitleText>{PackageOptionPrice}원</PackageTitleText>
-        </PackageTitle>
-
-        <PackageQuantityText>{PackageQuantity}개</PackageQuantityText>
-
-        <PackageDetailText>{PackageOptionMessage}</PackageDetailText>
+        <PackageDetailText>{packageData.packageDetailMessage}</PackageDetailText>
       </PackageContent>
     </PackageContainer>
   );
@@ -227,12 +198,6 @@ const PackageDetailText = styled.div`
   font: ${({ theme }) => theme.fonts.body4};
   color: #878686;
 `;
-
-interface ReservationDetailPaymentContentProps {
-  PackageName: string;
-  PaymentPrice: string;
-  PackageOption: string[];
-}
 
 const ReservationDetailPaymentContent = ({
   PackageName,
@@ -305,12 +270,6 @@ const PaymentDetailValue = styled.div`
   font: ${({ theme }) => theme.fonts.body4};
   color: #9d9d9d;
 `;
-
-interface PaymentContentTotalProps {
-  PaymentPrice: string;
-  PaymentCard: string;
-  PaymentType: string;
-}
 
 const PaymentContentTotal = ({
   PaymentPrice,

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import PackageInfoItem from '../ui/detail/PackageInfoItem';
+import PackageInfoItem from '../ui/detail/payment/PackageInfoItem';
 
 interface PackageItem {
   id: string;
@@ -23,6 +23,7 @@ const PackageInfoContainer = ({
 }: PackageInfoContainerProps) => {
   return (
     <>
+      {/* 기본 컨테이너 입니다. */}
       <ContentContainer>
         {packages.map((pkg, index) => (
           <React.Fragment key={pkg.id}>
@@ -35,7 +36,6 @@ const PackageInfoContainer = ({
           </React.Fragment>
         ))}
       </ContentContainer>
-
       <ThemeTextContainer>
         <ThemeText>
           클라이언트의 주문서 :&nbsp;

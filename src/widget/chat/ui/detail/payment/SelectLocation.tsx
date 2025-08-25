@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 const SelectLocation = () => {
   return (
     <>
+      // 장소 컨테이너 입니다.
       <SelectLocationContainer>
         <SelectLocationLeftButton>{'개인스튜디오'}</SelectLocationLeftButton>
         <SelectLocationRightButton>{'외부'}</SelectLocationRightButton>

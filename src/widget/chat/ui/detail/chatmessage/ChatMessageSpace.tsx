@@ -4,7 +4,7 @@ import {
   CheckMessage,
   NormalMessage,
   RequestCheckMessage,
-} from '@widget/chat/component/ChatTypeComponents';
+} from '@widget/chat/ui/detail/chatmessage/ChatTypeComponents';
 import {
   ConfirmNoticeMessage,
   DateChangeNoticeMessage,

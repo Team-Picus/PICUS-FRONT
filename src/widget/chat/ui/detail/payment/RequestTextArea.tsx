@@ -12,6 +12,7 @@ const RequestTextArea = () => {
   };
 
   return (
+    // 요청사항 컨테이너
     <RequestTextAreaContainer>
       <RequestTextAreaInput value={text} onChange={handleTextChange} />
       <RequestTextAreaCount>{`${text.length}`}/300</RequestTextAreaCount>

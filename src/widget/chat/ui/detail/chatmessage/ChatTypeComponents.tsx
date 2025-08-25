@@ -120,91 +120,94 @@ const ImageGrid = ({ images }: { images: string[] }) => {
   );
 };
 
+// 일반 메시지 컨테이너
 const NormalMessageContainer = styled.div`
   display: flex;
   gap: 8px;
 `;
 
+// 메시지 텍스트 내용
 const MessageTextContent = styled.div`
   display: block;
 `;
 
+// 파일 그리드 컨테이너
 const FileGridContainer = styled.div`
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
   width: 100%;
   gap: 8px;
 `;
 
+// 파일 아이템
 const FileItem = styled.div`
   display: flex;
+  align-items: center;
+  justify-content: space-between;
   height: 40px;
+  padding: 12px 8px;
+  gap: 4px;
   background-color: ${({ theme }) => theme.colors.darkMode.background.bg1};
   border: 1px solid ${({ theme }) => theme.colors.darkMode.divider.divider1};
   border-radius: 12px;
-  padding: 12px 8px;
-  align-items: center;
   flex: 0 0 auto;
   width: fit-content;
-  justify-content: space-between;
-  gap: 4px;
 `;
 
+// 파일 아이템 왼쪽 (아이콘)
 const FileItemLeft = styled.div`
   display: flex;
+  align-items: center;
+  justify-content: center;
   width: 16px;
   height: 16px;
-  justify-content: center;
-  align-items: center;
 `;
 
+// 파일 아이템 텍스트
 const FileItemText = styled.div`
-  display: flex;
+  flex: 1;
   font: ${({ theme }) => theme.fonts.caption};
   color: ${({ theme }) => theme.colors.darkMode.text.text1};
-  flex: 1;
   white-space: nowrap;
 `;
 
+// 파일 아이템 오른쪽 (다운로드 아이콘)
 const FileItemRight = styled.div`
   display: flex;
+  align-items: center;
+  justify-content: center;
   width: 16px;
   height: 16px;
-  justify-content: center;
-  align-items: center;
   color: ${({ theme }) => theme.colors.darkMode.icon.icon2};
 `;
 
+// 이미지 모달 (확대 화면)
 const ImageModal = styled.div`
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  inset: 0;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5);
   z-index: 1000;
   cursor: pointer;
-  margin: 0;
-  padding: 0;
 `;
 
+// 모달 내부 이미지
 const ModalImage = styled.img`
   width: 100vw;
   height: auto;
   object-fit: contain;
 `;
 
+// 모달 내부 플레이스홀더 (이미지 없을 때)
 const ModalPlaceholder = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100vw;
   height: 100vw;
   background-color: #d0d0d0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   font-size: 18px;
   color: #666;
 
@@ -213,6 +216,7 @@ const ModalPlaceholder = styled.div`
   }
 `;
 
+// 이미지 그리드 컨테이너 (이미지 개수에 따라 레이아웃 변경)
 const ImageGridContainer = styled.div<{ imageCount: number }>`
   display: grid;
   gap: 4px;
@@ -240,6 +244,7 @@ const ImageGridContainer = styled.div<{ imageCount: number }>`
   }}
 `;
 
+// 이미지 아이템 (개별 이미지)
 const ImageItem = styled.div<{ imageCount: number }>`
   position: relative;
   width: 100%;
@@ -262,6 +267,7 @@ const ImageItem = styled.div<{ imageCount: number }>`
   }
 `;
 
+// 일반 메시지 텍스트 (내 메시지/상대방 메시지 구분)
 const NormalMessageText = styled.div<{ roleType: 'my' | 'other' }>`
   display: flex;
   flex-direction: column;
@@ -279,6 +285,7 @@ const NormalMessageText = styled.div<{ roleType: 'my' | 'other' }>`
     roleType === 'my' ? theme.colors.darkMode.text.text1 : theme.colors.lightMode.text.text1};
 `;
 
+// 일반 메시지 시간
 const NormalMessageTime = styled.div`
   display: flex;
   font: ${({ theme }) => theme.fonts.caption};
@@ -339,12 +346,14 @@ const RequestCheckMessage = ({
   );
 };
 
+// 의뢰서 확인 메시지 래퍼
 const RequestCheckMessageWrapper = styled.div`
   display: flex;
   width: 100%;
   gap: 8px;
 `;
 
+// 의뢰서 확인 메시지 시간
 const RequestCheckMessageTime = styled.div`
   display: flex;
   font: ${({ theme }) => theme.fonts.caption};
@@ -352,17 +361,18 @@ const RequestCheckMessageTime = styled.div`
   align-self: flex-end;
 `;
 
+// 의뢰서 확인 메시지 컨테이너 (내 메시지/상대방 메시지 구분)
 const RequestCheckMessageContainer = styled.div<{ roleType: 'my' | 'other' }>`
   display: flex;
-  width: 100%;
   flex-direction: column;
-  border-radius: ${({ roleType }) => (roleType === 'my' ? '12px 0 12px 12px' : '0 12px 12px 12px')};
+  width: 100%;
+  padding: 12px;
+  gap: 16px;
   background-color: ${({ theme, roleType }) =>
     roleType === 'my'
       ? theme.colors.darkMode.background.bg1
       : theme.colors.lightMode.background.bg1};
-  padding: 12px;
-  gap: 16px;
+  border-radius: ${({ roleType }) => (roleType === 'my' ? '12px 0 12px 12px' : '0 12px 12px 12px')};
 `;
 
 const PicusNoticeContent = styled.div<{ roleType: 'my' | 'other' }>`

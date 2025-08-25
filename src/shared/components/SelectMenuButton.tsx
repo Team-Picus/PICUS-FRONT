@@ -18,56 +18,55 @@ const SelectMenuButton = ({
   dropDownTitle,
   onSelect,
 }: SelectMenuButtonProps) => {
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const handleButtonClick = () => {
-    setIsDropdownOpen(!isDropdownOpen);
+  const handleClick = () => {
+    setIsOpen(!isOpen);
   };
 
-  const handleItemClick = (item: string) => {
+  const handleSelect = (item: string) => {
     onSelect?.(item);
-    setIsDropdownOpen(false);
+    setIsOpen(false);
   };
 
-  const handleOverlayClick = () => {
-    setIsDropdownOpen(false);
+  const handleOverlay = () => {
+    setIsOpen(false);
   };
 
   return (
     <>
-      <SelectMenuButtonContainer ref={containerRef} onClick={handleButtonClick} isActive={isActive}>
-        <SelectMenuButtonTitle>{title}</SelectMenuButtonTitle>
-        <SelectMenuButtonIcon isOpen={isDropdownOpen}>
-          {isDropdownOpen ? <IcChevronUp /> : <IcChevronDown />}
-        </SelectMenuButtonIcon>
+      <Container ref={containerRef} onClick={handleClick} isActive={isActive}>
+        <Title>{title}</Title>
+        <Icon isOpen={isOpen}>{isOpen ? <IcChevronUp /> : <IcChevronDown />}</Icon>
 
-        {isDropdownOpen && (
+        {isOpen && (
           <>
-            <Overlay onClick={handleOverlayClick} />
+            <Overlay onClick={handleOverlay} />
             <DropdownContainer>
               {dropDownTitle && <DropDownMenu>{dropDownTitle}</DropDownMenu>}
               {contents.map((item, index) => (
-                <DropdownItem key={index} onClick={() => handleItemClick(item)}>
+                <DropdownItem key={index} onClick={() => handleSelect(item)}>
                   {item}
                 </DropdownItem>
               ))}
             </DropdownContainer>
           </>
         )}
-      </SelectMenuButtonContainer>
+      </Container>
     </>
   );
 };
 
-const SelectMenuButtonContainer = styled.div<{ isActive: boolean }>`
+const Container = styled.div<{ isActive: boolean }>`
   position: relative;
   display: flex;
-  padding: 4px 8px;
+  align-items: center;
   gap: 4px;
+  padding: 4px 8px;
   background-color: ${({ theme }) => theme.colors.lightMode.background.bg1};
-  border-radius: 8px;
   border: 1px solid ${({ theme }) => theme.colors.lightMode.neutral.neutral300};
+  border-radius: 8px;
   cursor: pointer;
 
   &:hover {
@@ -75,28 +74,22 @@ const SelectMenuButtonContainer = styled.div<{ isActive: boolean }>`
   }
 `;
 
-const SelectMenuButtonTitle = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
+const Title = styled.div`
   font: ${({ theme }) => theme.fonts.body3};
   color: ${({ theme }) => theme.colors.lightMode.text.text2};
 `;
 
-const SelectMenuButtonIcon = styled.div<{ isOpen: boolean }>`
+const Icon = styled.div<{ isOpen: boolean }>`
   display: flex;
-  width: 24px;
-  height: 24px;
   align-items: center;
   justify-content: center;
+  width: 24px;
+  height: 24px;
 `;
 
 const Overlay = styled.div`
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
+  inset: 0;
   background: transparent;
   z-index: 999;
 `;
@@ -116,7 +109,6 @@ const DropdownContainer = styled.div`
 `;
 
 const DropDownMenu = styled.div`
-  display: flex;
   padding: 8px 12px;
   background-color: ${({ theme }) => theme.colors.lightMode.background.bg1};
   font: ${({ theme }) => theme.fonts.labelS};
@@ -124,7 +116,6 @@ const DropDownMenu = styled.div`
 `;
 
 const DropdownItem = styled.div`
-  display: flex;
   padding: 8.5px 12px;
   font: ${({ theme }) => theme.fonts.body1};
   color: ${({ theme }) => theme.colors.lightMode.text.text2};
