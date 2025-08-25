@@ -2,14 +2,18 @@
 
 import styled from '@emotion/styled';
 
-type ChatStateType = '활동중' | '종료';
+type ChatStateType = 'on' | 'off';
 
 interface ChatStateChipProps {
   state: ChatStateType;
 }
 
 const ChatStateChip = ({ state }: ChatStateChipProps) => {
-  return <ChatStatusChipContainer state={state}>{state}</ChatStatusChipContainer>;
+  return (
+    <ChatStatusChipContainer state={state}>
+      {state === 'on' ? '활동중' : '종료'}
+    </ChatStatusChipContainer>
+  );
 };
 
 const ChatStatusChipContainer = styled.div<{ state: ChatStateType }>`
@@ -18,11 +22,9 @@ const ChatStatusChipContainer = styled.div<{ state: ChatStateType }>`
   border-radius: 8px;
   padding: 4px 8px;
   background-color: ${({ theme, state }) =>
-    state === '활동중'
-      ? theme.colors.lightMode.brand.primary
-      : theme.colors.lightMode.background.bg4};
+    state === 'on' ? theme.colors.lightMode.brand.primary : theme.colors.lightMode.background.bg4};
   color: ${({ theme, state }) =>
-    state === '활동중' ? theme.colors.lightMode.text.text1 : theme.colors.lightMode.text.text3};
+    state === 'on' ? theme.colors.lightMode.text.text1 : theme.colors.lightMode.text.text3};
   font: ${({ theme }) => theme.fonts.labelS};
   align-items: center;
   justify-content: center;

@@ -8,20 +8,48 @@ import IcChevronDown from '@icon/ic-chevron-down.svg';
 import ImgMainbannerEx from '@image/img-mainbanner-ex.png';
 import BottomTap from '@shared/components/BottomTap';
 import { useTheme } from '@emotion/react';
-import ChatReservationTypeTitle from '@widget/chat/ui/detail/ChatReservationTypeTitle';
-import ReservationDetailContent from '@widget/chat/ui/detail/ReservationDetailContent';
+import ChatReservationTypeTitle from '@widget/chat/ui/detail/document/ChatReservationTypeTitle';
+import ReservationDetailContent from '@widget/chat/component/DetailContent';
 import {
   PaymentContentTotal,
   ReservationDetailInfoContent,
   ReservationDetailPackageContent,
   ReservationDetailPaymentContent,
-} from '@widget/chat/ui/detail/ReservationDetailInfoContent';
+} from '@widget/chat/ui/detail/document/ReservationDetailInfoContent';
+import ChatCommonContainer from '@widget/chat/component/ChatCommonContainer';
+import type { ReservationInformation } from '@widget/chat/types/ReservationInformation';
 
-interface ChatReservationDetailPageProps {
+interface ChatDocumentDetailPageProps {
   reservationDetailType: 'request' | 'payment' | 'receipt';
   onClose?: () => void;
   isClosing?: boolean;
 }
+
+const MockReservationInformation: ReservationInformation = {
+  date: '2024년 12월 15일 (목)',
+  time: '오전 10:00 ~ 오후 1:00',
+  location: '라이트 스튜디오',
+  locationSub: '경기도 성남시 수정구 성남대로 1342',
+  filter: ['도회적인', '빈티지', '몽환적인'],
+  request:
+    '서로 즐겨 하는 포즈나 습관을 담고 싶어요. 기념일을 맞아 촬영합니다. 프러포즈를 앞두고 있어요! 촬영 중 반지를 건네는 순간을 자연스럽게 담아주시면 좋겠습니다. 둘 다 활동적인 걸 좋아해서 움직이는 장면을 많이 찍어주시면 좋겠어요.',
+  package: [
+    {
+      packageName: '패키지 B',
+      packagePrice: '800,000',
+      packageDetails: ['모먼트 패키지 1세트', '세밀 보정본 10장', '색보정본 20장', '분할 컷 2장'],
+      packageDetailMessage: '장소는 원하시는 장소 또는 바담 추천 제공드립니다. 기본 1시간입니다.',
+    },
+    {
+      packageName: '편집본 추가',
+      packageOptionName: '2장',
+      packagePrice: '100,000',
+      packageQuantity: '1개',
+      packageDetailMessage:
+        '최대 5장까지 가능합니다. 추가된 편집본 장 수에 따라 최대 3일정도 추가로 소요될 수 있습니다.',
+    },
+  ],
+};
 
 const getReservationTitle = (type: 'request' | 'payment' | 'receipt'): string => {
   const titles = {
@@ -32,11 +60,11 @@ const getReservationTitle = (type: 'request' | 'payment' | 'receipt'): string =>
   return titles[type];
 };
 
-const ChatReservationDetailPage = ({
+const ChatDocumentDetailPage = ({
   reservationDetailType,
   onClose,
   isClosing,
-}: ChatReservationDetailPageProps) => {
+}: ChatDocumentDetailPageProps) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isCancelModalOpen, setIsCancelModalOpen] = useState(false);
   const [isButtonVisible, setIsButtonVisible] = useState(true);
@@ -105,6 +133,7 @@ const ChatReservationDetailPage = ({
   ];
 
   return (
+    // 예약 상세 페이지입니다.
     <ChatReservationDetailPageContainer ref={containerRef}>
       <HeaderWrapper isClosing={isClosing}>
         <Header title="예약내역 상세" icons={icons} isBack={true} onBackClick={onClose} />
@@ -126,7 +155,7 @@ const ChatReservationDetailPage = ({
 
       <ChatReservationDetailContentContainer>
         {/* 첫번째 박스 */}
-        <ChatReservationDetailTypeContainer>
+        <ChatReservationDetailTypeContainer title="예약 정보">
           {/* 예약 진행 단계를 표시하는 타이틀 컴포넌트 */}
           <ChatReservationTypeTitle currentStep={reservationDetailType} />
 
@@ -145,48 +174,19 @@ const ChatReservationDetailPage = ({
         </ChatReservationDetailTypeContainer>
 
         {/* 두번째 박스 */}
-        <ChatReservationDetailInfoContainer>
-          <ChatReservationDetailInfoTitle>
-            <ChatReservationDetailInfoTitleIcon />
-            <ChatReservationDetailInfoTitleText>{'예약 정보'}</ChatReservationDetailInfoTitleText>
-          </ChatReservationDetailInfoTitle>
-
+        <ChatCommonContainer title="예약 정보" gap={24}>
           {/* 날짜 ~ 요청까지의 정보를 표시하는 컴포넌트 */}
-          <ReservationDetailInfoContent
-            dateValue="2024년 12월 15일 (목)"
-            timeValue="오전 10:00 ~ 오후 1:00"
-            locationValue="라이트 스튜디오"
-            locationSubValue="경기도 성남시 수정구 성남대로 1342"
-            filterValues={['도회적인', '빈티지', '몽환적인']}
-            requestValue="서로 즐겨 하는 포즈나 습관을 담고 싶어요. 기념일을 맞아 촬영합니다. 프러포즈를 앞두고 있어요! 촬영 중 반지를 건네는 순간을 자연스럽게 담아주시면 좋겠습니다. 둘 다 활동적인 걸 좋아해서 움직이는 장면을 많이 찍어주시면 좋겠어요."
-          />
+          <ReservationDetailInfoContent reservationData={MockReservationInformation} />
 
           {/* 패키지 및 옵션 설명 */}
-          <ReservationDetailPackageContent
-            PackageName="패키지 B"
-            PackagePrice="800,000"
-            PackageDetails={[
-              '모먼트 패키지 1세트',
-              '세밀 보정본 10장',
-              '색보정본 20장',
-              '분할 컷 2장',
-            ]}
-            PackageDetailMessage="장소는 원하시는 장소 또는 바담 추천 제공드립니다. 기본 1시간입니다."
-            PackageOptionName="편집본 추가"
-            PackageOptionQuantity="2"
-            PackageOptionPrice="100,000"
-            PackageQuantity="1"
-            PackageOptionMessage="최대 5장까지 가능합니다. 추가된 편집본 장 수에 따라 최대 3일정도 추가로 소요될 수 있습니다."
-          />
-        </ChatReservationDetailInfoContainer>
+          {MockReservationInformation.package.map((packageData, index) => (
+            <ReservationDetailPackageContent key={index} packageData={packageData} />
+          ))}
+        </ChatCommonContainer>
       </ChatReservationDetailContentContainer>
 
-      <ChatReservationDetailPaymentContentContainer>
-        <ChatReservationDetailInfoTitle>
-          <ChatReservationDetailInfoTitleIcon />
-          <ChatReservationDetailInfoTitleText>{'결제 정보'}</ChatReservationDetailInfoTitleText>
-        </ChatReservationDetailInfoTitle>
-
+      {/* 결제 정보 */}
+      <ChatCommonContainer title="결제 정보" gap={24}>
         {/* 결제 상품 정보 컴포넌트 */}
         <ReservationDetailPaymentContent
           PackageName="패키지 B"
@@ -202,7 +202,7 @@ const ChatReservationDetailPage = ({
         {reservationDetailType === 'receipt' && (
           <ChatReservationDetailReceiptButton>{'영수증 확인'}</ChatReservationDetailReceiptButton>
         )}
-      </ChatReservationDetailPaymentContentContainer>
+      </ChatCommonContainer>
       {reservationDetailType !== 'receipt' && (
         <BottomTap
           checkedCount={0}
@@ -286,40 +286,6 @@ const ChatReservationDetailTitle = styled.div`
   color: ${({ theme }) => theme.colors.lightMode.text.text1};
 `;
 
-const ChatReservationDetailInfoContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: 16px;
-  gap: 24px;
-`;
-
-const ChatReservationDetailInfoTitle = styled.div`
-  display: flex;
-  gap: 8px;
-`;
-
-const ChatReservationDetailInfoTitleIcon = styled.div`
-  display: flex;
-  width: 4px;
-  height: 4px;
-  border-radius: 999px;
-  background-color: ${({ theme }) => theme.colors.lightMode.text.text3};
-  align-self: center;
-`;
-
-const ChatReservationDetailInfoTitleText = styled.div`
-  display: flex;
-  font: ${({ theme }) => theme.fonts.labelL};
-  color: ${({ theme }) => theme.colors.lightMode.text.text2};
-`;
-
-const ChatReservationDetailPaymentContentContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: 16px 16px 32px 16px;
-  gap: 24px;
-`;
-
 const ChatReservationDetailPaymentContentDivider = styled.div`
   display: flex;
   width: 100%;
@@ -372,4 +338,4 @@ const FixedReceiptButtonIcon = styled.div`
   height: 16px;
 `;
 
-export default ChatReservationDetailPage;
+export default ChatDocumentDetailPage;

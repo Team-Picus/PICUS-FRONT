@@ -2,19 +2,16 @@
 import React from 'react';
 import styled from '@emotion/styled';
 
-interface PaymentBillCommonContainerProps {
+interface ChatCommonContainerProps {
   title: string;
   subTitle?: string;
   children: React.ReactNode;
+  gap?: number;
 }
 
-const PaymentBillCommonContainer = ({
-  title,
-  subTitle,
-  children,
-}: PaymentBillCommonContainerProps) => {
+const ChatCommonContainer = ({ title, subTitle, children, gap = 16 }: ChatCommonContainerProps) => {
   return (
-    <CommonContainer>
+    <CommonContainer gap={gap}>
       <CommonTitle>
         <CommonDotIcon />
         <CommonTitleText>{title}</CommonTitleText>
@@ -25,14 +22,14 @@ const PaymentBillCommonContainer = ({
   );
 };
 
-export default PaymentBillCommonContainer;
+export default ChatCommonContainer;
 
 // Styled Components
-const CommonContainer = styled.div`
+const CommonContainer = styled.div<{ gap: number }>`
   display: flex;
   flex-direction: column;
   width: 100%;
-  gap: 16px;
+  gap: ${({ gap }) => gap}px;
   padding: 16px;
 `;
 

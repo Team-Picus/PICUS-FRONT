@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from '@emotion/styled';
-import AddOptionItem from '../ui/detail/AddOptionItem';
+import AddOptionItem from '../AddOptionItem';
 
 interface Option {
   id: string;
@@ -32,6 +32,7 @@ const AddOptionContainer = ({ options }: AddOptionContainerProps) => {
 
   return (
     <>
+      // 추가 옵션 컨테이너 입니다.
       <ContentContainer>
         {options.map((option, index) => (
           <React.Fragment key={option.id}>
@@ -44,7 +45,6 @@ const AddOptionContainer = ({ options }: AddOptionContainerProps) => {
           </React.Fragment>
         ))}
       </ContentContainer>
-
       <ThemeTextContainer>
         <ThemeText>
           클라이언트의 주문서 :&nbsp;

@@ -1,15 +1,26 @@
 import styled from '@emotion/styled';
 import IcNavigate from '@icon/ic-navigate.svg?react';
-import ImgMainbannerEx from '@image/img-mainbanner-ex.png';
-import ChatStateChip from '../../component/ChatStateChip';
+import ChatStateChip from '../../../component/ChatStateChip';
 
-const ChatReservationCard = () => {
+interface ChatReservationCardProps {
+  myReservation: {
+    date: string;
+    state: 'on' | 'off';
+    image: string;
+    time: string;
+    artistName: string;
+    location: string;
+    locationSub: string;
+  };
+}
+
+const ChatReservationCard = ({ myReservation }: ChatReservationCardProps) => {
   return (
     <ChatReservationCardContainer>
       <ChatReservationCardHeader>
         <ChatReservationCardHeaderLeft>
-          <ChatReservationCardHeaderDate>{'2024년 12월 15일 (목)'}</ChatReservationCardHeaderDate>
-          <ChatStateChip state="활동중" />
+          <ChatReservationCardHeaderDate>{myReservation.date}</ChatReservationCardHeaderDate>
+          <ChatStateChip state={myReservation.state} />
         </ChatReservationCardHeaderLeft>
 
         <ChatReservationCardHeaderRight>
@@ -19,28 +30,32 @@ const ChatReservationCard = () => {
 
       <ChatReservationCardContentContainer>
         <ChatReservationCardContentLeft>
-          <img src={ImgMainbannerEx} alt="mainbanner" />
+          <img src={myReservation.image} alt="mainbanner" />
         </ChatReservationCardContentLeft>
 
         <ChatReservationCardContentRight>
           {/* 시간 */}
           <ChatReservationCardContent>
             <ChatReservationCardContentTitle>{'시간'}</ChatReservationCardContentTitle>
-            <ChatReservationCardContentValue>{'오전 10:00'}</ChatReservationCardContentValue>
+            <ChatReservationCardContentValue>{myReservation.time}</ChatReservationCardContentValue>
           </ChatReservationCardContent>
           {/* 작가 */}
           <ChatReservationCardContent>
             <ChatReservationCardContentTitle>{'작가'}</ChatReservationCardContentTitle>
-            <ChatReservationCardContentValue>{'작가 이름'}</ChatReservationCardContentValue>
+            <ChatReservationCardContentValue>
+              {myReservation.artistName}
+            </ChatReservationCardContentValue>
           </ChatReservationCardContent>
 
           {/* 장소 */}
           <ChatReservationCardContent>
             <ChatReservationCardContentTitle>{'장소'}</ChatReservationCardContentTitle>
             <ChatReservationCardContentValueContainer>
-              <ChatReservationCardContentValue>{'라이트 스튜디오'}</ChatReservationCardContentValue>
+              <ChatReservationCardContentValue>
+                {myReservation.location}
+              </ChatReservationCardContentValue>
               <ChatReservationCardContentSubValue>
-                {'서울특별시 강남구 도산대로 123'}
+                {myReservation.locationSub}
               </ChatReservationCardContentSubValue>
             </ChatReservationCardContentValueContainer>
           </ChatReservationCardContent>

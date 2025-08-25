@@ -2,7 +2,7 @@
 
 import styled from '@emotion/styled';
 
-interface ReservationDetailContentProps {
+interface DetailContentProps {
   imageSrc: string;
   imageAlt?: string;
   title: string;
@@ -10,13 +10,13 @@ interface ReservationDetailContentProps {
   authorName: string;
 }
 
-const ReservationDetailContent = ({
+const DetailContent = ({
   imageSrc,
   imageAlt = '',
   title,
   type,
   authorName,
-}: ReservationDetailContentProps) => {
+}: DetailContentProps) => {
   return (
     <Container>
       {/* 이미지 */}
@@ -84,4 +84,4 @@ const AuthorName = styled.div`
   color: ${({ theme }) => theme.colors.lightMode.text.text2};
 `;
 
-export default ReservationDetailContent;
+export default DetailContent;

@@ -17,6 +17,7 @@ const ThemeSelector = ({
 
   return (
     <>
+      {/* 테마 컨테이너 입니다. */}
       <ThemeContent>
         {themes.map((theme) => (
           <ThemeItem

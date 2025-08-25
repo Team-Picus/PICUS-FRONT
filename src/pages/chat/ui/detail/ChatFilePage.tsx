@@ -1,12 +1,12 @@
 import styled from '@emotion/styled';
 import { useTheme } from '@emotion/react';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Header from '@shared/components/Header';
 import IcMoreVertical from '@icon/ic-more-vertical.svg';
 import type { HeaderIcon } from '@shared/types/header';
 import { DateChangeNoticeMessage } from '@widget/chat/component/NoticeMessageComponents';
-import IcFileBlank from '@icon/ic-file-blank';
-import IcDocument from '@icon/ic-document';
+import ChatFileGrid from '@widget/chat/ui/detail/file/ChatFileGrid';
 import DropDownMenu from '@shared/components/DropDownMenu';
 import Modal from '@shared/components/Modal';
 
@@ -17,8 +17,29 @@ interface ChatFilePageProps {
 
 const ChatFilePage = ({ onClose, isClosing }: ChatFilePageProps) => {
   const theme = useTheme();
+  const navigate = useNavigate();
   const [isDropDownVisible, setIsDropDownVisible] = useState(false);
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
+
+  // 파일 데이터 배열
+  const fileData = [
+    {
+      fileType: 'file' as const,
+      fileName: 'File이름이 ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ길어요 많이 길어요',
+    },
+    {
+      fileType: 'document' as const,
+      fileName: 'Document이름이 ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ길어요 많이 길어요',
+    },
+    {
+      fileType: 'document' as const,
+      fileName: 'Document이름이 ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ길어요 많이 길어요',
+    },
+    {
+      fileType: 'document' as const,
+      fileName: 'Document이름이 ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ길어요 많이 길어요',
+    },
+  ];
 
   const handleMoreClick = () => {
     setIsDropDownVisible(!isDropDownVisible);
@@ -42,9 +63,8 @@ const ChatFilePage = ({ onClose, isClosing }: ChatFilePageProps) => {
     console.log('채팅방 삭제 확인');
     setIsDeleteModalVisible(false);
     // 실제 삭제 로직 후 채팅방 목록으로 이동
-    if (onClose) {
-      onClose();
-    }
+    // replace: true로 설정하여 뒤로 돌아갈 수 없도록 함
+    navigate('/chat', { replace: true });
   };
 
   const icons: HeaderIcon[] = [
@@ -56,7 +76,7 @@ const ChatFilePage = ({ onClose, isClosing }: ChatFilePageProps) => {
     },
   ];
   return (
-    // 채팅방 파일 페이지 입니다.
+    // 채팅방 파일 저장함 페이지 입니다.
     <ChatFilePageContainer>
       <HeaderWrapper isClosing={isClosing}>
         <Header
@@ -84,72 +104,7 @@ const ChatFilePage = ({ onClose, isClosing }: ChatFilePageProps) => {
           <DateChangeNoticeMessage />
 
           {/* 가로로 3개씩 배치됩니다 */}
-          <ChatFileGrid>
-            <ChatFileItem fileType="file">
-              <IcFileBlank />
-              <FileTitle>{'File이름이 ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ길어요 많이 길어요'}</FileTitle>
-            </ChatFileItem>
-            <ChatFileItem fileType="document">
-              <IcDocument />
-              <FileTitle>{'Document이름이 ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ길어요 많이 길어요'}</FileTitle>
-            </ChatFileItem>
-            <ChatFileItem fileType="document">
-              <IcDocument />
-              <FileTitle>{'Document이름이 ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ길어요 많이 길어요'}</FileTitle>
-            </ChatFileItem>
-            <ChatFileItem fileType="document">
-              <IcDocument />
-              <FileTitle>{'Document이름이 ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ길어요 많이 길어요'}</FileTitle>
-            </ChatFileItem>
-          </ChatFileGrid>
-        </ChatFileList>
-
-        <ChatFileList>
-          <DateChangeNoticeMessage />
-
-          {/* 가로로 3개씩 배치됩니다 */}
-          <ChatFileGrid>
-            <ChatFileItem fileType="file">
-              <IcFileBlank />
-              <FileTitle>{'File이름이 ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ길어요 많이 길어요'}</FileTitle>
-            </ChatFileItem>
-            <ChatFileItem fileType="document">
-              <IcDocument />
-              <FileTitle>{'Document이름이 ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ길어요 많이 길어요'}</FileTitle>
-            </ChatFileItem>
-            <ChatFileItem fileType="document">
-              <IcDocument />
-              <FileTitle>{'Document이름이 ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ길어요 많이 길어요'}</FileTitle>
-            </ChatFileItem>
-            <ChatFileItem fileType="document">
-              <IcDocument />
-              <FileTitle>{'Document이름이 ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ길어요 많이 길어요'}</FileTitle>
-            </ChatFileItem>
-          </ChatFileGrid>
-        </ChatFileList>
-
-        <ChatFileList>
-          <DateChangeNoticeMessage />
-
-          {/* 가로로 3개씩 배치됩니다 */}
-          <ChatFileGrid>
-            <ChatFileItem fileType="file">
-              <IcFileBlank />
-              <FileTitle>{'File이름이 ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ길어요 많이 길어요'}</FileTitle>
-            </ChatFileItem>
-            <ChatFileItem fileType="document">
-              <IcDocument />
-              <FileTitle>{'Document이름이 ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ길어요 많이 길어요'}</FileTitle>
-            </ChatFileItem>
-            <ChatFileItem fileType="document">
-              <IcDocument />
-              <FileTitle>{'Document이름이 ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ길어요 많이 길어요'}</FileTitle>
-            </ChatFileItem>
-            <ChatFileItem fileType="document">
-              <IcDocument />
-              <FileTitle>{'Document이름이 ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ길어요 많이 길어요'}</FileTitle>
-            </ChatFileItem>
-          </ChatFileGrid>
+          <ChatFileGrid files={fileData} />
         </ChatFileList>
       </ChatFileListContainer>
 
@@ -160,7 +115,9 @@ const ChatFilePage = ({ onClose, isClosing }: ChatFilePageProps) => {
         customDescription={
           <>
             채팅방을 삭제해도 상대에게 지속적으로 연락이 올 수 있습니다. 차단하시려면 서비스에{' '}
-            <u>문의</u>해주세요.
+            {/* 추후 경로 수정해야함 */}
+            <u onClick={() => navigate('/service')}>문의</u>
+            해주세요.
           </>
         }
         leftButtonText="닫기"
@@ -203,39 +160,4 @@ const ChatFileList = styled.div`
   flex-direction: column;
   width: 100%;
   gap: 10px;
-`;
-
-const ChatFileGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 4px;
-  width: 100%;
-`;
-
-const ChatFileItem = styled.div<{ fileType: 'file' | 'document' }>`
-  aspect-ratio: 1;
-  background-color: ${({ theme, fileType }) =>
-    fileType === 'file'
-      ? theme.colors.lightMode.background.bg3
-      : theme.colors.lightMode.brand.primary};
-  border-radius: 8px;
-  display: flex;
-  align-items: flex-start;
-  padding: 12px;
-  justify-content: space-between;
-  flex-direction: column;
-  svg {
-    color: ${({ theme }) => theme.colors.lightMode.icon.icon};
-  }
-`;
-
-const FileTitle = styled.div`
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  width: 100%;
-  font: ${({ theme }) => theme.fonts.body4};
-  color: ${({ theme }) => theme.colors.lightMode.text.text1};
 `;

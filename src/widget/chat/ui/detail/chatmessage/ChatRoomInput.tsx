@@ -3,7 +3,10 @@ import { useState } from 'react';
 import IcPlus from '@icon/ic-plus.svg';
 import IcSend from '@icon/ic-send.svg';
 import IcCloseBig from '@icon/ic-close-big.svg';
-import { AddContentSpace, ChatAddContents } from '@widget/chat/component/ChatAddContents';
+import {
+  AddContentSpace,
+  ChatAddContents,
+} from '@widget/chat/ui/detail/chatmessage/ChatAddContents';
 
 interface ChatRoomInputProps {
   onPaymentDocumentOpen: () => void;
@@ -11,10 +14,14 @@ interface ChatRoomInputProps {
 
 const ChatRoomInput = ({ onPaymentDocumentOpen }: ChatRoomInputProps) => {
   const [isAddMode, setIsAddMode] = useState(false);
+  const [showContentSpace, setShowContentSpace] = useState(false);
   const [contentType, setContentType] = useState<'image' | 'file'>('image');
 
   const handleAddClick = () => {
     setIsAddMode(!isAddMode);
+    if (isAddMode) {
+      setShowContentSpace(false);
+    }
   };
 
   const handleContentTypeChange = (type: 'image' | 'file' | 'document') => {
@@ -22,14 +29,16 @@ const ChatRoomInput = ({ onPaymentDocumentOpen }: ChatRoomInputProps) => {
       // 결제청구서일 때 모달 띄우기
       onPaymentDocumentOpen();
       setIsAddMode(false);
+      setShowContentSpace(false);
       return;
     }
     setContentType(type);
+    setShowContentSpace(true);
   };
 
   return (
     <ChatRoomInputWrapper>
-      <AddContentSpace contentType={contentType} />
+      {showContentSpace && <AddContentSpace contentType={contentType} />}
       <ChatRoomInputContainer>
         <FileInput
           src={isAddMode ? IcCloseBig : IcPlus}

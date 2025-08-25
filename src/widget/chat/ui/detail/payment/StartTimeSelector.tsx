@@ -1,16 +1,14 @@
 import styled from '@emotion/styled';
 const StartTimeSelector = () => {
   return (
+    // 시작 시간 컨테이너
     <>
       <SelectTimeContainer>{'2025년 6월 6일 금요일'}</SelectTimeContainer>
 
       <SelectTimeContainer>{'오전 11:00'}</SelectTimeContainer>
 
       <ThemeTextContainer>
-        <ThemeText>
-          클라이언트의 주문서 :&nbsp;
-          <ThemeText>{'2025년 6월 6일 금요일, 오전 11:00'}</ThemeText>
-        </ThemeText>
+        <ThemeText>클라이언트의 주문서 : 2025년 6월 6일 금요일, 오전 11:00</ThemeText>
       </ThemeTextContainer>
     </>
   );

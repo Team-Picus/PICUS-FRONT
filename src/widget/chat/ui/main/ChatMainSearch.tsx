@@ -24,6 +24,7 @@ const ChatMainSearch = () => {
   };
 
   return (
+    // 채팅 검색 컴포넌트 입니다.
     <ChatMainSearchContainer>
       <ChatMainSearchInputContainer isFocused={isFocused}>
         <SearchIcon src={IcSearch} alt="search" />
