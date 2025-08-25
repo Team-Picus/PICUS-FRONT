@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import { useTheme } from '@emotion/react';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Header from '@shared/components/Header';
 import IcMenu from '@icon/ic-menu.svg';
 import type { HeaderIcon } from '@shared/types/header';
@@ -12,6 +13,7 @@ import ChatDocumentDetailPage from './ChatDocumentDetailPage';
 
 const ChatDetailPage = () => {
   const theme = useTheme();
+  const navigate = useNavigate();
   const [view, setView] = useState<'chat' | 'file' | 'reservation' | 'payment'>('chat');
   const [reservationDetailType, setReservationDetailType] = useState<
     'request' | 'payment' | 'receipt'
@@ -24,6 +26,7 @@ const ChatDetailPage = () => {
   };
   const goToPayment = () => setView('payment');
   const goBack = () => setView('chat');
+  const handleBackClick = () => navigate('/chat');
 
   const icons: HeaderIcon[] = [
     {
@@ -40,6 +43,7 @@ const ChatDetailPage = () => {
           <Header
             title="작가 이름"
             isBack={true}
+            onBackClick={handleBackClick}
             icons={icons}
             backgroundColor={theme.colors.lightMode.background.bg1}
           />
