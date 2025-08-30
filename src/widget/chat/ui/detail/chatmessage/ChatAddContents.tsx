@@ -1,0 +1,378 @@
+import styled from '@emotion/styled';
+import IcDocument from '@shared/assets/icon/ic-document';
+import IcFileBlank from '@shared/assets/icon/ic-file-blank';
+import IcGallery from '@shared/assets/icon/ic-gallery';
+import IcDeleteBig from '@icon/ic-delete-filled.svg?react';
+
+const ChatAddContents = ({
+  onContentTypeChange,
+  role,
+}: {
+  onContentTypeChange?: (type: 'image' | 'file' | 'document') => void;
+  role: 'artist' | 'user';
+}) => {
+  const addContents = [
+    { icon: IcGallery, title: '사진', type: 'image' as const },
+    { icon: IcFileBlank, title: '파일', type: 'file' as const },
+    {
+      icon: IcDocument,
+      title: role === 'artist' ? '결제청구서' : '의뢰서',
+      type: 'document' as const,
+    },
+  ];
+
+  const handleContentClick = (type: 'image' | 'file' | 'document') => {
+    onContentTypeChange?.(type);
+  };
+
+  return (
+    <ChatAddContentsContainer>
+      {addContents.map(({ icon: Icon, title, type }) => (
+        <ChatAddContent key={title} onClick={() => handleContentClick(type)}>
+          <AddIcon>
+            <Icon />
+          </AddIcon>
+          <AddTitle>{title}</AddTitle>
+        </ChatAddContent>
+      ))}
+    </ChatAddContentsContainer>
+  );
+};
+
+const ChatAddContentsContainer = styled.div`
+  display: flex;
+  width: 100%;
+  height: 230px;
+  padding: 16px;
+`;
+
+const ChatAddContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px 16px;
+  gap: 8px;
+`;
+
+const AddIcon = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 56px;
+  height: 56px;
+  background-color: #191919;
+  border-radius: 999px;
+  color: ${({ theme }) => theme.colors.lightMode.icon.iconColor};
+`;
+
+const AddTitle = styled.div`
+  display: flex;
+  font: ${({ theme }) => theme.fonts.body4};
+  color: ${({ theme }) => theme.colors.lightMode.text.text2};
+`;
+
+const AddContentSpace = ({ contentType = 'image' }: { contentType?: 'image' | 'file' }) => {
+  const headerTexts = {
+    image: { text: '이미지 첨부', subtext: ['최대 10장'] },
+    file: { text: '파일 첨부', subtext: ['최대 10개', '최대 50MB'] },
+  };
+
+  return (
+    <AddContentSpaceContainer>
+      <AddContentHeader>
+        <AddContentHeaderLeft>
+          <AddContentHeaderLeftText>{headerTexts[contentType].text}</AddContentHeaderLeftText>
+          {headerTexts[contentType].subtext.map((text, index) => (
+            <AddContentHeaderLeftSubtext key={index}>{text}</AddContentHeaderLeftSubtext>
+          ))}
+        </AddContentHeaderLeft>
+        <AddContentHeaderRight>
+          <AddContentHeaderRightButton>{'전체 삭제'}</AddContentHeaderRightButton>
+        </AddContentHeaderRight>
+      </AddContentHeader>
+
+      {contentType === 'image' ? <AddImageList /> : <AddFileList />}
+    </AddContentSpaceContainer>
+  );
+};
+
+const AddContentSpaceContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 4px 0;
+`;
+
+const AddContentHeader = styled.div`
+  display: flex;
+  width: 100%;
+  padding: 3.5px 16px;
+  justify-content: space-between;
+`;
+
+const AddContentHeaderLeft = styled.div`
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+`;
+
+const AddContentHeaderLeftText = styled.div`
+  display: flex;
+  font: ${({ theme }) => theme.fonts.caption};
+  color: ${({ theme }) => theme.colors.lightMode.text.text1};
+`;
+
+const AddContentHeaderLeftSubtext = styled.div`
+  display: flex;
+  font: ${({ theme }) => theme.fonts.caption};
+  color: ${({ theme }) => theme.colors.lightMode.text.text3};
+`;
+
+const AddContentHeaderRight = styled.div`
+  display: flex;
+  height: 24px;
+  padding: 4px 8px;
+  background-color: ${({ theme }) => theme.colors.lightMode.background.bg1};
+  border: 1px solid ${({ theme }) => theme.colors.lightMode.neutral.neutral200};
+  border-radius: 8px;
+  justify-content: center;
+  align-items: center;
+`;
+
+const AddContentHeaderRightButton = styled.div`
+  display: flex;
+  font: ${({ theme }) => theme.fonts.labelS};
+  color: ${({ theme }) => theme.colors.lightMode.text.text1};
+`;
+
+const AddImageList = () => {
+  const contentItems = Array.from({ length: 10 }, (_, index) => ({
+    id: index + 1,
+  }));
+
+  return (
+    <AddImageListContainer itemCount={contentItems.length}>
+      {contentItems.map(({ id }) => (
+        <AddImageItem key={id}>
+          <DeleteIcon>
+            <IcDeleteBig width={24} height={24} />
+          </DeleteIcon>
+        </AddImageItem>
+      ))}
+    </AddImageListContainer>
+  );
+};
+
+const AddImageListContainer = styled.div<{ itemCount: number }>`
+  ${({ itemCount }) =>
+    itemCount >= 6
+      ? `
+        display: grid;
+        grid-template-columns: repeat(5, 40px);
+        grid-auto-rows: 40px;
+        justify-content: center;
+        align-content: center;
+        gap: 16px;
+      `
+      : `
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 16px;
+      `}
+  width: 100%;
+  padding: 12px 16px 0 16px;
+`;
+
+const AddImageItem = styled.div`
+  position: relative;
+  width: 40px;
+  height: 40px;
+  background-color: ${({ theme }) => theme.colors.lightMode.background.bg2};
+  border: 1px solid ${({ theme }) => theme.colors.lightMode.neutral.neutral200};
+  border-radius: 8px;
+`;
+
+const DeleteIcon = styled.div`
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  width: 24px;
+  height: 24px;
+`;
+
+const truncateFileName = (fileName: string, maxLength: number = 12) => {
+  if (fileName.length <= maxLength) return fileName;
+
+  const endPart = fileName.slice(-7); // 마지막 7글자
+  const availableLength = maxLength - 7 - 3; // 마지막 7글자와 ... 3글자 제외
+
+  if (availableLength <= 0) return fileName;
+
+  return fileName.slice(0, availableLength) + '...' + endPart;
+};
+
+const AddFileList = () => {
+  const fileItems = [
+    { id: 1, fileName: '파일명.pdf' },
+    { id: 2, fileName: '파일명ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ.pdf' },
+    { id: 3, fileName: '파일명ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ.pdf' },
+    { id: 4, fileName: '파일명ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ.pdf' },
+    { id: 5, fileName: '파일명ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ.pdf' },
+    { id: 6, fileName: '파일명ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ.pdf' },
+    { id: 7, fileName: '파일명ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ.pdf' },
+    { id: 8, fileName: '파일명ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ.pdf' },
+    { id: 9, fileName: '파일명ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ.pdf' },
+    { id: 10, fileName: 'asdasdasdasdasd.pdf' },
+  ];
+
+  // 768px 이상에서만 특정 패턴으로 나누기
+  const getRowsLayout = (items: typeof fileItems, useDesktopLayout: boolean) => {
+    if (!useDesktopLayout || items.length <= 3) {
+      return [items];
+    }
+
+    const rows = [];
+    let currentIndex = 0;
+
+    // 첫 번째 줄: 항상 3개
+    rows.push(items.slice(currentIndex, currentIndex + 3));
+    currentIndex += 3;
+
+    // 남은 아이템이 있으면 두 번째 줄에 최대 4개
+    if (currentIndex < items.length) {
+      const remainingItems = items.length - currentIndex;
+      const secondRowCount = Math.min(4, remainingItems);
+      rows.push(items.slice(currentIndex, currentIndex + secondRowCount));
+      currentIndex += secondRowCount;
+    }
+
+    // 남은 아이템이 있으면 세 번째 줄에 나머지
+    if (currentIndex < items.length) {
+      rows.push(items.slice(currentIndex));
+    }
+
+    return rows;
+  };
+
+  return (
+    <AddFileListContainer itemCount={fileItems.length}>
+      {/* 데스크톱 레이아웃 (768px 이상) */}
+      <DesktopLayout itemCount={fileItems.length}>
+        {getRowsLayout(fileItems, true).map((row, rowIndex) => (
+          <AddFileRow key={rowIndex} itemCount={fileItems.length}>
+            {row.map(({ id, fileName }) => (
+              <AddFileItem key={id}>
+                <AddFileItemLeft>
+                  <IcFileBlank />
+                </AddFileItemLeft>
+                <AddFileItemRightText>{truncateFileName(fileName)}</AddFileItemRightText>
+                <DeleteFileIcon>
+                  <IcDeleteBig width={24} height={24} />
+                </DeleteFileIcon>
+              </AddFileItem>
+            ))}
+          </AddFileRow>
+        ))}
+      </DesktopLayout>
+
+      {/* 모바일 레이아웃 (768px 미만) */}
+      <MobileLayout>
+        {fileItems.slice(0, 2).map(({ id, fileName }) => (
+          <AddFileItem key={id}>
+            <AddFileItemLeft>
+              <IcFileBlank />
+            </AddFileItemLeft>
+            <AddFileItemRightText>{truncateFileName(fileName)}</AddFileItemRightText>
+            <DeleteFileIcon>
+              <IcDeleteBig width={24} height={24} />
+            </DeleteFileIcon>
+          </AddFileItem>
+        ))}
+      </MobileLayout>
+    </AddFileListContainer>
+  );
+};
+
+const AddFileListContainer = styled.div<{ itemCount: number }>`
+  width: 100%;
+  padding: 12px 16px 0 16px;
+
+  @media (min-width: 768px) {
+    padding: 12px 80px 0 80px;
+  }
+`;
+
+const DesktopLayout = styled.div<{ itemCount: number }>`
+  display: none;
+
+  @media (min-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+  }
+`;
+
+const MobileLayout = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+
+  @media (min-width: 768px) {
+    display: none;
+  }
+`;
+
+const AddFileRow = styled.div<{ itemCount: number }>`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+`;
+
+const AddFileItem = styled.div`
+  position: relative;
+  display: flex;
+  height: 40px;
+  gap: 4px;
+  flex: 0 0 auto;
+  max-width: calc(50% - 8px);
+  background-color: ${({ theme }) => theme.colors.lightMode.background.bg1};
+  border: 1px solid ${({ theme }) => theme.colors.lightMode.divider.divider1};
+  border-radius: 12px;
+  padding: 12px 8px;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const AddFileItemLeft = styled.div`
+  display: flex;
+  width: 16px;
+  height: 16px;
+  justify-content: center;
+  align-items: center;
+`;
+
+const AddFileItemRightText = styled.div`
+  display: flex;
+  font: ${({ theme }) => theme.fonts.caption};
+  color: ${({ theme }) => theme.colors.lightMode.text.text1};
+`;
+
+const DeleteFileIcon = styled.div`
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  width: 24px;
+  height: 24px;
+`;
+
+export { ChatAddContents, AddContentSpace };
