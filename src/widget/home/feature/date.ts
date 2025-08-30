@@ -1,0 +1,18 @@
+export const getTimeAgo = (createdAt: string) => {
+  const now = new Date();
+  const created = new Date(createdAt);
+
+  const diffMs = now.getTime() - created.getTime();
+  const diffMin = Math.floor(diffMs / 1000 / 60);
+  const diffHour = Math.floor(diffMin / 60);
+  const diffDay = Math.floor(diffHour / 24);
+
+  if (diffMin < 1) return '방금 전';
+  if (diffMin < 60) return `${diffMin}분 전`;
+  if (diffHour < 24) return `${diffHour}시간 전`;
+  return `${diffDay}일 전`;
+};
+
+export const sortByCreatedAtDesc = <T extends { createdAt: string }>(arr: T[]) => {
+  return [...arr].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+};

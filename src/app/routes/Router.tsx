@@ -1,10 +1,12 @@
 import { createBrowserRouter } from 'react-router';
 import RootLayout from '@app/layout/RootLayout';
 import HomePage from '@home/ui/HomePage.tsx';
+import WeeklyMagazinePage from '@home/ui/WeeklyMagazinePage.tsx';
 import ExplorePage from '@explore/ui/ExplorePage.tsx';
 import ChatPage from '@chat/ui/ChatPage.tsx';
 import MyPage from '@my/ui/MyPage.tsx';
 import LoginPage from '@pages/login/ui/LoginPage';
+import NotificationPage from '@home/ui/NotificationPage.tsx';
 
 export const router = createBrowserRouter([
   {
@@ -14,6 +16,14 @@ export const router = createBrowserRouter([
       {
         index: true,
         element: <HomePage />,
+      },
+      {
+        path: 'weekly_magazine',
+        element: <WeeklyMagazinePage />,
+      },
+      {
+        path: 'notification',
+        element: <NotificationPage />,
       },
     ],
   },
