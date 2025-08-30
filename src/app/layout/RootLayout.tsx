@@ -14,7 +14,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   width: 100vw;
   max-width: 768px;
-  height: 100vh;
+  height: 100dvh;
   background-color: white;
   padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom)
     env(safe-area-inset-left);
