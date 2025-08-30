@@ -6,13 +6,20 @@ import styled from '@emotion/styled';
 import type { ActiveProps } from '@shared/types/active.ts';
 import { useModal } from '@widget/explore/feature/custom/useModal.ts';
 import FilterModal from '@widget/explore/ui/modal/FilterModal.tsx';
+import RegionModal from '@widget/explore/ui/modal/RegionModal.tsx';
+import { useState } from 'react';
 
 const ExploreFilterList = () => {
   const { isActiveTab } = useExploreTabStore();
   const { filter, setFilter, clearFilter } = useExploreFilterStore();
   const { isModalOn, modalRef, offModal, onModal } = useModal();
+  const [isRegionModalOn, setIsRegionModalOn] = useState(false);
 
   const handleFilterChange = (newFilter: ExploreFilter | 'all') => {
+    if (newFilter === 'region') {
+      setIsRegionModalOn(true);
+      return;
+    }
     if (newFilter === filter) {
       clearFilter();
       offModal();
@@ -57,6 +64,7 @@ const ExploreFilterList = () => {
         )}
       </ExploreFilterContainer>
       {isModalOn && <FilterModal ref={modalRef} clearFilter={clearFilter} offModal={offModal} />}
+      <RegionModal isOpen={isRegionModalOn} onClose={() => setIsRegionModalOn(false)} />
     </div>
   );
 };
@@ -84,7 +92,8 @@ const ExploreAllFilterItem = styled.div<ActiveProps>`
 const ExploreFilterItem = styled.div<ActiveProps>`
   display: flex;
   flex-direction: row;
-  border: 1px solid ${({ theme, active }) => (active ? '#1d1d1d' : theme.colors.lightMode.text.text5)};
+  border: 1px solid
+    ${({ theme, active }) => (active ? '#1d1d1d' : theme.colors.lightMode.text.text5)};
   border-radius: 8px;
   font: ${({ theme }) => theme.fonts.body1};
   color: ${({ theme, active }) =>
