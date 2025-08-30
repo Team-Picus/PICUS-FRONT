@@ -25,7 +25,7 @@ export const colors = {
       bg1: '#FFFFFF',
       bg2: '#F7F7F7',
       bg3: '#FCFCFC',
-      bg4: '#F2F2F2',
+      bg4: '#E6E6E6',
       bgColor: '#F5F7F7',
     },
     divider: {
