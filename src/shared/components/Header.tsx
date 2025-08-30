@@ -3,8 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import IcPicusLogo from '@icon/ic-picus-logo.svg';
 import IcBack from '@icon/ic-arrow-back-up.svg';
 import type { HeaderIcon } from '@shared/types/header.ts';
+import { useNavigate } from 'react-router';
 
 interface HeaderProps {
+  back?: boolean;
   title?: string;
   icons?: HeaderIcon[];
   isBack?: boolean; // 뒤로가기 아이콘 활성화 시 사용합니다. true로 지정 시 활성화 됩니다.
