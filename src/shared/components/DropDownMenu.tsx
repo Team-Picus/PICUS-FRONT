@@ -68,7 +68,13 @@ const ModalTitle = styled.div`
 `;
 
 const ModalItem = styled.div<{ color?: string }>`
+  height: 40px;
   padding: 8px 12px;
   font: ${({ theme }) => theme.fonts.body1};
   color: ${({ theme, color }) => color || theme.colors.lightMode.text.text2};
+  line-height: 150%;
+
+  &:active {
+    background-color: rgba(245, 247, 247, 1);
+  }
 `;

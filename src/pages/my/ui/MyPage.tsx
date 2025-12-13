@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { useState } from 'react';
 import Navigation from '@shared/components/Navigation.tsx';
 import Header from '@shared/components/Header.tsx';
 import Profile from '@widget/my/ui/Profile.tsx';
@@ -6,15 +7,30 @@ import Menu from '@widget/my/ui/Menu.tsx';
 import type { HeaderIcon } from '@shared/types/header.ts';
 import type { MenuItemProps } from '@widget/my/types/menu.ts';
 import IcSet from '@icon/ic-set.svg';
+import { DropDownMenu } from '@shared/components';
 
 const MyPage = () => {
+  const [isDropDownVisible, setIsDropDownVisible] = useState(false);
+
+  const handleSettingClick = () => {
+    setIsDropDownVisible((prev) => !prev);
+  };
+
+  const handleDropDownClose = () => {
+    setIsDropDownVisible(false);
+  };
+
+  const handleWithdrawClick = () => {
+    // TODO: 탈퇴 로직 구현
+    console.log('회원탈퇴 클릭');
+    setIsDropDownVisible(false);
+  };
+
   const icons: HeaderIcon[] = [
     {
       src: IcSet,
       alt: '설정',
-      onClick: () => {
-        console.log('설정 아이콘 클릭됨');
-      },
+      onClick: handleSettingClick,
     },
   ];
   const activityMenu: MenuItemProps[] = [
@@ -39,19 +55,33 @@ const MyPage = () => {
   ];
   return (
     <>
-      <Header title="MY" icons={icons} />
-      <MyPageContainer>
+      <HeaderWrapper>
+        <Header title="MY" icons={icons} />
+        <DropDownMenu
+          isVisible={isDropDownVisible}
+          onClose={handleDropDownClose}
+          title="MY 계정"
+          items={[
+            {
+              label: '회원탈퇴',
+              onClick: handleWithdrawClick,
+              color: '000000',
+            },
+          ]}
+        />
+      </HeaderWrapper>
+      <MyPageWrapper>
         <Profile />
-        <MenuSectionContainer style={{ border: 'none' }}>
+        <MenuSectionWrapper style={{ border: 'none' }}>
           <Menu title="활동" menuList={activityMenu} />
-        </MenuSectionContainer>
-        <MenuSectionContainer>
+        </MenuSectionWrapper>
+        <MenuSectionWrapper>
           <Menu title="고객지원" menuList={supportMenu} />
-        </MenuSectionContainer>
-        <MenuSectionContainer>
+        </MenuSectionWrapper>
+        <MenuSectionWrapper>
           <Menu title="로그인" menuList={loginMenu} />
-        </MenuSectionContainer>
-      </MyPageContainer>
+        </MenuSectionWrapper>
+      </MyPageWrapper>
       <Navigation whiteBackgroundColor={true} />
     </>
   );
@@ -59,7 +89,12 @@ const MyPage = () => {
 
 export default MyPage;
 
-const MyPageContainer = styled.div`
+const HeaderWrapper = styled.div`
+  position: relative;
+  flex-shrink: 0;
+`;
+
+const MyPageWrapper = styled.div`
   display: flex;
   flex-direction: column;
   background-color: white;
@@ -67,6 +102,6 @@ const MyPageContainer = styled.div`
   gap: 16px;
 `;
 
-const MenuSectionContainer = styled.div`
+const MenuSectionWrapper = styled.div`
   border-top: 1px solid ${({ theme }) => theme.colors.lightMode.divider.divider1};
 `;
