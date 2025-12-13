@@ -5,7 +5,7 @@ import IcApproval from '@icon/ic-approval.svg';
 import IcUnapproval from '@icon/ic-unapproval.svg';
 import { user } from '@widget/my/feature/mock.ts';
 
-const Profile = () => {
+const ProfileSummary = () => {
   const [isApproved, setIsApproved] = useState(false);
   const navigate = useNavigate();
 
@@ -67,7 +67,7 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default ProfileSummary;
 
 const ProfileContainer = styled.div`
   display: flex;
