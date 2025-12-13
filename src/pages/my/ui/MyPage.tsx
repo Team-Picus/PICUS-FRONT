@@ -55,7 +55,7 @@ const MyPage = () => {
   ];
   return (
     <>
-      <HeaderWrapper>
+      <HeaderContainer>
         <Header title="MY" icons={icons} />
         <DropDownMenu
           isVisible={isDropDownVisible}
@@ -69,19 +69,19 @@ const MyPage = () => {
             },
           ]}
         />
-      </HeaderWrapper>
-      <MyPageWrapper>
+      </HeaderContainer>
+      <MyPageContainer>
         <ProfileSummary />
-        <MenuSectionWrapper style={{ border: 'none' }}>
+        <MenuSection style={{ border: 'none' }}>
           <Menu title="활동" menuList={activityMenu} />
-        </MenuSectionWrapper>
-        <MenuSectionWrapper>
+        </MenuSection>
+        <MenuSection>
           <Menu title="고객지원" menuList={supportMenu} />
-        </MenuSectionWrapper>
-        <MenuSectionWrapper>
+        </MenuSection>
+        <MenuSection>
           <Menu title="로그인" menuList={loginMenu} />
-        </MenuSectionWrapper>
-      </MyPageWrapper>
+        </MenuSection>
+      </MyPageContainer>
       <Navigation whiteBackgroundColor={true} />
     </>
   );
@@ -89,12 +89,12 @@ const MyPage = () => {
 
 export default MyPage;
 
-const HeaderWrapper = styled.div`
+const HeaderContainer = styled.div`
   position: relative;
   flex-shrink: 0;
 `;
 
-const MyPageWrapper = styled.div`
+const MyPageContainer = styled.div`
   display: flex;
   flex-direction: column;
   background-color: white;
@@ -102,6 +102,6 @@ const MyPageWrapper = styled.div`
   gap: 16px;
 `;
 
-const MenuSectionWrapper = styled.div`
+const MenuSection = styled.div`
   border-top: 1px solid ${({ theme }) => theme.colors.lightMode.divider.divider1};
 `;
