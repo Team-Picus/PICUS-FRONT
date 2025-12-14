@@ -90,12 +90,11 @@ export default BottomTap;
 
 const TabContainer = styled.div`
   display: flex;
-  position: absolute;
-  bottom: -56px;
   width: 100%;
   background-color: white;
   box-shadow: 0 -1px 14px 0 #0000000d;
   border-top: 1px;
   padding: 8px 16px;
   gap: 12px;
+  margin-top: auto;
 `;
