@@ -6,7 +6,7 @@ import Modal from '@shared/components/Modal';
 import IcMoreVertical from '@icon/ic-more-vertical.svg';
 import IcChevronDown from '@icon/ic-chevron-down.svg';
 import ImgMainbannerEx from '@image/img-mainbanner-ex.png';
-import BottomTap from '@shared/components/BottomTap';
+import BottomTap from '@shared/components/BottomTap.tsx';
 import { useTheme } from '@emotion/react';
 import ChatReservationTypeTitle from '@widget/chat/ui/detail/document/ChatReservationTypeTitle';
 import ReservationDetailContent from '@widget/chat/component/DetailContent';
@@ -205,14 +205,11 @@ const ChatDocumentDetailPage = ({
       </ChatCommonContainer>
       {reservationDetailType !== 'receipt' && (
         <BottomTap
-          checkedCount={0}
-          hideCount={true}
-          leftButtonText={reservationDetailType === 'payment' ? '예약 취소하기' : '거절하기'}
-          rightButtonText={
-            reservationDetailType === 'payment' ? '결제하기' : '수정 및 결제청구하기'
-          }
-          onLeftClick={() => {}}
-          onRightClick={() => {}}
+          showGhost
+          ghostText={reservationDetailType === 'payment' ? '예약 취소하기' : '거절하기'}
+          secondaryText={reservationDetailType === 'payment' ? '결제하기' : '수정 및 결제청구하기'}
+          onGhostClick={() => {}}
+          onSecondaryClick={() => {}}
         />
       )}
 
