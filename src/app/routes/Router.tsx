@@ -4,12 +4,12 @@ import HomePage from '@home/ui/HomePage.tsx';
 import WeeklyMagazinePage from '@home/ui/WeeklyMagazinePage.tsx';
 import ExplorePage from '@explore/ui/ExplorePage.tsx';
 import ChatMainPage from '@chat/ui/main/ChatMainPage';
-import MyPage from '@my/ui/MyPage.tsx';
+import MyPage from '@my/ui/main/MyPage.tsx';
 import ChatDetailPage from '@pages/chat/ui/detail/ChatDetailPage';
 import ChatReservationMainPage from '@pages/chat/ui/reservation/ChatReservationMainPage';
 import LoginPage from '@pages/login/ui/LoginPage';
 import NotificationPage from '@home/ui/NotificationPage.tsx';
-import AccountSettings from '@my/ui/AccountSettings.tsx';
+import AccountSettings from '@my/ui/main/AccountSettings.tsx';
 
 export const router = createBrowserRouter([
   {
