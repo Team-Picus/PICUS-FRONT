@@ -39,16 +39,13 @@ const GlobalStyle = () => {
           outline: none;
 
           &:hover {
-            border: none;
             outline: none;
           }
 
           &:focus {
-            border: none;
             outline: none;
           }
           &:active {
-            border: none;
             outline: none;
           }
         }
