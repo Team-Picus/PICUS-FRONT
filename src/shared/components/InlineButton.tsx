@@ -8,6 +8,7 @@ interface InlineButtonProps {
   size: ButtonSize;
   width?: string; // 버튼 고정 너비가 필요할 때 사용 (default 100%)
   text: string; // 버튼 라벨 텍스트
+  textColor?: string; // 텍스트 색 지정 (default: secondary-#CAFF29, 그 외-#000000)
   disabled?: boolean;
   pushRight?: boolean; // ghost 버튼이 없을 때 사용 (true: margin-left auto 적용 → 오른쪽 끝으로 밀기)
   onClick?: () => void;
@@ -21,6 +22,7 @@ const InlineButton = ({
   size,
   width,
   text,
+  textColor,
   disabled,
   pushRight,
   onClick,
@@ -39,6 +41,7 @@ const InlineButton = ({
       $variant={variant}
       $size={size}
       $width={width}
+      $textColor={textColor}
       $pushRight={pushRight}
       onClick={onClick}
       disabled={disabled}
@@ -54,6 +57,7 @@ const ButtonContainer = styled.button<{
   $size: ButtonSize;
   $width?: string;
   $variant: ButtonVariants;
+  $textColor?: string;
   $pushRight?: boolean;
 }>`
   display: flex;
@@ -67,10 +71,11 @@ const ButtonContainer = styled.button<{
       : $variant === 'primary'
         ? theme.colors.lightMode.blue.blue500
         : theme.colors.lightMode.background.bg1};
-  color: ${({ $variant, theme }) =>
-    $variant === 'secondary'
+  color: ${({ $variant, theme, $textColor }) =>
+    $textColor ??
+    ($variant === 'secondary'
       ? theme.colors.lightMode.text.text1color
-      : theme.colors.lightMode.text.text1};
+      : theme.colors.lightMode.text.text1)};
   border: ${({ $variant, theme }) =>
     $variant === 'ghost' ? `1px solid ${theme.colors.lightMode.neutral.neutral200}` : 'none'};
   border-radius: 8px;
@@ -84,8 +89,8 @@ const ButtonContainer = styled.button<{
         : $variant === 'primary'
           ? theme.colors.lightMode.blue.blue700
           : theme.colors.lightMode.background.bg4};
-    color: ${({ $variant, theme }) =>
-      $variant === 'secondary' ? theme.colors.lightMode.blue.blue700 : 'inherit'};
+    color: ${({ $variant, theme, $textColor }) =>
+      $textColor ?? ($variant === 'secondary' ? theme.colors.lightMode.blue.blue700 : 'inherit')};
     border: ${({ $variant, theme }) =>
       $variant === 'ghost' || $variant === 'text'
         ? `1px solid ${theme.colors.lightMode.neutral.neutral200}`
