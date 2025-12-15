@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import InlineButton from '@shared/components/InlineButton.tsx';
+import { InlineButton } from '@shared/components';
 
 /**
  * 왼쪽(ghost) 버튼은 옵션(필요할 때만 표시)

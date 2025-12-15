@@ -1,8 +1,8 @@
 import styled from '@emotion/styled';
 import { useNavigate } from 'react-router';
 import { ApprovalOverview } from '@widget/my/ui/approval';
+import { InlineButton } from '@shared/components';
 import Header from '@shared/components/Header.tsx';
-import InlineButton from '@shared/components/InlineButton.tsx';
 
 const ExpertApprovalPage = () => {
   const navigate = useNavigate();
