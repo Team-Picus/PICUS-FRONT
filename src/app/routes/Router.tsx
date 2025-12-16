@@ -10,6 +10,9 @@ import ChatReservationMainPage from '@pages/chat/ui/reservation/ChatReservationM
 import LoginPage from '@pages/login/ui/LoginPage';
 import NotificationPage from '@home/ui/NotificationPage.tsx';
 import AccountSettings from '@my/ui/main/AccountSettings.tsx';
+import ExpertApprovalPage from '@my/ui/approval/ExpertApprovalPage.tsx';
+import ApprovalStepsPage from '@my/ui/approval/ApprovalStepsPage.tsx';
+import ApprovalStatusPage from '@my/ui/approval/ApprovalStatusPage.tsx';
 
 export const router = createBrowserRouter([
   {
@@ -21,7 +24,7 @@ export const router = createBrowserRouter([
         element: <HomePage />,
       },
       {
-        path: 'weekly_magazine',
+        path: 'weekly-magazine',
         element: <WeeklyMagazinePage />,
       },
       {
@@ -91,6 +94,24 @@ export const router = createBrowserRouter([
       {
         path: 'settings',
         element: <AccountSettings />,
+      },
+      {
+        path: 'expert-approval',
+        element: <RootLayout />,
+        children: [
+          {
+            index: true,
+            element: <ExpertApprovalPage />,
+          },
+          {
+            path: 'steps',
+            element: <ApprovalStepsPage />,
+          },
+          {
+            path: 'status/:state',
+            element: <ApprovalStatusPage />,
+          },
+        ],
       },
     ],
   },
