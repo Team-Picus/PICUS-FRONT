@@ -93,10 +93,12 @@ const ProfileImage = styled.img`
 const UserMeta = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: start;
 `;
 
 const Nickname = styled.div`
   font: ${({ theme }) => theme.fonts.title3};
+  color: ${({ theme }) => theme.colors.lightMode.text.text1};
 `;
 
 const Email = styled.div`
@@ -112,12 +114,17 @@ const ExpertProfileButton = styled.button`
   width: fit-content;
   height: 40px;
   font: ${({ theme }) => theme.fonts.labelM};
+  color: ${({ theme }) => theme.colors.lightMode.text.text1};
   border-radius: 8px;
-  border: 1px solid #e6e6e6;
+  border: ${({ theme }) => `1px solid ${theme.colors.lightMode.neutral.neutral200}`};
   padding: 12px;
 
   &:active {
     background-color: #1d1d1d0d;
+  }
+  &:hover,
+  &:focus {
+    border: ${({ theme }) => `1px solid ${theme.colors.lightMode.neutral.neutral200}`};
   }
 `;
 
