@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router';
 import IcApproval from '@icon/ic-approval.svg';
 import IcUnapproval from '@icon/ic-unapproval.svg';
 import { user } from '@widget/my/feature/mock.ts';
+import Stats from '@widget/my/ui/main/Stats.tsx';
 
 const ProfileSummary = () => {
   const [isApproved, setIsApproved] = useState(false);
@@ -19,9 +20,9 @@ const ProfileSummary = () => {
   } = user;
 
   return (
-    <ProfileContainer>
+    <ProfileSummaryContainer>
       <ProfileInfoContainer>
-        <ProfileInfoSection
+        <ProfileLinkContainer
           isApproved={isApproved}
           onClick={() => {
             if (!isApproved) {
@@ -29,47 +30,38 @@ const ProfileSummary = () => {
             }
           }}
         >
-          <ProfileImageSection>
+          <ProfileFrame>
             <ProfileImage src={profile_image_url} alt={nickname} />
-          </ProfileImageSection>
-          <InfoSection>
+          </ProfileFrame>
+          <UserMeta>
             <Nickname>{nickname}</Nickname>
             <Email>{links}</Email>
-          </InfoSection>
-        </ProfileInfoSection>
-        {isApproved && <ExpertProfileDetail>{`내 프로필`}</ExpertProfileDetail>}
+          </UserMeta>
+        </ProfileLinkContainer>
+        {isApproved && <ExpertProfileButton>{`내 프로필`}</ExpertProfileButton>}
       </ProfileInfoContainer>
-      <ActivityAccessSection>
-        <ActivityItem>
-          <ActivityTitle>{`예약 내역`}</ActivityTitle>
-          <ActivityCount>{reservation_count}</ActivityCount>
-        </ActivityItem>
-        <ActivityDivider />
-        <ActivityItem>
-          <ActivityTitle>{`팔로우`}</ActivityTitle>
-          <ActivityCount>{following_count}</ActivityCount>
-        </ActivityItem>
-        <ActivityDivider />
-        <ActivityItem>
-          <ActivityTitle>{`내 무드보드`}</ActivityTitle>
-          <ActivityCount>{moodboard_count}</ActivityCount>
-        </ActivityItem>
-      </ActivityAccessSection>
-      <ExpertApprovalSection
+      <Stats
+        stats={[
+          { label: '예약 내역', value: reservation_count },
+          { label: '팔로우', value: following_count },
+          { label: '내 무드보드', value: moodboard_count },
+        ]}
+      />
+      <ExpertApprovalCard
         onClick={() => {
           if (!isApproved) setIsApproved(true);
         }}
       >
         <img src={isApproved ? IcApproval : IcUnapproval} alt={isApproved ? '승인' : '미승인'} />
         <ApprovalLabel>{isApproved ? '작가승인 완료' : '작가승인 하기'}</ApprovalLabel>
-      </ExpertApprovalSection>
-    </ProfileContainer>
+      </ExpertApprovalCard>
+    </ProfileSummaryContainer>
   );
 };
 
 export default ProfileSummary;
 
-const ProfileContainer = styled.div`
+const ProfileSummaryContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -82,7 +74,7 @@ const ProfileInfoContainer = styled.div`
   justify-content: space-between;
 `;
 
-const ProfileInfoSection = styled.div<{ isApproved: boolean }>`
+const ProfileLinkContainer = styled.div<{ isApproved: boolean }>`
   display: flex;
   align-items: center;
   width: ${({ isApproved }) => (isApproved ? 'fit-content' : '100%')};
@@ -90,7 +82,7 @@ const ProfileInfoSection = styled.div<{ isApproved: boolean }>`
   gap: 12px;
 `;
 
-const ProfileImageSection = styled.div`
+const ProfileFrame = styled.div`
   width: 80px;
   height: 80px;
   overflow: hidden;
@@ -106,7 +98,7 @@ const ProfileImage = styled.img`
   object-position: center;
 `;
 
-const InfoSection = styled.div`
+const UserMeta = styled.div`
   display: flex;
   flex-direction: column;
 `;
@@ -121,7 +113,7 @@ const Email = styled.div`
   line-height: 150%;
 `;
 
-const ExpertProfileDetail = styled.div`
+const ExpertProfileButton = styled.div`
   display: flex;
   white-space: nowrap;
   align-items: center;
@@ -138,37 +130,7 @@ const ExpertProfileDetail = styled.div`
   }
 `;
 
-const ActivityAccessSection = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 6px;
-`;
-
-const ActivityItem = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  cursor: pointer;
-  padding: 0 8px;
-  gap: 4px;
-`;
-
-const ActivityTitle = styled.div`
-  font: ${({ theme }) => theme.fonts.labelS};
-  color: #6f6f6f;
-`;
-
-const ActivityCount = styled.div`
-  font: ${({ theme }) => theme.fonts.title3};
-`;
-
-const ActivityDivider = styled.div`
-  height: 32px;
-  border: 1px solid ${({ theme }) => theme.colors.lightMode.divider.divider2};
-`;
-
-const ExpertApprovalSection = styled.div`
+const ExpertApprovalCard = styled.div`
   display: flex;
   align-items: center;
   background-color: ${({ theme }) => theme.colors.lightMode.background.bg1};
