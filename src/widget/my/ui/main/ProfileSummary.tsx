@@ -41,6 +41,7 @@ const ProfileSummary = () => {
         ]}
       />
       <ExpertApprovalCard
+        isApproved={isApproved}
         onClick={() => {
           if (!isApproved) setIsApproved(true);
         }}
@@ -128,13 +129,13 @@ const ExpertProfileButton = styled.button`
   }
 `;
 
-const ExpertApprovalCard = styled.div`
+const ExpertApprovalCard = styled.div<{ isApproved: boolean }>`
   display: flex;
   align-items: center;
   background-color: ${({ theme }) => theme.colors.lightMode.background.bg1};
   border: 1px solid ${({ theme }) => theme.colors.lightMode.divider.divider1};
   border-radius: 8px;
-  cursor: pointer;
+  cursor: ${({ isApproved }) => (isApproved ? 'default' : 'pointer')};
   padding: 18px 16px;
   gap: 4px;
 `;
