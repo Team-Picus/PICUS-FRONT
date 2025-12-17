@@ -22,14 +22,7 @@ const ProfileSummary = () => {
   return (
     <ProfileSummaryContainer>
       <ProfileInfoContainer>
-        <ProfileLinkContainer
-          isApproved={isApproved}
-          onClick={() => {
-            if (!isApproved) {
-              navigate('/my/settings');
-            }
-          }}
-        >
+        <ProfileSummaryButton isApproved={isApproved} onClick={() => navigate('/my/settings')}>
           <ProfileFrame>
             <ProfileImage src={profile_image_url} alt={nickname} />
           </ProfileFrame>
@@ -37,7 +30,7 @@ const ProfileSummary = () => {
             <Nickname>{nickname}</Nickname>
             <Email>{links}</Email>
           </UserMeta>
-        </ProfileLinkContainer>
+        </ProfileSummaryButton>
         {isApproved && <ExpertProfileButton>{`내 프로필`}</ExpertProfileButton>}
       </ProfileInfoContainer>
       <Stats
@@ -74,11 +67,10 @@ const ProfileInfoContainer = styled.div`
   justify-content: space-between;
 `;
 
-const ProfileLinkContainer = styled.div<{ isApproved: boolean }>`
+const ProfileSummaryButton = styled.button<{ isApproved: boolean }>`
   display: flex;
   align-items: center;
   width: ${({ isApproved }) => (isApproved ? 'fit-content' : '100%')};
-  cursor: ${({ isApproved }) => (isApproved ? 'default' : 'pointer')};
   gap: 12px;
 `;
 
@@ -113,7 +105,7 @@ const Email = styled.div`
   line-height: 150%;
 `;
 
-const ExpertProfileButton = styled.div`
+const ExpertProfileButton = styled.button`
   display: flex;
   white-space: nowrap;
   align-items: center;
@@ -122,7 +114,6 @@ const ExpertProfileButton = styled.div`
   font: ${({ theme }) => theme.fonts.labelM};
   border-radius: 8px;
   border: 1px solid #e6e6e6;
-  cursor: pointer;
   padding: 12px;
 
   &:active {
