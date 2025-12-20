@@ -31,7 +31,11 @@ const ProfileSummary = () => {
             <Email>{links}</Email>
           </UserMeta>
         </ProfileSummaryButton>
-        {isApproved && <ExpertProfileButton>{`내 프로필`}</ExpertProfileButton>}
+        {isApproved && (
+          <ExpertProfileButton
+            onClick={() => navigate('profile')}
+          >{`내 프로필`}</ExpertProfileButton>
+        )}
       </ProfileInfoContainer>
       <Stats
         stats={[
