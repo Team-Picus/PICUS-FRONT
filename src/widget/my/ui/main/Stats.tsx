@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import type { ReactNode } from 'react';
+import { Fragment, type ReactNode } from 'react';
 
 type StatItem = {
   label: string;
@@ -16,18 +16,13 @@ const Stats = ({ stats = [], labelColor }: ProfileOverviewCardProps) => {
   return (
     <StatsContainer>
       {stats.map((s, idx) => (
-        <>
-          <Stat
-            key={`${s.label}-${idx}`}
-            type="button"
-            onClick={s.onClick}
-            data-clickable={Boolean(s.onClick)}
-          >
+        <Fragment key={`${s.label}-${idx}`}>
+          <Stat type="button" onClick={s.onClick} data-clickable={Boolean(s.onClick)}>
             <Label $labelColor={labelColor}>{s.label}</Label>
             <StatValue>{s.value}</StatValue>
           </Stat>
           {idx !== stats.length - 1 && <Divider aria-hidden />}
-        </>
+        </Fragment>
       ))}
     </StatsContainer>
   );
