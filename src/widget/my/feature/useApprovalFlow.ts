@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router';
-import type { ApprovalRequestDTO } from '@widget/my/types/approvalForm.ts';
-import { FLOW, type Step, type StepAction } from '@widget/my/types/approvalFlow.ts';
+import type { ApprovalRequestDTO } from '@widget/my/types/approval/approvalForm.ts';
+import { FLOW, type Step, type StepAction } from '@widget/my/types/approval/approvalFlow.ts';
 
 export const useApprovalFlow = (
   initialForm: ApprovalRequestDTO,
