@@ -2,11 +2,11 @@ import styled from '@emotion/styled';
 import { useState } from 'react';
 import { DropDownMenu, Header } from '@shared/components';
 import type { HeaderIcon } from '@shared/types/header.ts';
-import ProfileOverview from '@widget/my/ui/main/ProfileOverview.tsx';
-import CategoryPage from '@widget/my/ui/main/CategoryPage.tsx';
-import Gallery from '@widget/my/ui/main/Gallery.tsx';
-import ExpertInfo from '@widget/my/ui/main/ExpertInfo.tsx';
-import PriceComposition from '@widget/my/ui/main/PriceComposition.tsx';
+import ProfileOverview from '@widget/my/ui/main/profile/ProfileOverview.tsx';
+import CategoryPage from '@widget/my/ui/main/profile/CategoryPage.tsx';
+import Gallery from '@widget/my/ui/main/profile/Gallery.tsx';
+import ExpertInfo from '@widget/my/ui/main/profile/ExpertInfo.tsx';
+import PriceComposition from '@widget/my/ui/main/profile/PriceComposition.tsx';
 import IcMoreVertical from '@icon/ic-more-vertical.svg';
 
 const MyProfile = () => {

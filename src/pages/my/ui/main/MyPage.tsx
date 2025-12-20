@@ -2,10 +2,10 @@ import styled from '@emotion/styled';
 import { useState } from 'react';
 import Navigation from '@shared/components/Navigation.tsx';
 import Header from '@shared/components/Header.tsx';
-import ProfileSummary from '@widget/my/ui/main/ProfileSummary.tsx';
-import Menu from '@widget/my/ui/main/Menu.tsx';
+import ProfileSummary from '@widget/my/ui/main/my/ProfileSummary.tsx';
+import Menu from '@widget/my/ui/main/my/Menu.tsx';
 import type { HeaderIcon } from '@shared/types/header.ts';
-import type { MenuItemProps } from '@widget/my/types/menu.ts';
+import type { MenuItemProps } from '@widget/my/types/my/menu.ts';
 import IcSet from '@icon/ic-set.svg';
 import { DropDownMenu } from '@shared/components';
 

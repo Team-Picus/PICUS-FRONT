@@ -1,5 +1,5 @@
 import { useParams, useNavigate } from 'react-router';
-import { type State, ApprovalStatus } from '@widget/my/types/approvalStatus.ts';
+import { type State, ApprovalStatus } from '@widget/my/types/approval/approvalStatus.ts';
 import { ApprovedStatusLayout } from '@widget/my/ui/approval/ApprovedStatusLayout.tsx';
 import { ApprovalInProgressLayout } from '@widget/my/ui/approval/ApprovalInProgressLayout.tsx';
 import Header from '@shared/components/Header.tsx';

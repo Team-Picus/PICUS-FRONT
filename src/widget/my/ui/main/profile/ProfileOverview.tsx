@@ -2,9 +2,9 @@ import styled from '@emotion/styled';
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { expertBasicInfoMock } from '@widget/my/feature/mock.ts';
-import Stats from '@widget/my/ui/main/Stats.tsx';
+import Stats from '@widget/my/ui/main/my/Stats.tsx';
 import ShapeButton from '@shared/components/ShapeButton.tsx';
-import LinksModal from '@widget/my/ui/main/LinksModal.tsx';
+import LinksModal from '@widget/my/ui/main/profile/LinksModal.tsx';
 import IcProgress from '@icon/ic-progress.tsx';
 import IcMail from '@icon/ic-mail.svg';
 

@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { useNavigate } from 'react-router';
-import type { MenuItemProps } from '@widget/my/types/menu.ts';
+import type { MenuItemProps } from '@widget/my/types/my/menu.ts';
 
 interface MenuProps {
   title: string;

@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router';
 import IcApproval from '@icon/ic-approval.svg';
 import IcUnapproval from '@icon/ic-unapproval.svg';
 import { user } from '@widget/my/feature/mock.ts';
-import Stats from '@widget/my/ui/main/Stats.tsx';
+import Stats from '@widget/my/ui/main/my/Stats.tsx';
 
 const ProfileSummary = () => {
   const [isApproved, setIsApproved] = useState(false);

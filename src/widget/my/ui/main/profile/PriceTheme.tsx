@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import { InlineButton } from '@shared/components';
 import type { ThemePackage } from '@shared/components/PackageItem.tsx';
 import SectionHeader from '@shared/components/SectionHeader.tsx';
-import PackageList from '@widget/my/ui/main/PackageList.tsx';
+import PackageList from '@widget/my/ui/main/profile/PackageList.tsx';
 
 type ReferenceImage = {
   id: string;

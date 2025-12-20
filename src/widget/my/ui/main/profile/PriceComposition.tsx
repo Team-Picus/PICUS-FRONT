@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import PriceTheme from '@widget/my/ui/main/PriceTheme.tsx';
+import PriceTheme from '@widget/my/ui/main/profile/PriceTheme.tsx';
 import ImgMainBannerEx from '@image/img-mainbanner-ex.png';
 import { weddingPackages, friendshipPackages } from '@widget/my/feature/mock.ts';
 

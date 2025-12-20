@@ -1,7 +1,10 @@
 import ImgProfileEx from '@image/img-profile-ex.png';
 import ImgMyProfileCoverEx from '@image/img-my-profile-cover-ex.png';
-import type { ApprovalRequestDTO } from '@widget/my/types/approvalForm.ts';
-import type { ExpertBasicInfoResponseDTO, ExpertDetailInfoResDTO } from '../types/expertInfo';
+import type { ApprovalRequestDTO } from '@widget/my/types/approval/approvalForm.ts';
+import type {
+  ExpertBasicInfoResponseDTO,
+  ExpertDetailInfoResDTO,
+} from '../types/profile/expertInfo';
 import type { ThemePackage } from '@shared/components/PackageItem.tsx';
 
 interface User {
