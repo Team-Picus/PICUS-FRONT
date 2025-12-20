@@ -2,6 +2,7 @@ import ImgProfileEx from '@image/img-profile-ex.png';
 import ImgMyProfileCoverEx from '@image/img-my-profile-cover-ex.png';
 import type { ApprovalRequestDTO } from '@widget/my/types/approvalForm.ts';
 import type { ExpertBasicInfoResponseDTO, ExpertDetailInfoResDTO } from '../types/expertInfo';
+import type { ThemePackage } from '@shared/components/PackageItem.tsx';
 
 interface User {
   name: string;
@@ -143,3 +144,60 @@ export const expertBasicInfoMock: ExpertBasicInfoResponseDTO = {
   profile_image_url: ImgProfileEx,
   links: ['instagram.com/username', 'behance.net/username', 'www.myphotowork.com'],
 };
+
+export const weddingPackages: ThemePackage[] = [
+  {
+    id: 'w-pkg-a',
+    name: '패키지 A',
+    price: 300000,
+    contents: [
+      { label: '모먼트 패키지', value: '1세트' },
+      { label: '분할 컷', value: '2장' },
+    ],
+    notice: '장소는 원하시는 장소 또는 바담 추천 제공드립니다. 기본은 1시간입니다.',
+  },
+  {
+    id: 'w-pkg-b',
+    name: '패키지 B',
+    price: 450000,
+    meta: '2장',
+    contents: [
+      { label: '모먼트 패키지', value: '1세트' },
+      { label: '분할 컷', value: '2장' },
+    ],
+    notice: '장소는 원하시는 장소 또는 바담 추천 제공드립니다. 기본은 1시간입니다.',
+  },
+];
+
+export const friendshipPackages: ThemePackage[] = [
+  {
+    id: 'f-pkg-a',
+    name: '패키지 A',
+    price: 200000,
+    contents: [
+      { label: '모먼트 패키지', value: '1세트' },
+      { label: '분할 컷', value: '2장' },
+    ],
+    notice: '장소는 원하시는 장소 또는 바담 추천 제공드립니다. 기본은 1시간입니다.',
+  },
+  {
+    id: 'f-pkg-b',
+    name: '패키지 B',
+    price: 320000,
+    contents: [
+      { label: '모먼트 패키지', value: '1세트' },
+      { label: '분할 컷', value: '2장' },
+    ],
+    notice: '장소는 원하시는 장소 또는 바담 추천 제공드립니다. 기본은 1시간입니다.',
+  },
+  {
+    id: 'f-pkg-c',
+    name: '패키지 C',
+    price: 1700000,
+    contents: [
+      { label: '모먼트 패키지', value: '1세트' },
+      { label: '분할 컷', value: '2장' },
+    ],
+    notice: '장소는 원하시는 장소 또는 바담 추천 제공드립니다. 기본은 1시간입니다.',
+  },
+];
