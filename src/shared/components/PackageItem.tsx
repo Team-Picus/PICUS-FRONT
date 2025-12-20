@@ -58,15 +58,11 @@ const PackageItem = ({
     return '1개';
   }, []);
 
-  const handleHeaderClick = () => {
-    onToggle();
-  };
-
   return (
     <PackageItemContainer data-expanded={selected}>
       <PackageHeader
         type="button"
-        onClick={handleHeaderClick}
+        onClick={onToggle}
         data-expanded={selected}
         aria-expanded={selected}
       >
