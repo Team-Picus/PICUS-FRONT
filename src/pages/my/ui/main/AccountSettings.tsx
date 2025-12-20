@@ -24,7 +24,7 @@ const AccountSettings = () => {
 
   return (
     <>
-      <Header back title="계정관리" icons={icons} />
+      <Header isBack title="계정관리" icons={icons} />
       <AccountSettingsContainer>
         <AccountInfoContainer>
           <SectionHeader text="계정 정보" />
