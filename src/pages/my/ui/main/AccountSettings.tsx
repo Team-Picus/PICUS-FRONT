@@ -4,10 +4,9 @@ import type { HeaderIcon } from '@shared/types/header.ts';
 import { user } from '@widget/my/feature/mock.ts';
 import Header from '@shared/components/Header.tsx';
 import SectionHeader from '@shared/components/SectionHeader.tsx';
+import ProfileImagePicker from '@widget/my/component/ProfileImagePicker.tsx';
 import TextField from '@shared/components/TextField.tsx';
-import ImgProfileEx from '@image/img-profile-ex.png';
 import IcSave from '@icon/ic-save.svg';
-import IcGallery from '@icon/ic-gallery.svg';
 import IcKakao from '@icon/ic-kakao.svg';
 
 const AccountSettings = () => {
@@ -28,14 +27,7 @@ const AccountSettings = () => {
       <AccountSettingsContainer>
         <AccountInfoContainer>
           <SectionHeader text="계정 정보" />
-          <ProfileImageSection>
-            <SectionLabel>{`프로필`}</SectionLabel>
-            <ProfileImage src={ImgProfileEx} alt="프로필 이미지" />
-          </ProfileImageSection>
-          <ImageSelectButton>
-            <img src={IcGallery} alt="gallery" />
-            <ButtonLabel>{`사진 선택`}</ButtonLabel>
-          </ImageSelectButton>
+          <ProfileImagePicker imageUrl={user.profile_image_url} onChange={() => {}} />
           <TextField
             type="text"
             value={nickname}
@@ -109,38 +101,6 @@ const AccountInfoContainer = styled.div`
   border-bottom: 1px solid ${({ theme }) => theme.colors.lightMode.divider.divider1};
   padding: 16px 0 40px;
   gap: 16px;
-`;
-
-const ProfileImageSection = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-`;
-
-const SectionLabel = styled.div`
-  font: ${({ theme }) => theme.fonts.labelM};
-`;
-
-const ProfileImage = styled.img`
-  width: 80px;
-  height: 80px;
-  border-radius: 24px;
-`;
-
-const ImageSelectButton = styled.div`
-  display: flex;
-  align-items: center;
-  width: fit-content;
-  background-color: ${({ theme }) => theme.colors.lightMode.background.bg1};
-  border: 1px solid ${({ theme }) => theme.colors.lightMode.divider.divider1};
-  border-radius: 8px;
-  padding: 8px 16px;
-  gap: 4px;
-`;
-
-const ButtonLabel = styled.div`
-  font: ${({ theme }) => theme.fonts.labelM};
-  color: ${({ theme }) => theme.colors.lightMode.text.text2};
 `;
 
 const UserInfoContainer = styled.div`
