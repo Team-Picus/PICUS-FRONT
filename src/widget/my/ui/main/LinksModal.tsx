@@ -100,11 +100,14 @@ const LinksModalContainer = styled.div`
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: 326px;
-  max-width: 560px;
+  width: 560px;
   background: ${({ theme }) => theme.colors.lightMode.background.bg1};
   border-radius: 12px;
   padding-bottom: 16px;
+
+  @media (max-width: 640px) {
+    width: 326px;
+  }
 `;
 
 const ModalHeader = styled.div`
