@@ -13,6 +13,7 @@ import AccountSettings from '@my/ui/main/AccountSettings.tsx';
 import ExpertApprovalPage from '@my/ui/approval/ExpertApprovalPage.tsx';
 import ApprovalStepsPage from '@my/ui/approval/ApprovalStepsPage.tsx';
 import ApprovalStatusPage from '@my/ui/approval/ApprovalStatusPage.tsx';
+import MyProfile from '@my/ui/main/MyProfile.tsx';
 
 export const router = createBrowserRouter([
   {
@@ -94,6 +95,10 @@ export const router = createBrowserRouter([
       {
         path: 'settings',
         element: <AccountSettings />,
+      },
+      {
+        path: 'profile',
+        element: <MyProfile />,
       },
       {
         path: 'expert-approval',
