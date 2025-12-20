@@ -1,59 +1,45 @@
-import { useLayoutEffect, useMemo, useRef, useState } from 'react';
-import type { ReactNode } from 'react';
+import { useLayoutEffect, useRef, useState } from 'react';
+import type { RefCallback } from 'react';
 
-type TabViewItem = {
-  key: string;
-  label: string;
-  content: ReactNode;
-};
+export type MyProfileTabId = 'gallery' | 'info' | 'pricing';
 
-interface UseMyProfileTabsParams {
-  items: TabViewItem[];
-  defaultActiveKey?: string;
-  onChange?: (key: string) => void;
-}
+const MY_PROFILE_TABS: { id: MyProfileTabId; label: string }[] = [
+  { id: 'gallery', label: '갤러리' },
+  { id: 'info', label: '작가 정보' },
+  { id: 'pricing', label: '가격 구성' },
+];
 
-export const useMyProfileTabs = ({ items, defaultActiveKey, onChange }: UseMyProfileTabsParams) => {
-  const firstKey = items[0]?.key ?? '';
-  const [activeKey, setActiveKey] = useState(defaultActiveKey ?? firstKey);
+export const useMyProfileTabs = () => {
+  const [activeId, setActiveId] = useState<MyProfileTabId>('gallery');
 
-  // items가 바뀌어서 activeKey가 사라지는 경우 방어
-  useLayoutEffect(() => {
-    if (!items.length) return;
-    const exists = items.some((i) => i.key === activeKey);
-    if (!exists) setActiveKey(defaultActiveKey ?? items[0].key);
-  }, [items, activeKey, defaultActiveKey]);
+  const tabRefs = useRef<Record<MyProfileTabId, HTMLDivElement | null>>({
+    gallery: null,
+    info: null,
+    pricing: null,
+  });
 
-  const tabs = useMemo(() => items.map(({ key, label }) => ({ id: key, label })), [items]);
-
-  const activeContent = useMemo(
-    () => items.find((i) => i.key === activeKey)?.content ?? null,
-    [items, activeKey],
-  );
-
-  const tabRefs = useRef<Record<string, HTMLDivElement | null>>({});
   const [indicatorStyle, setIndicatorStyle] = useState({ left: 0, width: 0 });
 
-  const setTabRef = (id: string) => (el: HTMLDivElement | null) => {
-    tabRefs.current[id] = el;
-  };
+  const setTabRef =
+    (id: MyProfileTabId): RefCallback<HTMLDivElement> =>
+    (el) => {
+      tabRefs.current[id] = el;
+    };
 
   useLayoutEffect(() => {
-    const el = tabRefs.current[activeKey];
+    const el = tabRefs.current[activeId];
     if (!el) return;
-    setIndicatorStyle({ left: el.offsetLeft, width: el.offsetWidth });
-  }, [activeKey, tabs.length]); // 탭 개수/레이아웃 변동 시 보정
 
-  const handleChange = (key: string) => {
-    setActiveKey(key);
-    onChange?.(key);
-  };
+    setIndicatorStyle({
+      left: el.offsetLeft,
+      width: el.offsetWidth,
+    });
+  }, [activeId]);
 
   return {
-    activeKey,
-    tabs,
-    activeContent,
-    handleChange,
+    items: MY_PROFILE_TABS,
+    activeId,
+    onChange: setActiveId,
     indicatorStyle,
     setTabRef,
   };

@@ -4,9 +4,6 @@ import { DropDownMenu, Header } from '@shared/components';
 import type { HeaderIcon } from '@shared/types/header.ts';
 import ProfileOverview from '@widget/my/ui/main/profile/ProfileOverview.tsx';
 import CategoryPage from '@widget/my/ui/main/profile/CategoryPage.tsx';
-import Gallery from '@widget/my/ui/main/profile/Gallery.tsx';
-import ExpertInfo from '@widget/my/ui/main/profile/ExpertInfo.tsx';
-import PriceComposition from '@widget/my/ui/main/profile/PriceComposition.tsx';
 import IcMoreVertical from '@icon/ic-more-vertical.svg';
 
 const MyProfile = () => {
@@ -51,13 +48,7 @@ const MyProfile = () => {
         />
       </HeaderContainer>
       <ProfileOverview />
-      <CategoryPage
-        items={[
-          { key: 'gallery', label: '갤러리', content: <Gallery /> },
-          { key: 'info', label: '작가 정보', content: <ExpertInfo /> },
-          { key: 'pricing', label: '가격 구성', content: <PriceComposition /> },
-        ]}
-      />
+      <CategoryPage />
     </>
   );
 };

@@ -1,34 +1,26 @@
 import styled from '@emotion/styled';
-import type { ReactNode } from 'react';
-import Tabs from '@shared/components/Tabs.tsx';
 import { useMyProfileTabs } from '@widget/my/feature/useMyProfileTabs.ts';
+import Tabs from '@shared/components/Tabs.tsx';
+import Gallery from '@widget/my/ui/main/profile/Gallery.tsx';
+import ExpertInfo from '@widget/my/ui/main/profile/ExpertInfo.tsx';
+import PriceComposition from '@widget/my/ui/main/profile/PriceComposition.tsx';
 
-type TabViewItem = {
-  key: string;
-  label: string;
-  content: ReactNode;
-};
-
-interface TabViewProps {
-  items: TabViewItem[];
-  defaultActiveKey?: string;
-  onChange?: (key: string) => void;
-}
-
-const CategoryPage = ({ items, defaultActiveKey, onChange }: TabViewProps) => {
-  const { tabs, activeKey, activeContent, handleChange, indicatorStyle, setTabRef } =
-    useMyProfileTabs({ items, defaultActiveKey, onChange });
+const CategoryPage = () => {
+  const { items, activeId, onChange, indicatorStyle, setTabRef } = useMyProfileTabs();
 
   return (
     <CategoryPageContainer>
       <Tabs
-        items={tabs}
-        activeId={activeKey}
-        onChange={handleChange}
+        items={items}
+        activeId={activeId}
+        onChange={onChange}
         indicatorStyle={indicatorStyle}
         setTabRef={setTabRef}
       />
-      {activeContent}
+
+      {activeId === 'gallery' && <Gallery />}
+      {activeId === 'info' && <ExpertInfo />}
+      {activeId === 'pricing' && <PriceComposition />}
     </CategoryPageContainer>
   );
 };
