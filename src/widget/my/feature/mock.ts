@@ -1,5 +1,7 @@
 import ImgProfileEx from '@image/img-profile-ex.png';
+import ImgMyProfileCoverEx from '@image/img-my-profile-cover-ex.png';
 import type { ApprovalRequestDTO } from '@widget/my/types/approvalForm.ts';
+import type { ExpertBasicInfoResponseDTO, ExpertDetailInfoResDTO } from '../types/expertInfo';
 
 interface User {
   name: string;
@@ -44,7 +46,10 @@ export const approvalRequestMock: ApprovalRequestDTO = {
     { skill_type: 'CAMERA', content: '카메라 기종 1' },
     { skill_type: 'CAMERA', content: '카메라 기종 2' },
     { skill_type: 'LIGHT', content: '조명 기종 1' },
+    { skill_type: 'LIGHT', content: '조명 기종 2' },
+    { skill_type: 'LIGHT', content: '조명 기종 3' },
     { skill_type: 'EDIT', content: 'Adobe Photoshop' },
+    { skill_type: 'EDIT', content: 'Adobe Lightroom' },
   ],
   studio: {
     studio_name: '스튜디오 시선',
@@ -57,4 +62,84 @@ export const approvalRequestMock: ApprovalRequestDTO = {
     'https://behance.net/your_portfolio',
     'https://yourdomain.com',
   ],
+};
+
+export const expertDetailInfoMock: ExpertDetailInfoResDTO = {
+  activity_career: '3개월',
+
+  projects: [
+    {
+      projectNo: 'PJT-001',
+      project_name: '개인스튜디오운영',
+      start_date: '2025-04-01T10:00:00',
+      end_date: '2025-05-02T18:00:00',
+    },
+    {
+      projectNo: 'PJT-002',
+      project_name: '무신사 룩북',
+      start_date: '2024-10-10T09:30:00',
+      end_date: '2024-12-12T19:00:00',
+    },
+  ],
+
+  skills: [
+    {
+      skillNo: 'SKL-001',
+      skill_type: 'CAMERA',
+      content: '카메라 기종 1',
+    },
+    {
+      skillNo: 'SKL-002',
+      skill_type: 'CAMERA',
+      content: '카메라 기종 2',
+    },
+    {
+      skillNo: 'SKL-003',
+      skill_type: 'LIGHT',
+      content: '조명 기종 1',
+    },
+    {
+      skillNo: 'SKL-004',
+      skill_type: 'LIGHT',
+      content: '조명 기종 2',
+    },
+    {
+      skillNo: 'SKL-005',
+      skill_type: 'LIGHT',
+      content: '조명 기종 3',
+    },
+    {
+      skillNo: 'SKL-006',
+      skill_type: 'EDIT',
+      content: 'Adobe Photoshop',
+    },
+    {
+      skillNo: 'SKL-007',
+      skill_type: 'EDIT',
+      content: 'Adobe Lightroom',
+    },
+  ],
+
+  activity_area: ['서울시 송파구', '성남시 수정구'],
+
+  studio: {
+    studioNo: 'STD-001',
+    studio_name: 'usee_pic',
+    employees_count: 8,
+    business_hours: '10:00 - 19:00 (월~금)',
+    address: '서울시 송파구 00동 00길 182-17',
+  },
+};
+
+export const expertBasicInfoMock: ExpertBasicInfoResponseDTO = {
+  expert_no: 'EXP-001',
+  activity_duration: '3개월',
+  activity_count: 32,
+  last_activity_at: '2025-09-11T18:30:00',
+  intro:
+    '저는 빛과 순간이 만나 만들어내는 이야기를 기록합니다.\n사진을 통해 세상의 본질과 사람의 내면을 포착하고자 합니다.',
+  background_image_url: ImgMyProfileCoverEx,
+  nickname: 'usee_pic',
+  profile_image_url: ImgProfileEx,
+  links: ['instagram.com/username', 'behance.net/username', 'www.myphotowork.com'],
 };
