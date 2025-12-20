@@ -95,34 +95,38 @@ const PackageItem = ({
         </HeaderRight>
       </PackageHeader>
 
-      {selected && hasPanel && (
-        <PackageDetailContainer>
-          {showSettingsCount && <SettingsCount>{settingsCountText}</SettingsCount>}
+      {hasPanel && (
+        <PackagePanel data-expanded={selected} aria-hidden={!selected}>
+          <PackagePanelInner>
+            <PackageDetailContainer>
+              {showSettingsCount && <SettingsCount>{settingsCountText}</SettingsCount>}
 
-          {pkg.contents && (
-            <ContentList>
-              {pkg.contents.map((d, idx) => (
-                <ContentItem key={`${d.label}-${idx}`}>
-                  {d.label} {d.value}
-                </ContentItem>
-              ))}
-            </ContentList>
-          )}
+              {pkg.contents && (
+                <ContentList>
+                  {pkg.contents.map((d, idx) => (
+                    <ContentItem key={`${d.label}-${idx}`}>
+                      {d.label} {d.value}
+                    </ContentItem>
+                  ))}
+                </ContentList>
+              )}
 
-          {pkg.notice && <PackageNotice>{pkg.notice}</PackageNotice>}
+              {pkg.notice && <PackageNotice>{pkg.notice}</PackageNotice>}
 
-          {showQuantitySelector && (
-            <QuantityRow>
-              <QtyButton type="button" aria-label="감소">
-                <IcCircleMinusFilled />
-              </QtyButton>
-              <QtyValue>1</QtyValue>
-              <QtyButton type="button" aria-label="증가">
-                <IcCirclePlusFilled />
-              </QtyButton>
-            </QuantityRow>
-          )}
-        </PackageDetailContainer>
+              {showQuantitySelector && (
+                <QuantityRow>
+                  <QtyButton type="button" aria-label="감소">
+                    <IcCircleMinusFilled />
+                  </QtyButton>
+                  <QtyValue>1</QtyValue>
+                  <QtyButton type="button" aria-label="증가">
+                    <IcCirclePlusFilled />
+                  </QtyButton>
+                </QuantityRow>
+              )}
+            </PackageDetailContainer>
+          </PackagePanelInner>
+        </PackagePanel>
       )}
     </PackageItemContainer>
   );
@@ -146,6 +150,7 @@ const PackageHeader = styled.button`
   align-items: center;
   justify-content: space-between;
   padding: 12px 8px;
+  transition: padding 0.25s ease;
 
   &[data-expanded='true'] {
     padding: 12px 16px;
@@ -166,6 +171,7 @@ const HeaderRight = styled.div`
 const HeaderText = styled.div`
   font: ${({ theme }) => theme.fonts.labelM};
   color: ${({ theme }) => theme.colors.lightMode.text.text1};
+  transition: all 0.25s ease;
 
   &[data-expanded='true'] {
     font: ${({ theme }) => theme.fonts.title3};
@@ -176,6 +182,30 @@ const SelectionIcon = styled.span`
   display: flex;
   align-items: center;
   justify-content: center;
+`;
+
+const PackagePanel = styled.div`
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition:
+    grid-template-rows 0.25s ease,
+    opacity 0.25s ease,
+    transform 0.25s ease;
+
+  pointer-events: none;
+
+  &[data-expanded='true'] {
+    grid-template-rows: 1fr;
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+`;
+
+const PackagePanelInner = styled.div`
+  overflow: hidden;
 `;
 
 const PackageDetailContainer = styled.div`
