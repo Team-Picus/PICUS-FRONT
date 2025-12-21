@@ -135,10 +135,15 @@ const Icon = styled.img<IconProps>`
 
 const InlineButton = styled.button`
   display: flex;
-  heigth: 40px;
-  padding: 8px 12px;
+  height: 40px;
+  padding: 12px;
   align-items: center;
   justify-content: center;
+  border-radius: 8px;
   font: ${({ theme }) => theme.fonts.labelM};
   color: ${({ theme }) => theme.colors.lightMode.text.text2};
+
+  &:active {
+    background-color: rgba(29, 29, 29, 0.05);
+  }
 `;
