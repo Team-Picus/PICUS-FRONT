@@ -3,12 +3,17 @@ import { useState, useRef } from 'react';
 import IcChevronDown from '@icon/ic-chevron-down.svg?react';
 import IcChevronUp from '@icon/ic-chevron-up.svg?react';
 
+type Size = 'M' | 'L';
+
 interface SelectMenuButtonProps {
   title: string;
   isActive: boolean;
   contents: string[];
   dropDownTitle?: string;
   onSelect?: (selectedItem: string) => void;
+  onClick?: () => void;
+  size?: Size;
+  containerStyle?: React.CSSProperties;
 }
 
 const SelectMenuButton = ({
@@ -17,11 +22,19 @@ const SelectMenuButton = ({
   contents,
   dropDownTitle,
   onSelect,
+  onClick,
+  size = 'M',
+  containerStyle,
 }: SelectMenuButtonProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
   const handleClick = () => {
+    if (onClick) {
+      onClick();
+      return;
+    }
+
     setIsOpen(!isOpen);
   };
 
@@ -36,11 +49,17 @@ const SelectMenuButton = ({
 
   return (
     <>
-      <Container ref={containerRef} onClick={handleClick} isActive={isActive}>
-        <Title>{title}</Title>
+      <Container
+        ref={containerRef}
+        onClick={handleClick}
+        isActive={isActive}
+        $size={size}
+        style={containerStyle}
+      >
+        <Title $size={size}>{title}</Title>
         <Icon isOpen={isOpen}>{isOpen ? <IcChevronUp /> : <IcChevronDown />}</Icon>
 
-        {isOpen && (
+        {!onClick && isOpen && (
           <>
             <Overlay onClick={handleOverlay} />
             <DropdownContainer>
@@ -58,12 +77,13 @@ const SelectMenuButton = ({
   );
 };
 
-const Container = styled.div<{ isActive: boolean }>`
+const Container = styled.div<{ isActive: boolean; $size?: string }>`
   position: relative;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 4px;
-  padding: 4px 8px;
+  padding: ${({ $size }) => ($size === 'M' ? '4px 8px' : '8px')};
   background-color: ${({ theme }) => theme.colors.lightMode.background.bg1};
   border: 1px solid ${({ theme }) => theme.colors.lightMode.neutral.neutral300};
   border-radius: 8px;
@@ -74,9 +94,10 @@ const Container = styled.div<{ isActive: boolean }>`
   }
 `;
 
-const Title = styled.div`
-  font: ${({ theme }) => theme.fonts.body3};
+const Title = styled.div<{ $size?: string }>`
+  font: ${({ $size, theme }) => ($size === 'M' ? theme.fonts.body3 : theme.fonts.body1)};
   color: ${({ theme }) => theme.colors.lightMode.text.text2};
+  line-height: 150%;
 `;
 
 const Icon = styled.div<{ isOpen: boolean }>`
@@ -105,7 +126,7 @@ const DropdownContainer = styled.div`
   border: 1px solid ${({ theme }) => theme.colors.lightMode.neutral.neutral200};
   z-index: 1000;
   overflow: hidden;
-  padding: 0 4px;
+  padding: 4px 0;
 `;
 
 const DropDownMenu = styled.div`
@@ -116,7 +137,7 @@ const DropDownMenu = styled.div`
 `;
 
 const DropdownItem = styled.div`
-  padding: 8.5px 12px;
+  padding: 8px 12px;
   font: ${({ theme }) => theme.fonts.body1};
   color: ${({ theme }) => theme.colors.lightMode.text.text2};
 `;
