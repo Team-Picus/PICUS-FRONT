@@ -6,7 +6,7 @@ import PictureWorkList from '@widget/home/ui/PictureWorkList.tsx';
 const WeeklyMagazinePage = () => {
   return (
     <>
-      <Header back title="시선"></Header>
+      <Header isBack title="시선"></Header>
       <WeeklyMagazineContainer>
         <MagazineOverview />
         <PictureWorkList />
