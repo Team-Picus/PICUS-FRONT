@@ -4,7 +4,7 @@ import type { HeaderIcon } from '@shared/types/header.ts';
 import { user } from '@widget/my/feature/mock.ts';
 import Header from '@shared/components/Header.tsx';
 import SectionHeader from '@shared/components/SectionHeader.tsx';
-import ProfileImagePicker from '@widget/my/component/ProfileImagePicker.tsx';
+import ImagePicker from '@widget/my/component/ImagePicker.tsx';
 import TextField from '@shared/components/TextField.tsx';
 import IcSave from '@icon/ic-save.svg';
 import IcKakao from '@icon/ic-kakao.svg';
@@ -29,12 +29,9 @@ const AccountSettings = () => {
           <SectionHeader text="계정 정보" />
           <ProfileImagePicker imageUrl={user.profile_image_url} onChange={() => {}} />
           <TextField
-            type="text"
             value={nickname}
-            states="default"
-            isLabel
-            isTextLength={false}
-            isHelpText
+            showLabel
+            showHelpText
             label="닉네임"
             helpText="이모티콘 및 특수기호, 띄어쓰기 사용이 불가능합니다."
             placeholder={user.nickname}
@@ -43,33 +40,9 @@ const AccountSettings = () => {
         </AccountInfoContainer>
         <UserInfoContainer>
           <SectionHeader text="회원 정보" />
-          <TextField
-            type="text"
-            states="disabled"
-            isLabel
-            isTextLength={false}
-            isHelpText={false}
-            label="이름"
-            placeholder={user.name}
-          />
-          <TextField
-            type="text"
-            states="disabled"
-            isLabel
-            isTextLength={false}
-            isHelpText={false}
-            label="이메일"
-            placeholder={user.email}
-          />
-          <TextField
-            type="text"
-            states="disabled"
-            isLabel
-            isTextLength={false}
-            isHelpText={false}
-            label="전화번호"
-            placeholder={user.phone_number}
-          />
+          <TextField states="disabled" showLabel label="이름" placeholder={user.name} />
+          <TextField states="disabled" showLabel label="이메일" placeholder={user.email} />
+          <TextField states="disabled" showLabel label="전화번호" placeholder={user.phone_number} />
           <HelperList>
             <HelperText>{`이름과 휴대폰 번호를 설정하거나 변경하려면 본인 인증해 주세요. 인증할 때 입력한 정보로 설정 및 변경돼요.`}</HelperText>
             <HelperText>{`이동통신사에 본인 명의로 가입되어 있는지 확인해 주세요.`}</HelperText>

@@ -1,53 +1,63 @@
 import styled from '@emotion/styled';
 
 type FieldState = 'default' | 'disabled' | 'error';
+type TextFieldType = 'text' | 'password';
 
 interface TextFieldProps {
-  type: string;
+  type?: TextFieldType;
   value?: string;
-  states: FieldState;
-  isLabel: boolean;
-  isTextLength: boolean;
-  isHelpText: boolean;
+  states?: FieldState;
+  showLabel?: boolean;
+  showTextLength?: boolean;
+  showHelpText?: boolean;
   label?: string;
-  textLength?: number;
+  maxLength?: number;
   helpText?: string;
   placeholder?: string;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const TextField = ({
-  type,
+  type = 'text',
   value,
-  states,
-  isLabel,
-  isTextLength,
-  isHelpText,
+  states = 'default',
+  showLabel = false,
+  showTextLength = false,
+  showHelpText = false,
   label,
-  textLength,
+  maxLength,
   helpText,
   placeholder,
   onChange,
 }: TextFieldProps) => {
+  const length = (value ?? '').length;
+  const isOver = typeof maxLength === 'number' && length > maxLength;
   const isDisabled = states === 'disabled';
-  const isError = states === 'error';
+  const currentState: FieldState = isDisabled
+    ? 'disabled'
+    : states === 'error' || isOver
+      ? 'error'
+      : 'default';
 
   return (
     <TextFieldContainer>
-      {isLabel && <Label $state={states}>{label}</Label>}
-      <InputContainer $state={states}>
+      {showLabel && <Label $state={currentState}>{label}</Label>}
+      <InputContainer $state={currentState}>
         <Input
           type={type}
           value={value}
           placeholder={placeholder}
           disabled={isDisabled}
-          aria-invalid={isError}
           onChange={onChange}
-          $state={states}
+          $state={currentState}
         />
-        {isTextLength && <TextLength>{textLength}/30</TextLength>}
+        {showTextLength && (
+          <TextLength>
+            {length}/{maxLength}
+          </TextLength>
+        )}
       </InputContainer>
-      {isHelpText && <HelpText $state={states}>{helpText}</HelpText>}
+      {showHelpText && <HelpText $state={currentState}>{helpText}</HelpText>}
     </TextFieldContainer>
   );
 };
@@ -71,6 +81,8 @@ const Label = styled.div<{ $state: FieldState }>`
 `;
 
 const InputContainer = styled.div<{ $state: FieldState }>`
+  display: flex;
+  flex-direction: column;
   background-color: ${({ $state, theme }) =>
     $state === 'disabled'
       ? theme.colors.lightMode.background.bg4
@@ -85,8 +97,12 @@ const InputContainer = styled.div<{ $state: FieldState }>`
   border-radius: 8px;
   padding: 8px 12px;
   gap: 8px;
+
   &:focus-within {
-    border-color: ${({ theme }) => theme.colors.lightMode.neutral.neutral1000};
+    border-color: ${({ $state, theme }) =>
+      $state === 'error'
+        ? theme.colors.lightMode.semantic.error
+        : theme.colors.lightMode.neutral.neutral1000};
   }
 `;
 
@@ -96,10 +112,11 @@ const Input = styled.input<{ $state: FieldState }>`
     $state === 'disabled'
       ? theme.colors.lightMode.background.bg4
       : theme.colors.lightMode.background.bg1};
-  font: ${({ theme }) => theme.fonts.body2};
+  ${({ theme }) => theme.fonts.body2};
   color: ${({ theme }) => theme.colors.lightMode.text.text1};
   line-height: 150%;
   border: none;
+
   ::placeholder {
     color: ${({ theme }) => theme.colors.lightMode.text.text2};
   }

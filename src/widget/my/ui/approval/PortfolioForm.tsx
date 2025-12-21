@@ -8,15 +8,7 @@ const PortfolioForm = () => {
     <S.SectionContainer>
       <SectionHeader text="포트폴리오 링크" />
       <S.AddableField>
-        <TextField
-          type="text"
-          states="default"
-          isLabel
-          isTextLength={false}
-          isHelpText={false}
-          label="분야"
-          placeholder="https://"
-        />
+        <TextField showLabel label="분야" placeholder="https://" />
         <SelectMenuOption text="추가하기" />
       </S.AddableField>
     </S.SectionContainer>
