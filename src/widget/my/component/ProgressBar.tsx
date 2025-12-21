@@ -1,11 +1,11 @@
 import styled from '@emotion/styled';
 
 interface ProgressBarProps {
+  labels: string[];
   current: 0 | 1 | 2;
 }
 
-const ProgressBar = ({ current }: ProgressBarProps) => {
-  const labels = ['프로필 작성', '소속 작성', '포트폴리오 공유'];
+const ProgressBar = ({ labels, current }: ProgressBarProps) => {
   return (
     <BarContainer>
       {labels.map((label, i) => (

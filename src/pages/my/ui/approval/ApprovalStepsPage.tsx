@@ -2,8 +2,9 @@ import styled from '@emotion/styled';
 import { useApprovalFlow } from '@widget/my/feature/useApprovalFlow.ts';
 import { approvalRequestMock } from '@widget/my/feature/mock.ts';
 import Header from '@shared/components/Header.tsx';
-import { ProgressBar, ProfileForm, OrganizationForm, PortfolioForm } from '@widget/my/ui/approval';
+import { ProfileForm, OrganizationForm, PortfolioForm } from '@widget/my/ui/approval';
 import { BottomTap } from '@shared/components';
+import ProgressBar from '@widget/my/component/ProgressBar.tsx';
 
 const ApprovalStepsPage = () => {
   const { step, ghost, secondary, go } = useApprovalFlow(approvalRequestMock, (form) =>
@@ -18,7 +19,7 @@ const ApprovalStepsPage = () => {
       <Header isBack title="작가승인" />
       <ApprovalStepsPageContainer>
         <ContentContaner>
-          <ProgressBar current={step} />
+          <ProgressBar labels={['프로필 작성', '소속 작성', '포트폴리오 공유']} current={step} />
           <Intro>
             {step === 0 ? '프로필 작성' : step === 1 ? '소속 작성' : '포트폴리오 공유'}
             <Caption>
