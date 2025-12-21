@@ -27,7 +27,12 @@ const AccountSettings = () => {
       <AccountSettingsContainer>
         <AccountInfoContainer>
           <SectionHeader text="계정 정보" />
-          <ProfileImagePicker imageUrl={user.profile_image_url} onChange={() => {}} />
+          <ImagePicker
+            variant="avatar"
+            label="프로필"
+            imageUrl={user.profile_image_url}
+            onChange={() => {}}
+          />
           <TextField
             value={nickname}
             showLabel
