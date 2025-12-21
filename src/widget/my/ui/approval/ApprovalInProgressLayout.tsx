@@ -1,5 +1,5 @@
 import { InlineButton } from '@shared/components';
-import { type StatusConfig } from '@widget/my/types/approvalStatus.ts';
+import { type StatusConfig } from '@widget/my/types/approval/approvalStatus.ts';
 import styled from '@emotion/styled';
 
 interface Props {

@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { InlineButton } from '@shared/components';
-import { type StatusConfig } from '@widget/my/types/approvalStatus.ts';
+import { type StatusConfig } from '@widget/my/types/approval/approvalStatus.ts';
 import HeroImage from '@image/img-approved-hero.png';
 
 interface Props {
