@@ -11,12 +11,9 @@ interface TabsProps<T extends string> {
   items: TabsItem<T>[];
   activeId: T;
   onChange: (id: T) => void;
-
-  // 훅에서 계산한 indicator 스타일
-  indicatorStyle: { left: number; width: number };
-
-  // 훅에서 내려주는 ref setter
-  setTabRef: (id: T) => RefCallback<HTMLDivElement>;
+  indicatorStyle: { left: number; width: number }; // 훅에서 계산한 indicator 스타일
+  setTabRef: (id: T) => RefCallback<HTMLDivElement>; // 훅에서 내려주는 ref setter
+  borderColor?: string;
 }
 
 const Tabs = <T extends string>({
@@ -25,9 +22,10 @@ const Tabs = <T extends string>({
   onChange,
   indicatorStyle,
   setTabRef,
+  borderColor,
 }: TabsProps<T>) => {
   return (
-    <TabsContainer>
+    <TabsContainer $borderColor={borderColor}>
       {items.map((tab) => (
         <TabItem
           key={tab.id}
@@ -45,14 +43,15 @@ const Tabs = <T extends string>({
 
 export default Tabs;
 
-const TabsContainer = styled.div`
+const TabsContainer = styled.div<{ $borderColor?: string }>`
   position: relative;
   display: flex;
   flex-direction: row;
   gap: 12px;
   padding-top: 8px;
   padding-left: 12px;
-  border-bottom: 1px solid ${({ theme }) => theme.colors.lightMode.divider.divider1};
+  border-bottom: 1px solid
+    ${({ $borderColor, theme }) => $borderColor ?? theme.colors.lightMode.divider.divider1};
 `;
 
 const TabItem = styled.div<ActiveProps>`
