@@ -14,6 +14,7 @@ import ExpertApprovalPage from '@my/ui/approval/ExpertApprovalPage.tsx';
 import ApprovalStepsPage from '@my/ui/approval/ApprovalStepsPage.tsx';
 import ApprovalStatusPage from '@my/ui/approval/ApprovalStatusPage.tsx';
 import MyProfile from '@my/ui/main/MyProfile.tsx';
+import ProfileEditPage from '@my/ui/main/ProfileEditPage.tsx';
 
 export const router = createBrowserRouter([
   {
@@ -98,7 +99,17 @@ export const router = createBrowserRouter([
       },
       {
         path: 'profile',
-        element: <MyProfile />,
+        element: <RootLayout />,
+        children: [
+          {
+            index: true,
+            element: <MyProfile />,
+          },
+          {
+            path: 'edit',
+            element: <ProfileEditPage />,
+          },
+        ],
       },
       {
         path: 'expert-approval',
