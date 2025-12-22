@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import { useState } from 'react';
+import { useNavigate } from 'react-router';
 import { DropDownMenu, Header } from '@shared/components';
 import type { HeaderIcon } from '@shared/types/header.ts';
 import ProfileOverview from '@widget/my/ui/main/profile/ProfileOverview.tsx';
@@ -7,6 +8,7 @@ import CategoryPage from '@widget/my/ui/main/profile/CategoryPage.tsx';
 import IcMoreVertical from '@icon/ic-more-vertical.svg';
 
 const MyProfile = () => {
+  const navigate = useNavigate();
   const [isDropDownVisible, setIsDropDownVisible] = useState(false);
 
   const handleSettingClick = () => {
@@ -41,7 +43,7 @@ const MyProfile = () => {
             },
             {
               label: '프로필 편집',
-              onClick: () => {},
+              onClick: () => navigate('edit'),
               color: '000000',
             },
           ]}
