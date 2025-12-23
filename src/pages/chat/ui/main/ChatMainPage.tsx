@@ -8,7 +8,7 @@ import IcMoreVertical from '@icon/ic-more-vertical.svg';
 import ChatMainSearch from '@widget/chat/ui/main/ChatMainSearch';
 import ChatRoomList from '@widget/chat/ui/main/ChatRoomList';
 import DropDownMenu from '@shared/components/DropDownMenu';
-import BottomTap from '@shared/components/BottomTap.tsx';
+import BottomTap from '@shared/components/BottomTap';
 import Modal from '@shared/components/Modal';
 
 const ChatMainPage = () => {

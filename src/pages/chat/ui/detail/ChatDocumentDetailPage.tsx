@@ -6,7 +6,7 @@ import Modal from '@shared/components/Modal';
 import IcMoreVertical from '@icon/ic-more-vertical.svg';
 import IcChevronDown from '@icon/ic-chevron-down.svg';
 import ImgMainbannerEx from '@image/img-mainbanner-ex.png';
-import BottomTap from '@shared/components/BottomTap.tsx';
+import BottomTap from '@shared/components/BottomTap';
 import { useTheme } from '@emotion/react';
 import ChatReservationTypeTitle from '@widget/chat/ui/detail/document/ChatReservationTypeTitle';
 import ReservationDetailContent from '@widget/chat/component/DetailContent';
