@@ -15,6 +15,7 @@ import ApprovalStepsPage from '@my/ui/approval/ApprovalStepsPage.tsx';
 import ApprovalStatusPage from '@my/ui/approval/ApprovalStatusPage.tsx';
 import MyProfile from '@my/ui/main/MyProfile.tsx';
 import ProfileEditPage from '@my/ui/main/ProfileEditPage.tsx';
+import AddThemePage from '@my/ui/main/AddThemePage.tsx';
 
 export const router = createBrowserRouter([
   {
@@ -107,7 +108,17 @@ export const router = createBrowserRouter([
           },
           {
             path: 'edit',
-            element: <ProfileEditPage />,
+            element: <RootLayout />,
+            children: [
+              {
+                index: true,
+                element: <ProfileEditPage />,
+              },
+              {
+                path: 'theme/create',
+                element: <AddThemePage />,
+              },
+            ],
           },
         ],
       },
