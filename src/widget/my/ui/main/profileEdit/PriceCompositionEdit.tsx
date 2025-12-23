@@ -5,6 +5,7 @@ import PackageList from '@widget/my/ui/main/profile/PackageList.tsx';
 import { friendshipPackages, weddingPackages } from '@widget/my/feature/mock.ts';
 import type { ThemePackage } from '@shared/components/PackageItem.tsx';
 import SectionHeader from '@shared/components/SectionHeader.tsx';
+import { useNavigate } from 'react-router';
 
 type Theme = {
   id: string;
@@ -26,8 +27,9 @@ const MOCK_THEMES: Theme[] = [
 ];
 
 const PriceCompositionEdit = () => {
+  const navigate = useNavigate();
   const handleAddTheme = () => {
-    // TODO: 테마 추가 모달/페이지 연결
+    navigate('theme/create');
   };
 
   const handleThemeSetting = (themeId: string) => {
