@@ -144,11 +144,14 @@ const ChatMainPage = () => {
       />
       {isEditMode || isPinMode ? (
         <BottomTap
+          showGhost
+          hasCount
           checkedCount={checkedCount}
-          leftButtonText={isPinMode && checkedCount === 0 ? `${pinnedCount} 고정` : '선택 해제'}
-          rightButtonText={isPinMode ? '고정하기' : '삭제하기'}
-          onLeftClick={() => setCheckedCount(0)}
-          onRightClick={isPinMode ? handlePinConfirm : handleDeleteClick}
+          ghostDisabled={checkedCount === 0}
+          ghostText={isPinMode && checkedCount === 0 ? `${pinnedCount} 고정` : '선택 해제'}
+          secondaryText={isPinMode ? '고정하기' : '삭제하기'}
+          onGhostClick={() => setCheckedCount(0)}
+          onSecondaryClick={isPinMode ? handlePinConfirm : handleDeleteClick}
         />
       ) : (
         <Navigation />

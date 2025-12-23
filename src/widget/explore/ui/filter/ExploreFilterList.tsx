@@ -6,7 +6,7 @@ import styled from '@emotion/styled';
 import type { ActiveProps } from '@shared/types/active.ts';
 import { useModal } from '@widget/explore/feature/custom/useModal.ts';
 import FilterModal from '@widget/explore/ui/modal/FilterModal.tsx';
-import RegionModal from '@widget/explore/ui/modal/RegionModal.tsx';
+import RegionModal from '@shared/components/RegionModal.tsx';
 import { useState } from 'react';
 
 const ExploreFilterList = () => {

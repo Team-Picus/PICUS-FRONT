@@ -3,10 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import IcPicusLogo from '@icon/ic-picus-logo.svg';
 import IcBack from '@icon/ic-arrow-back-up.svg';
 import type { HeaderIcon } from '@shared/types/header.ts';
-import { useNavigate } from 'react-router';
 
 interface HeaderProps {
-  back?: boolean;
   title?: string;
   icons?: HeaderIcon[];
   isBack?: boolean; // 뒤로가기 아이콘 활성화 시 사용합니다. true로 지정 시 활성화 됩니다.
@@ -137,10 +135,15 @@ const Icon = styled.img<IconProps>`
 
 const InlineButton = styled.button`
   display: flex;
-  heigth: 40px;
-  padding: 8px 12px;
+  height: 40px;
+  padding: 12px;
   align-items: center;
   justify-content: center;
+  border-radius: 8px;
   font: ${({ theme }) => theme.fonts.labelM};
   color: ${({ theme }) => theme.colors.lightMode.text.text2};
+
+  &:active {
+    background-color: rgba(29, 29, 29, 0.05);
+  }
 `;

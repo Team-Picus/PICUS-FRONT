@@ -4,11 +4,18 @@ import HomePage from '@home/ui/HomePage.tsx';
 import WeeklyMagazinePage from '@home/ui/WeeklyMagazinePage.tsx';
 import ExplorePage from '@explore/ui/ExplorePage.tsx';
 import ChatMainPage from '@chat/ui/main/ChatMainPage';
-import MyPage from '@my/ui/MyPage.tsx';
+import MyPage from '@my/ui/main/MyPage.tsx';
 import ChatDetailPage from '@pages/chat/ui/detail/ChatDetailPage';
 import ChatReservationMainPage from '@pages/chat/ui/reservation/ChatReservationMainPage';
 import LoginPage from '@pages/login/ui/LoginPage';
 import NotificationPage from '@home/ui/NotificationPage.tsx';
+import AccountSettings from '@my/ui/main/AccountSettings.tsx';
+import ExpertApprovalPage from '@my/ui/approval/ExpertApprovalPage.tsx';
+import ApprovalStepsPage from '@my/ui/approval/ApprovalStepsPage.tsx';
+import ApprovalStatusPage from '@my/ui/approval/ApprovalStatusPage.tsx';
+import MyProfile from '@my/ui/main/MyProfile.tsx';
+import ProfileEditPage from '@my/ui/main/ProfileEditPage.tsx';
+import AddThemePage from '@my/ui/main/AddThemePage.tsx';
 
 export const router = createBrowserRouter([
   {
@@ -20,7 +27,7 @@ export const router = createBrowserRouter([
         element: <HomePage />,
       },
       {
-        path: 'weekly_magazine',
+        path: 'weekly-magazine',
         element: <WeeklyMagazinePage />,
       },
       {
@@ -86,6 +93,52 @@ export const router = createBrowserRouter([
       {
         index: true,
         element: <MyPage />,
+      },
+      {
+        path: 'settings',
+        element: <AccountSettings />,
+      },
+      {
+        path: 'profile',
+        element: <RootLayout />,
+        children: [
+          {
+            index: true,
+            element: <MyProfile />,
+          },
+          {
+            path: 'edit',
+            element: <RootLayout />,
+            children: [
+              {
+                index: true,
+                element: <ProfileEditPage />,
+              },
+              {
+                path: 'theme/create',
+                element: <AddThemePage />,
+              },
+            ],
+          },
+        ],
+      },
+      {
+        path: 'expert-approval',
+        element: <RootLayout />,
+        children: [
+          {
+            index: true,
+            element: <ExpertApprovalPage />,
+          },
+          {
+            path: 'steps',
+            element: <ApprovalStepsPage />,
+          },
+          {
+            path: 'status/:state',
+            element: <ApprovalStatusPage />,
+          },
+        ],
       },
     ],
   },

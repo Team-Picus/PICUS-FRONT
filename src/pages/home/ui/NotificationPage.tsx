@@ -9,7 +9,7 @@ const NotificationPage = () => {
 
   return (
     <>
-      <Header back title="알림"></Header>
+      <Header isBack title="알림"></Header>
       <NotificationListContainer>
         {sorted.map(({ icon, title, content, createdAt }, index) => (
           <Notification

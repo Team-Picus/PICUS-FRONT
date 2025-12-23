@@ -4,3 +4,4 @@ export { default as Modal } from './Modal';
 export { default as BottomTap } from './BottomTap';
 export { default as DropDownMenu } from './DropDownMenu';
 export { default as Navigation } from './Navigation';
+export { default as InlineButton } from './InlineButton';
