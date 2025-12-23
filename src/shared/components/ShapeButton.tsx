@@ -7,14 +7,14 @@ type Icon = {
   alt: string;
 };
 
-interface InlineButtonProps {
+interface ShapeButtonProps {
   variant: ButtonVariants; // 버튼 스타일 종류
   icon: Icon;
   isShadow?: boolean;
   onClick?: () => void;
 }
 
-const ShapeButton = ({ variant, icon, isShadow = false, onClick }: InlineButtonProps) => {
+const ShapeButton = ({ variant, icon, isShadow = false, onClick }: ShapeButtonProps) => {
   return (
     <ButtonContainer $variant={variant} $isShadow={isShadow} onClick={onClick}>
       <Icon src={icon.icon} alt={icon.alt}></Icon>
@@ -39,8 +39,16 @@ const ButtonContainer = styled.button<{
     $isShadow ? '0px 7.2px 21.6px 0px rgba(0, 0, 0, 0.1)' : 'none'};
   padding: 8px;
 
-  &:active {
+  &:active,
+  &:hover {
     background-color: rgba(29, 29, 29, 0.05);
+  }
+  &:hover,
+  &:focus {
+    border: ${({ $variant, $isShadow, theme }) =>
+      $variant === 'icon' || $isShadow
+        ? 'none'
+        : `1px solid ${theme.colors.lightMode.neutral.neutral200}`};
   }
 `;
 
