@@ -42,11 +42,12 @@ type BottomTapProps = GhostPart & {
   secondaryDisabled?: boolean;
   onGhostClick?: () => void;
   onSecondaryClick?: () => void;
+  isPushRight?: boolean;
 };
 
 const BottomTap = (props: BottomTapProps) => {
   // 오른쪽 버튼만 있는지 여부 (for pushRight)
-  const onlySecondary = !props.showGhost;
+  const onlySecondary = !props.showGhost && props.isPushRight;
 
   // count 모드일 때 checkedCount가 0이면 ghost 버튼을 자동 비활성화
   const isGhostCountInactive = props.showGhost && props.hasCount ? props.checkedCount === 0 : false;
